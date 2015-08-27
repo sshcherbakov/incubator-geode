@@ -402,7 +402,6 @@ public class BridgeWriter implements CacheWriter, Declarable
    * @see SystemFailure#loadEmergencyClasses()
    */
   public static void loadEmergencyClasses() {
-    BridgeClient.loadEmergencyClasses(); // make sure subclass is taken care of
     BridgePoolImpl.loadEmergencyClasses();
   }
 
