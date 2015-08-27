@@ -31,7 +31,7 @@ import dunit.VM;
 
 /**
  * Provides helper methods for testing BridgeServers and bridge clients. This
- * test case was created by refactoring methods from BridgeLoaderTest into
+ * test case was created by refactoring methods from ConnectionPoolDUnitTest into
  * this class.
  *
  * @author Kirk Lund

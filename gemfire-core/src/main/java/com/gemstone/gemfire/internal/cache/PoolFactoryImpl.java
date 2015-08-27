@@ -293,9 +293,9 @@ public class PoolFactoryImpl implements PoolFactory {
   }
   /**
    * Used to create a pool given the old Bridge properties
-   * @param properties from a BridgeWriter or BridgeLoader
+   * @param properties from a BridgeWriter or bl
    * @param usedByBridgeWriter true  if props from BridgeWriter;
-   *                           false if props from BridgeLoader.
+   *                           false if props from bl.
    * *param usedByGateway true if props from GatewayImpl.
    * @since 5.7
    */
@@ -487,13 +487,12 @@ public class PoolFactoryImpl implements PoolFactory {
     public transient LocatorDiscoveryCallback locatorCallback = null; //only used by tests
     public GatewaySender gatewaySender = null;
     /**
-     * True if this factory needs to produce a pool for use by BridgeWriter
-     * or BridgeLoader.
+     * True if this factory needs to produce a pool for use by old bridge
      */
     public boolean bridge = false;
     /**
-     * True if bridge is true and the pool is used by a BridgeWriter.
-     * False if bridge is true and the pool is used by a BridgeLoader.
+     * True if bridge is true and the pool is used by a bw.
+     * False if bridge is true and the pool is used by a bl.
      * Ignore this attribute if bridge is false.
      */
     public boolean bridgeWriter = false;

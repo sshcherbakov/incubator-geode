@@ -75,7 +75,6 @@ import com.gemstone.gemfire.cache.query.TypeMismatchException;
 import com.gemstone.gemfire.cache.query.internal.index.IndexManager;
 import com.gemstone.gemfire.cache.snapshot.RegionSnapshotService;
 import com.gemstone.gemfire.cache.util.BridgeClient;
-import com.gemstone.gemfire.cache.util.BridgeLoader;
 import com.gemstone.gemfire.cache.util.BridgeWriter;
 import com.gemstone.gemfire.cache.wan.GatewaySender;
 import com.gemstone.gemfire.compression.Compressor;
@@ -486,9 +485,6 @@ public abstract class AbstractRegion implements Region, RegionAttributes,
    */
   public CacheLoader basicGetLoader() {
     CacheLoader result = this.cacheLoader;
-    if (isBridgeLoader(result)) {
-      result = null;
-    }
     return result;
   }
   /**
@@ -1200,11 +1196,6 @@ public abstract class AbstractRegion implements Region, RegionAttributes,
   // synchronized so not reentrant
   public synchronized CacheLoader setCacheLoader(CacheLoader cl) {
     checkReadiness();
-    if (cl != null && isBridgeLoader(cl)) {
-      if (getPoolName() != null) {
-        throw new IllegalStateException("A region with a connection pool can not have a BridgeLoader.");
-      }
-    }
     CacheLoader oldLoader = this.cacheLoader;
     assignCacheLoader(cl);
     cacheLoaderChanged(oldLoader);
@@ -1213,13 +1204,6 @@ public abstract class AbstractRegion implements Region, RegionAttributes,
 
   private synchronized void assignCacheLoader(CacheLoader cl) {
     this.cacheLoader = cl;
-    if (cl instanceof BridgeLoader) {
-      BridgeLoader bl = (BridgeLoader) cl;
-      bl.attach(this);
-    } else if (cl instanceof BridgeClient) {
-      BridgeClient bc = (BridgeClient)cl;
-      bc.attach(this);
-    }
   }
 
   // synchronized so not reentrant
@@ -1576,10 +1560,6 @@ public abstract class AbstractRegion implements Region, RegionAttributes,
         BridgeWriter bw = (BridgeWriter)cb;
         bw.detach(this);
       }
-      else if (cb instanceof BridgeLoader) {
-        BridgeLoader bl = (BridgeLoader)cb;
-        bl.detach(this);
-      }
 
       try {
         cb.close();
@@ -1610,12 +1590,6 @@ public abstract class AbstractRegion implements Region, RegionAttributes,
     // nothing needed by default
   }
 
-  /**
-   * @since 5.7
-   */
-  public static boolean isBridgeLoader(CacheLoader cl) {
-    return cl instanceof BridgeLoader || cl instanceof BridgeClient;
-  }
   /**
    * @since 5.7
    */

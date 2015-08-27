@@ -18,9 +18,7 @@ import com.gemstone.gemfire.cache.LoaderHelper;
 import com.gemstone.gemfire.cache.Region;
 
 /**
- * This class combines the BridgeWriter and BridgeLoader functionality into one
  * class, sharing BridgeServer connections, optimizing the number
- * of connections required when using a BridgeWriter and BridgeLoader separately.
  * <p>
  * When a BridgeClient is declared in cache.xml
  * it can be installed as either a cache-loader or as a cache-writer
@@ -31,11 +29,9 @@ import com.gemstone.gemfire.cache.Region;
  * 
  * <p>
  * For configuration details please see the {@link com.gemstone.gemfire.cache.util.BridgeWriter} and 
- * the {@link com.gemstone.gemfire.cache.util.BridgeLoader}.
  * 
  * @author Mitch Thomas
  * @since 5.0.1
- * @see com.gemstone.gemfire.cache.util.BridgeLoader
  * @see com.gemstone.gemfire.cache.util.BridgeWriter
  * @see com.gemstone.gemfire.cache.util.BridgeServer
  * @deprecated as of 5.7 use {@link com.gemstone.gemfire.cache.client pools} instead.
@@ -44,30 +40,22 @@ import com.gemstone.gemfire.cache.Region;
 public class BridgeClient extends BridgeWriter implements CacheLoader
 {
 
-  private final BridgeLoader loader = new BridgeLoader();
-  
   public Object load(LoaderHelper helper) throws CacheLoaderException
   {
-    return this.loader.load(helper);
+    return null;
   }
 
   /**
-   * Ensure that the BridgeLoader class gets loaded.
    * 
    * @see SystemFailure#loadEmergencyClasses()
    */
   public static void loadEmergencyClasses() {
-    BridgeLoader.loadEmergencyClasses();
   }
   
   @Override
   public void close()
   {
-    try {
-      this.loader.close();
-    } finally {
       super.close();
-    }
   }
 
   /**
@@ -95,11 +83,7 @@ public class BridgeClient extends BridgeWriter implements CacheLoader
   @Override
   public void attach(Region r)
   {
-    try {
-      this.loader.attach(r);
-    } finally {
       super.attach(r);
-    }
   }
 
   /**
@@ -116,34 +100,21 @@ public class BridgeClient extends BridgeWriter implements CacheLoader
   @Override
   public void detach(Region r)
   {
-    try {
-      this.loader.detach(r);
-    } finally {
       super.detach(r);
-    }
   }
 
   @Override
   public void init(BridgeWriter bridgeWriter)
   {
     super.init(bridgeWriter);
-    this.loader.init(this);
   }
 
   @Override
   public void init(Properties p)
   {
     super.init(p);
-    this.loader.init(this);
   }
 
-  /**
-   * Return the internally maintained BridgeLoader 
-   * @return the internal BridgeLoader
-   */
-  public BridgeLoader getBridgeLoader() {
-    return this.loader;
-  }
   
   /**
    * Returns a string description of the BridgeClient

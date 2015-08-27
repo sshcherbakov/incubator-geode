@@ -254,7 +254,6 @@ public class CacheXml30DUnitTest extends CacheXmlTestCase {
     final Region ro = cache.getRegion("root");
     assertSame(ro.getAttributes().getCacheLoader(), ro.getAttributes().getCacheWriter());
     assertTrue(ro.getAttributes().getCacheLoader() instanceof TestBridgeClient);
-    // now that a BridgeLoader creates its own pool make sure it exists
     assertEquals("pools="+PoolManager.getAll(), 1, PoolManager.getAll().size());
   }
 
@@ -285,7 +284,6 @@ public class CacheXml30DUnitTest extends CacheXmlTestCase {
     final Region ro = cache.getRegion("root");
     assertTrue(ro.getAttributes().getCacheLoader() instanceof BridgeClient);
     assertTrue(ro.getAttributes().getCacheWriter() instanceof MyTestCacheWriter);
-    // now that a BridgeLoader creates its own pool make sure it exists
     assertEquals("pools="+PoolManager.getAll(), 1, PoolManager.getAll().size());
   }
 
@@ -316,7 +314,6 @@ public class CacheXml30DUnitTest extends CacheXmlTestCase {
     final Region ro = cache.getRegion("root");
     assertTrue(ro.getAttributes().getCacheWriter() instanceof BridgeClient);
     assertTrue(ro.getAttributes().getCacheLoader() instanceof CacheLoaderWithDeclarables);
-    // now that a BridgeLoader creates its own pool make sure it exists
     assertEquals("pools="+PoolManager.getAll(), 1, PoolManager.getAll().size());
   }
 
@@ -345,7 +342,6 @@ public class CacheXml30DUnitTest extends CacheXmlTestCase {
     final Region ro = cache.getRegion("root");
     assertSame(ro.getAttributes().getCacheLoader(), ro.getAttributes().getCacheWriter());
     assertTrue(ro.getAttributes().getCacheWriter() instanceof TestBridgeClient);
-    // now that a BridgeLoader creates its own pool make sure it exists
     assertEquals("pools="+PoolManager.getAll(), 1, PoolManager.getAll().size());
   }
 

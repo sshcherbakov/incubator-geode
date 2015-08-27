@@ -2905,9 +2905,6 @@ public class DistributedRegion extends LocalRegion implements
   protected void cacheLoaderChanged(CacheLoader oldLoader)
   {
     super.cacheLoaderChanged(oldLoader);
-    if (isBridgeLoader(oldLoader)) {
-      oldLoader = null;
-    }
     if (oldLoader == null ^ basicGetLoader() == null) {
       new UpdateAttributesProcessor(this).distribute();
     }

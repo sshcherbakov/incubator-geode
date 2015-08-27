@@ -1327,7 +1327,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
    * com.gemstone.gemfire.internal.cache.tier.Endpoint#getNumConnections
    * Endpoint.getNumConnections()} to {@link 
    * com.gemstone.gemfire.internal.cache.tier.Endpoint}. Note: This probably
-   * won't work if the BridgeLoader has more than one Endpoint.
+   * won't work if the pool has more than one Endpoint.
    */
   protected void waitForClientToFullyConnect(final PoolImpl pool) {
     getLogWriter().info("[waitForClientToFullyConnect]");
@@ -1864,7 +1864,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     
     vm0.invoke(createBridgeServer);
     
-    // gather details for later creation of BridgeLoader...
+    // gather details for later creation of pool...
     assertEquals(ports[0],
                  vm0.invokeInt(UniversalMembershipListenerAdapterDUnitTest.class, 
                                "getTestServerEventsInLonerClient_port"));
@@ -2035,7 +2035,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     // reconnect bridge client to test for crashed event
     vm0.invoke(createBridgeServer);
     
-    // gather details for later creation of BridgeLoader...
+    // gather details for later creation of pool...
     assertEquals(ports[0],
                  vm0.invokeInt(UniversalMembershipListenerAdapterDUnitTest.class, 
                                "getTestServerEventsInLonerClient_port"));

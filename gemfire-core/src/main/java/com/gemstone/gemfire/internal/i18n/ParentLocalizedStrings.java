@@ -132,8 +132,7 @@ class ParentLocalizedStrings {
   public static final StringId BaseCommand_UNKNOWN_QUERY_EXCEPTION = new StringIdImpl(1117, "Uknown query Exception.");
   public static final StringId BaseCommand_SEVERE_CACHE_EXCEPTION_0 = new StringIdImpl(1118, "Severe cache exception : {0}");
   public static final StringId BaseCommand_UNEXPECTED_QUERYINVALIDEXCEPTION_WHILE_PROCESSING_QUERY_0 = new StringIdImpl(1119, "Unexpected QueryInvalidException while processing query {0}");
-  public static final StringId BridgeLoader_THE_BRIDGELOADER_COULD_NOT_ACQUIRE_OR_CREATE_A_CONNECTION_BECAUSE__0 = new StringIdImpl(1120, "The BridgeLoader could not acquire or create a Connection because  {0}");
-  public static final StringId BridgeLoader_THE_SERVER_IS_UNREACHABLE_COULD_NOT_CONNECT_AFTER_0_ATTEMPTS = new StringIdImpl(1121, "The Server is unreachable, could not connect after {0} attempts.");
+  // ok to reuse 1120..1121
   public static final StringId BridgeServerImpl_CACHESERVER_CONFIGURATION___0 = new StringIdImpl(1122, "CacheServer Configuration:   {0}");
   public static final StringId BridgeServerImpl_FORCING_NOTIFYBYSUBSCRIPTION_TO_SUPPORT_DYNAMIC_REGIONS = new StringIdImpl(1123, "Forcing notifyBySubscription to support dynamic regions");
   public static final StringId BridgeServerImpl_STARTED__0 = new StringIdImpl(1124, "Started  {0}");
@@ -1290,9 +1289,7 @@ class ParentLocalizedStrings {
   public static final StringId BaseCommand_UNKNOWN_RESULT_TYPE_0 = new StringIdImpl(2269, "Unknown result type:  {0}");
   public static final StringId BaseRecordManager_NAME_DIRECTORY_MUST_EXIST = new StringIdImpl(2270, "Name directory must exist");
   public static final StringId BaseRecordManager_RECORDMANAGER_HAS_BEEN_CLOSED = new StringIdImpl(2271, "RecordManager has been closed");
-  public static final StringId BridgeLoader_ALREADY_INITIALIZED = new StringIdImpl(2272, "Already initialized");
-  public static final StringId BridgeLoader_INVALID_LOAD_PARAMS_CHECK_HELPER_OBJECT = new StringIdImpl(2273, "Invalid load params, check helper object");
-  public static final StringId BridgeLoader_THE_BRIDGELOADER_HAS_BEEN_CLOSED = new StringIdImpl(2274, "The BridgeLoader has been closed.");
+  // ok to reuse 2272..2274
   public static final StringId BridgeServerImpl_A_BRIDGE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING = new StringIdImpl(2275, "A bridge server''s configuration cannot be changed once it is running.");
   public static final StringId BridgeWriter_ALREADY_INITIALIZED = new StringIdImpl(2276, "Already initialized");
   public static final StringId BridgeWriter_INTEREST_REGISTRATION_REQUIRES_ESTABLISHCALLBACKCONNECTION_PARAMETER_TO_BE_SET_TO_TRUE = new StringIdImpl(2277, "Interest registration requires establishCallbackConnection parameter to be set to true.");
@@ -2400,12 +2397,7 @@ class ParentLocalizedStrings {
   public static final StringId DistributedRegion_OPERATION_DISTRIBUTION_MAY_HAVE_FAILED_TO_NOTIFY_THESE_REQUIRED_ROLES_0 = new StringIdImpl( 3396, "Operation distribution may have failed to notify these required roles: {0}");
   public static final StringId DistributedRegion_OPERATION_DISTRIBUTION_WAS_NOT_DONE_TO_THESE_REQUIRED_ROLES_0 = new StringIdImpl( 3397, "Operation distribution was not done to these required roles: {0}");
   public static final StringId DistributedCacheOperation_THE_CACHE_HAS_BEEN_CLOSED = new StringIdImpl(3398, "The cache has been closed");
-  public static final StringId BridgeLoader_SOCKET_CLOSED_ON_SERVER = new StringIdImpl( 3399, "socket closed on server");
-  public static final StringId BridgeLoader_SOCKET_TIMED_OUT_ON_CLIENT = new StringIdImpl( 3400, "socket timed out on client");
-  public static final StringId BridgeLoader_SERVER_DEATH = new StringIdImpl( 3401, "server death");
-  public static final StringId BridgeLoader_BRIDGELOADER_CONNECTED_TO_0 = new StringIdImpl( 3402, "BridgeLoader connected to {0}");
-  public static final StringId BridgeLoader_NO_ACTIVE_SERVERS_WERE_FOUND = new StringIdImpl( 3403, "No active servers were found.");
-  public static final StringId BridgeLoader_NO_AVAILABLE_CONNECTION_WAS_FOUND_BUT_THE_FOLLOWING_ACTIVE_SERVERS_EXIST_0 = new StringIdImpl( 3404, "No available connection was found, but the following active server(s) exist: {0}");
+  // okay to reuse 3399..3404
   public static final StringId BridgeWriter_THE_BRIDGEWRITER_HAS_BEEN_CLOSED_WHILE_ATTEMPTING_TO_LOAD_REGION_0_KEY_1 = new StringIdImpl( 3405, "The BridgeWriter has been closed while attempting to load: region={0} key={1}");
   public static final StringId BridgeWriter_NO_ACTIVE_SERVERS_WERE_FOUND_WHILE_ATTEMPTING_TO_LOAD_REGION_0_KEY_1 = new StringIdImpl( 3406, "No active servers were found while attempting to load: region={0} key={1}");
   public static final StringId BridgeWriter_NO_AVAILABLE_CONNECTION_WAS_FOUND_WHILE_ATTEMPTING_TO_LOAD_REGION_0_KEY_1_BUT_THE_FOLLOWING_ACTIVE_SERVERS_EXIST_2 = new StringIdImpl( 3407, "No available Connection was found while attempting to load: region={0} key={1}, but the following active servers exist: {2}");

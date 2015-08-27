@@ -96,7 +96,6 @@ import com.gemstone.gemfire.cache.query.internal.index.PrimaryKeyIndex;
 import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.server.ServerLoadProbe;
 import com.gemstone.gemfire.cache.util.BridgeClient;
-import com.gemstone.gemfire.cache.util.BridgeLoader;
 import com.gemstone.gemfire.cache.util.BridgeWriter;
 import com.gemstone.gemfire.cache.util.ObjectSizer;
 import com.gemstone.gemfire.cache.wan.GatewayEventFilter;
@@ -2256,8 +2255,6 @@ public class CacheXmlGenerator extends CacheXml implements XMLReader {
       props = ((Declarable2) callback).getConfig();
     } else if (callback instanceof BridgeWriter) {
       props = ((BridgeWriter) callback).getProperties();
-    } else if (callback instanceof BridgeLoader) {
-      props = ((BridgeLoader) callback).getProperties();
     } else if (callback instanceof ReflectionBasedAutoSerializer) {
       props = ((ReflectionBasedAutoSerializer) callback).getConfig();
     } else if (callback instanceof Declarable  && cache instanceof GemFireCacheImpl) {

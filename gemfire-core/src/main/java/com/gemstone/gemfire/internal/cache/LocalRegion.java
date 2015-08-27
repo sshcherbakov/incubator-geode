@@ -675,7 +675,6 @@ public class LocalRegion extends AbstractRegion
     
     // initialize client to server proxy
     this.srp = ((this.getPoolName() != null)
-                || isBridgeLoader(this.getCacheLoader())
                 || isBridgeWriter(this.getCacheWriter()))
       ? new ServerRegionProxy(this)
       : null;
@@ -11437,7 +11436,7 @@ public class LocalRegion extends AbstractRegion
       predicate = predicate.trim();
 
       // Compare the query patterns to the 'predicate'. If one matches,
-      // send it as is to the BridgeLoader
+      // send it as is to the server
       boolean matches = false;
       for (int i=0; i<QUERY_PATTERNS.length; i++) {
         if (QUERY_PATTERNS[i].matcher(predicate).matches()) {

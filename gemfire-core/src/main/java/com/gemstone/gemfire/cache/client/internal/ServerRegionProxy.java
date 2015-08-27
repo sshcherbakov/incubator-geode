@@ -28,7 +28,6 @@ import com.gemstone.gemfire.cache.client.internal.ContainsKeyOp.MODE;
 import com.gemstone.gemfire.cache.execute.Function;
 import com.gemstone.gemfire.cache.execute.ResultCollector;
 import com.gemstone.gemfire.cache.util.BridgeClient;
-import com.gemstone.gemfire.cache.util.BridgeLoader;
 import com.gemstone.gemfire.cache.util.BridgeWriter;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.cache.AbstractRegion;
@@ -87,37 +86,8 @@ public class ServerRegionProxy extends ServerProxy implements ServerRegionDataAc
   private static InternalPool calcPool(Region r) {
     String poolName = r.getAttributes().getPoolName();
     if (poolName == null || "".equals(poolName)) {
-      final CacheLoader cl = r.getAttributes().getCacheLoader();
-      final CacheWriter cw = r.getAttributes().getCacheWriter();
-      if (AbstractRegion.isBridgeLoader(cl) || AbstractRegion.isBridgeWriter(cw)) {
-        Object loaderPool = null;
-        Object writerPool = null;
-        if (AbstractRegion.isBridgeLoader(cl)) {
-          if (cl instanceof BridgeLoader) {
-            loaderPool = ((BridgeLoader)cl).getConnectionProxy();
-          } else {
-            loaderPool = ((BridgeClient)cl).getConnectionProxy();
-          }
-        }
-        if (AbstractRegion.isBridgeWriter(cw)) {
-          writerPool = ((BridgeWriter)cw).getConnectionProxy();
-        }
-        if (loaderPool != writerPool && loaderPool != null && writerPool != null) {
-          throw new IllegalStateException("The region " + r.getFullPath()
-                                          + " has a BridgeLoader and a BridgeWriter/BridgeClient "
-                                          + " that are configured with different connection pools. "
-                                          + " This is not allowed. Instead create a single BridgeClient and install it as both the loader and the writer."
-                                          + " loaderPool="+loaderPool + " writerPool=" + writerPool);
-        }
-        InternalPool result = (InternalPool)loaderPool;
-        if (result == null) {
-          result = (InternalPool)writerPool;
-        }
-        return result;
-      } else {
-        throw new IllegalStateException("The region " + r.getFullPath()
-                                        + " did not have a client pool configured.");
-      }
+      throw new IllegalStateException("The region " + r.getFullPath()
+          + " did not have a client pool configured.");
     } else {
       InternalPool pool = (InternalPool)PoolManager.find(poolName);
       if (pool == null) {

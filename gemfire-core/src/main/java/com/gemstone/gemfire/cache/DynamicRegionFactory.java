@@ -110,7 +110,7 @@ import com.gemstone.gemfire.security.GemFireSecurityException;
  * are shared by the parent and all its dynamic children
  * so make sure the callback is thread-safe and that its
  * {@link CacheCallback#close} implementation does not stop it from functioning.
- * However the products BridgeLoader, BridgeWriter, and all LRUAlgorithm instances will
+ * However the products LRUAlgorithm instances will
  * be cloned so that each dynamic Region has its own callback.
  * 
  * <li>The root Region name "DynamicRegions" is reserved. The factory creates a root Region of

@@ -501,11 +501,6 @@ public class AttributesFactory<K,V> {
    */
   public void setCacheLoader(CacheLoader<K,V> cacheLoader)
   {
-    if (cacheLoader != null) {
-      if (AbstractRegion.isBridgeLoader(cacheLoader) && this.regionAttributes.getPoolName() != null) {
-        throw new IllegalStateException("A region with a pool name can not have a BridgeLoader or BridgeClient. Please use pools OR BridgeClient.");
-      }
-    }
     this.regionAttributes.cacheLoader = cacheLoader;
     this.regionAttributes.setHasCacheLoader(true);
   }
@@ -1295,11 +1290,6 @@ public class AttributesFactory<K,V> {
       nm = null;
     }
     if (nm != null) {
-      // make sure a cache listener or writer has not already been installed
-      if (this.regionAttributes.getCacheLoader() != null 
-          && AbstractRegion.isBridgeLoader(this.regionAttributes.getCacheLoader())) {
-        throw new IllegalStateException("A region with a bridge loader can not have a pool name.");
-      }
       if (this.regionAttributes.getCacheWriter() != null 
           && AbstractRegion.isBridgeWriter(this.regionAttributes.getCacheWriter())) {
         throw new IllegalStateException("A region with a bridge writer can not have a pool name.");
@@ -1548,9 +1538,6 @@ public class AttributesFactory<K,V> {
       }
     }
     if (attrs.getPoolName() != null) {
-      if (attrs.getCacheLoader() != null && AbstractRegion.isBridgeLoader(attrs.getCacheLoader())) {
-        throw new IllegalStateException("A region with a pool name can not have a BridgeLoader or BridgeClient. Please use pools OR BridgeClient.");
-      }
       if (attrs.getCacheWriter() != null && AbstractRegion.isBridgeWriter(attrs.getCacheWriter())) {
         throw new IllegalStateException("A region with a pool name can not have a BridgeWriter or BridgeClient. Please use pools OR BridgeClient.");
       }

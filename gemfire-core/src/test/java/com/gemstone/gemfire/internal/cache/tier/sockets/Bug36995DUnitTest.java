@@ -180,9 +180,6 @@ public class Bug36995DUnitTest extends DistributedTestCase
 
   /**
    * BugTest for 36526 : 
-   * getActiveServers() and getDeadServers() on BridgeLoader and BridgeWriter returns a Set of endpoint names.  
-   * Endpoints are stored internally as a list and allow duplicate logical names.  
-   * If any duplicates, getActiveServers() will omit them.
    */
   public void testBug36526()
   {

@@ -34,7 +34,7 @@ import com.gemstone.gemfire.internal.cache.tier.sockets.AcceptorImpl;
 import com.gemstone.gemfire.internal.logging.LogService;
 
 /**
- * A pool for use by the old BridgeLoader/BridgeWriter.
+ * A pool for use by the old bridge code.
  * This class can go away once we drop these deprecated classes
  * 
  * @author darrel

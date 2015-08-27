@@ -239,9 +239,6 @@ public interface Cache extends GemFireCache {
   /**
    * Creates a new bridge server with the default configuration.
    *
-   * @see com.gemstone.gemfire.cache.util.BridgeLoader
-   * @see com.gemstone.gemfire.cache.util.BridgeWriter
-   *
    * @since 4.0
    * @deprecated as of 5.7 use {@link #addCacheServer} instead.
    */

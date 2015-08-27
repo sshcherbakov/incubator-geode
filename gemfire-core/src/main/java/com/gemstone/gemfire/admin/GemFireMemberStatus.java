@@ -590,11 +590,6 @@ public class GemFireMemberStatus implements Serializable {
 	  }
 
   protected void initializeClient() {
-    // There are several ways to detect a client:
-    // - is a loner
-    // - has regions that use BridgeWriters or BridgeLoaders
-    // This method uses the presence of a connection proxy or
-    // a pool on the PoolManager.
     Map poolMap = PoolManager.getAll();
     if (poolMap.size() == 0) {
       setIsClient(false);

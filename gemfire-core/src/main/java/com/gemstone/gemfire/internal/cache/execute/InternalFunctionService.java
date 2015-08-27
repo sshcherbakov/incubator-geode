@@ -91,7 +91,7 @@ public class InternalFunctionService {
   private static boolean isClientRegion(Region region) {
     LocalRegion localRegion = (LocalRegion)region;
     return (localRegion.hasServerProxy()
-        || AbstractRegion.isBridgeLoader(localRegion.getCacheLoader()) || AbstractRegion
+        || AbstractRegion
         .isBridgeWriter(localRegion.getCacheWriter()));
   }
 

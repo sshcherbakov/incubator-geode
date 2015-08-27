@@ -5469,9 +5469,6 @@ public class PartitionedRegion extends LocalRegion implements
   @Override
   protected void cacheLoaderChanged(CacheLoader oldLoader) {
     CacheLoader myOldLoader = oldLoader;
-    if (isBridgeLoader(oldLoader)) {
-      myOldLoader = null;
-    }
     this.dataStore.cacheLoaderChanged(basicGetLoader(), myOldLoader);
     super.cacheLoaderChanged(oldLoader);
     if (myOldLoader == null ^ basicGetLoader() == null) {
