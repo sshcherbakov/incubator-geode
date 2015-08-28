@@ -23,7 +23,7 @@ import dunit.Host;
 import dunit.VM;
 
 /**
- * Tests the BridgeWriter API, including interaction with Region.
+ * Tests the client register interest
  *
  * @author Kirk Lund
  * @since 4.2.3
@@ -96,7 +96,7 @@ public class BridgeWriterDUnitTest extends BridgeTestCase {
     assertNotNull(getRootRegion().getSubregion(name));
     try {
       region.registerInterest("KEY-1");
-      fail("registerInterest failed to throw BridgeWriterException with establishCallbackConnection set to false"); 
+      fail("registerInterest failed to throw SubscriptionNotEnabledException with establishCallbackConnection set to false"); 
     }
     catch (SubscriptionNotEnabledException expected) {
     }
