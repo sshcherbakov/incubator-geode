@@ -46,9 +46,6 @@ public class RedundancyLevelJUnitTest
   /** The distributed system */
   Cache cache;
 
-  /** The proxy instance */
-  ConnectionProxy proxy = null;
-
   /**
    * Close the cache and proxy instances for a test and disconnect from the
    * distributed system.
@@ -70,9 +67,6 @@ public class RedundancyLevelJUnitTest
       system.getLogWriter().info(removeExpectedREM);
       
       system.disconnect();
-    }
-    if (proxy != null) {
-      proxy.close();
     }
   }
 
