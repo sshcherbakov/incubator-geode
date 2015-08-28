@@ -136,11 +136,7 @@ class ParentLocalizedStrings {
   public static final StringId BridgeServerImpl_CACHESERVER_CONFIGURATION___0 = new StringIdImpl(1122, "CacheServer Configuration:   {0}");
   public static final StringId BridgeServerImpl_FORCING_NOTIFYBYSUBSCRIPTION_TO_SUPPORT_DYNAMIC_REGIONS = new StringIdImpl(1123, "Forcing notifyBySubscription to support dynamic regions");
   public static final StringId BridgeServerImpl_STARTED__0 = new StringIdImpl(1124, "Started  {0}");
-  public static final StringId BridgeWriter_0_NO_ACTIVE_SERVERS_WERE_FOUND = new StringIdImpl(1126, "{0}: No active servers were found.");
-  public static final StringId BridgeWriter_0_NO_AVAILABLE_CONNECTION_WAS_FOUND_BUT_THE_FOLLOWING_ACTIVE_SERVERS_EXIST_1 = new StringIdImpl(1127, "{0}: No available connection was found, but the following active server(s) exist: {1}");
-  public static final StringId BridgeWriter_0_THE_BRIDGEWRITER_HAS_BEEN_CLOSED = new StringIdImpl(1128, "{0}: The BridgeWriter has been closed.");
-  public static final StringId BridgeWriter_THE_BRIDGEWRCLEARITER_COULD_NOT_ACQUIRE_OR_CREATE_A_CONNECTION_BECAUSE_0 = new StringIdImpl(1129, "The BridgeWrcleariter could not acquire or create a Connection because: {0}");
-  public static final StringId BridgeWriter_THE_BRIDGEWRITER_COULD_NOT_ACQUIRE_OR_CREATE_A_CONNECTION_BECAUSE__0 = new StringIdImpl(1130, "The BridgeWriter could not acquire or create a Connection because:  {0}");
+  // ok to reuse 1126..1130
   public static final StringId BucketAdvisor_ATTEMPTED_TO_CLOSE_BUCKETADVISOR_THAT_IS_ALREADY_CLOSED = new StringIdImpl(1131, "Attempted to close BucketAdvisor that is already CLOSED");
   public static final StringId AgentImpl_COULD_NOT_TAIL_0_BECAUSE_1 = new StringIdImpl(1132, "Could not tail \"{0}\" because: {1}");
   public static final StringId SystemAdmin_USED_TO_SPECIFY_A_HOST_NAME_OR_IP_ADDRESS_TO_GIVE_TO_CLIENTS_SO_THEY_CAN_CONNECT_TO_A_LOCATOR = new StringIdImpl(1133, "Used to specify a host name or IP address to give to clients so they can connect to a locator.");
@@ -332,10 +328,10 @@ class ParentLocalizedStrings {
   public static final StringId CqQueryImpl_REGION__0_SPECIFIED_WITH_CQ_NOT_FOUND_CQNAME_1 = new StringIdImpl(1319, "Region : {0} specified with cq not found. CqName: {1}");
   public static final StringId CqQueryImpl_RUNTIMEEXCEPTION_OCCOURED_IN_THE_CQLISTENER_OF_THE_CQ_CQNAME_0_ERROR_1 = new StringIdImpl(1320, "RuntimeException occurred in the CqListener of the CQ, CqName : {0} Error : {1}");
   public static final StringId CqQueryImpl_SELECT_DISTINCT_QUERIES_NOT_SUPPORTED_IN_CQ = new StringIdImpl(1321, "select DISTINCT queries not supported in CQ");
-  public static final StringId CqQueryImpl_THE_ESTABLISHCALLBACKCONNECTION_ON_BRIDGEWRITER_CLIENT_INSTALLED_ON_REGION_0_IS_SET_TO_FALSE = new StringIdImpl(1322, "The ''establishCallbackConnection'' on BridgeWriter/Client installed on Region {0} is set to false.");
+  // ok to reuse 1322
   public static final StringId CqQueryImpl_THE_WHERE_CLAUSE_IN_CQ_QUERIES_CANNOT_REFER_TO_A_REGION = new StringIdImpl(1323, "The WHERE clause in CQ queries cannot refer to a region");
   public static final StringId CqQueryImpl_UNABLE_TO_CREATE_CQ_0_ERROR__1 = new StringIdImpl(1324, "Unable to create cq {0} Error : {1}");
-  public static final StringId CqQueryImpl_UNABLE_TO_GET_THE_CONNECTIONPROXY_THE_REGION_MAY_NOT_HAVE_A_BRIDGEWRITER_OR_BRIDGECLIENT_INSTALLED_ON_IT = new StringIdImpl(1325, "Unable to get the connectionProxy. The Region may not have BridgeWriter or BridgeClient installed on it.");
+  // ok to reuse 1325
   public static final StringId CqQueryImpl_UNSUPPORTED_SEND_REQUEST_TO_SERVER = new StringIdImpl(1326, "Unsupported send request to Server.");
   public static final StringId CqQueryImpl_CQ_IS_IN_RUNNING_STATE_CQNAME_0 = new StringIdImpl(1327, "CQ is in running state, CqName : {0}");
   public static final StringId CqService_0_FAILED_TO_GET_THE_SPECIFIED_CQ_1 = new StringIdImpl(1328, "{0}: Failed to get the specified CQ: {1}");
@@ -1291,15 +1287,7 @@ class ParentLocalizedStrings {
   public static final StringId BaseRecordManager_RECORDMANAGER_HAS_BEEN_CLOSED = new StringIdImpl(2271, "RecordManager has been closed");
   // ok to reuse 2272..2274
   public static final StringId BridgeServerImpl_A_BRIDGE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING = new StringIdImpl(2275, "A bridge server''s configuration cannot be changed once it is running.");
-  public static final StringId BridgeWriter_ALREADY_INITIALIZED = new StringIdImpl(2276, "Already initialized");
-  public static final StringId BridgeWriter_INTEREST_REGISTRATION_REQUIRES_ESTABLISHCALLBACKCONNECTION_PARAMETER_TO_BE_SET_TO_TRUE = new StringIdImpl(2277, "Interest registration requires establishCallbackConnection parameter to be set to true.");
-  public static final StringId BridgeWriter_INVALID_CREATE_PARAMETERS_CHECK_ENTRY_EVENT_OBJECT = new StringIdImpl(2278, "Invalid create parameters. Check entry event object");
-  public static final StringId BridgeWriter_INVALID_KEYSET_PARAMETERS_THE_REGION_CANNOT_BE_NULL = new StringIdImpl(2279, "Invalid keySet parameters. The region cannot be null.");
-  public static final StringId BridgeWriter_INVALID_REGION_PARAMS = new StringIdImpl(2280, "Invalid region params");
-  public static final StringId BridgeWriter_THE_BRIDGEWRITER_HAS_BEEN_CLOSED = new StringIdImpl(2281, "The BridgeWriter has been closed.");
-  public static final StringId BridgeWriter_THE_INPUT_KEY_CANNOT_BE_NULL = new StringIdImpl(2282, "The input key cannot be null");
-  public static final StringId BridgeWriter_THE_INPUT_PARENT_REGION_NAME_0_IS_INVALID = new StringIdImpl(2283, "The input parent region name ( {0} ) is invalid");
-  public static final StringId BridgeWriter_THE_INPUT_REGION_NAME_0_IS_INVALID = new StringIdImpl(2284, "The input region name ( {0} ) is invalid");
+  // ok to reuse 2276..2284
   public static final StringId BucketAdvisor_CANNOT_CHANGE_FROM_0_TO_1 = new StringIdImpl(2285, "Cannot change from  {0}  to  {1}");
   public static final StringId BucketRegion_THIS_SHOULD_NEVER_BE_CALLED_ON_0 = new StringIdImpl(2286, "This should never be called on  {0}");
   public static final StringId BucketSizeMessage_FAILED_SENDING_0 = new StringIdImpl(2287, "Failed sending < {0} >");
@@ -1371,7 +1359,7 @@ class ParentLocalizedStrings {
   public static final StringId CacheXmlParser_CLASS_0_IS_NOT_AN_INSTANCE_OF_DECLARABLE = new StringIdImpl(2354, "Class \"{0}\" is not an instance of Declarable.");
   public static final StringId CacheXmlParser_NO_CACHE_ELEMENT_SPECIFIED = new StringIdImpl(2355, "No cache element specified.");
   public static final StringId CacheXmlParser_ONLY_A_PARAMETER_IS_ALLOWED_IN_THE_CONTEXT_OF_0 = new StringIdImpl(2356, "Only a parameter is allowed in the context of  {0}");
-  public static final StringId CacheXmlParser_THE_DYNAMICREGIONFACTORY_CACHEWRITER_MUST_BE_AN_INSTANCE_OF_BRIDGEWRITER = new StringIdImpl(2357, "The dynamic-region-factory cache-writer must be an instance of BridgeWriter.");
+  // ok to reuse 2357
   public static final StringId CacheXmlParser_UNKNOWN_DATA_POLICY_0 = new StringIdImpl(2358, "Unknown data policy:  {0}");
   public static final StringId CacheXmlParser_UNKNOWN_EXPIRATION_ACTION_0 = new StringIdImpl(2359, "Unknown expiration action:  {0}");
   public static final StringId CacheXmlParser_UNKNOWN_GATEWAY_HUB_POLICY_0 = new StringIdImpl(2360, "Unknown gateway hub policy:  {0}");
@@ -2397,15 +2385,7 @@ class ParentLocalizedStrings {
   public static final StringId DistributedRegion_OPERATION_DISTRIBUTION_MAY_HAVE_FAILED_TO_NOTIFY_THESE_REQUIRED_ROLES_0 = new StringIdImpl( 3396, "Operation distribution may have failed to notify these required roles: {0}");
   public static final StringId DistributedRegion_OPERATION_DISTRIBUTION_WAS_NOT_DONE_TO_THESE_REQUIRED_ROLES_0 = new StringIdImpl( 3397, "Operation distribution was not done to these required roles: {0}");
   public static final StringId DistributedCacheOperation_THE_CACHE_HAS_BEEN_CLOSED = new StringIdImpl(3398, "The cache has been closed");
-  // okay to reuse 3399..3404
-  public static final StringId BridgeWriter_THE_BRIDGEWRITER_HAS_BEEN_CLOSED_WHILE_ATTEMPTING_TO_LOAD_REGION_0_KEY_1 = new StringIdImpl( 3405, "The BridgeWriter has been closed while attempting to load: region={0} key={1}");
-  public static final StringId BridgeWriter_NO_ACTIVE_SERVERS_WERE_FOUND_WHILE_ATTEMPTING_TO_LOAD_REGION_0_KEY_1 = new StringIdImpl( 3406, "No active servers were found while attempting to load: region={0} key={1}");
-  public static final StringId BridgeWriter_NO_AVAILABLE_CONNECTION_WAS_FOUND_WHILE_ATTEMPTING_TO_LOAD_REGION_0_KEY_1_BUT_THE_FOLLOWING_ACTIVE_SERVERS_EXIST_2 = new StringIdImpl( 3407, "No available Connection was found while attempting to load: region={0} key={1}, but the following active servers exist: {2}");
-  public static final StringId BridgeWriter_SOCKET_TIMED_OUT_ON_CLIENT = new StringIdImpl( 3408, "socket timed out on client");
-  public static final StringId BridgeWriter_SOCKET_CLOSED_ON_SERVER = new StringIdImpl( 3409, "socket closed on server");
-  public static final StringId BridgeWriter_SERVER_DEATH = new StringIdImpl( 3410, "server death");
-  public static final StringId BridgeWriter_SERVER_UNREACHABLE_COULD_NOT_CONNECT_AFTER_0_ATTEMPTS = new StringIdImpl( 3411, "Server unreachable: could not connect after {0} attempts");
-  public static final StringId BridgeWriter_BRIDGEWRITER_CONNECTED_TO_0 = new StringIdImpl( 3412, "BridgeWriter connected to {0}");
+  // okay to reuse 3399..3412
   
   
 }
