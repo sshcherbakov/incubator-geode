@@ -514,11 +514,6 @@ public class AttributesFactory<K,V> {
    */
   public void setCacheWriter(CacheWriter<K,V> cacheWriter)
   {
-    if (cacheWriter != null) {
-      if (AbstractRegion.isBridgeWriter(cacheWriter) &&  this.regionAttributes.getPoolName() != null) {
-        throw new IllegalStateException("A region with a pool name can not have a BridgeWriter or BridgeClient. Please use pools OR BridgeClient.");
-      }
-    }
     this.regionAttributes.cacheWriter = cacheWriter;
     this.regionAttributes.setHasCacheWriter(true);
   }
@@ -1280,20 +1275,12 @@ public class AttributesFactory<K,V> {
    * @param name the name of the connection pool to use; if <code>null</code>
    * or <code>""</code> then the connection pool is disabled for regions
    * using these attributes.
-   * @throws IllegalStateException if a cache loader or cache writer has already
-   * been set.
    * @since 5.7
    */
   public void setPoolName(String name) {
     String nm = name;
     if ("".equals(nm)) {
       nm = null;
-    }
-    if (nm != null) {
-      if (this.regionAttributes.getCacheWriter() != null 
-          && AbstractRegion.isBridgeWriter(this.regionAttributes.getCacheWriter())) {
-        throw new IllegalStateException("A region with a bridge writer can not have a pool name.");
-      }
     }
     this.regionAttributes.poolName = nm;
     this.regionAttributes.setHasPoolName(true);
@@ -1535,11 +1522,6 @@ public class AttributesFactory<K,V> {
     if (attrs.getMembershipAttributes().hasRequiredRoles()) {
       if (attrs.getScope().isLocal()) {
         throw new IllegalStateException(LocalizedStrings.AttributesFactory_IF_THE_MEMBERSHIP_ATTRIBUTES_HAS_REQUIRED_ROLES_THEN_SCOPE_MUST_NOT_BE_LOCAL.toLocalizedString());
-      }
-    }
-    if (attrs.getPoolName() != null) {
-      if (attrs.getCacheWriter() != null && AbstractRegion.isBridgeWriter(attrs.getCacheWriter())) {
-        throw new IllegalStateException("A region with a pool name can not have a BridgeWriter or BridgeClient. Please use pools OR BridgeClient.");
       }
     }
     

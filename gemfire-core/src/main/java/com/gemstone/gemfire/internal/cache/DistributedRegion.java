@@ -2893,9 +2893,6 @@ public class DistributedRegion extends LocalRegion implements
   protected void cacheWriterChanged(CacheWriter oldWriter)
   {
     super.cacheWriterChanged(oldWriter);
-    if (isBridgeWriter(oldWriter)) {
-      oldWriter = null;
-    }
     if (oldWriter == null ^ basicGetWriter() == null) {
       new UpdateAttributesProcessor(this).distribute();
     }

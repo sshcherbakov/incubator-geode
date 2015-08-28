@@ -52,7 +52,6 @@ import com.gemstone.gemfire.cache.asyncqueue.internal.AsyncEventQueueFactoryImpl
 import com.gemstone.gemfire.cache.client.Pool;
 import com.gemstone.gemfire.cache.client.PoolFactory;
 import com.gemstone.gemfire.cache.client.PoolManager;
-import com.gemstone.gemfire.cache.client.internal.BridgePoolImpl;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.execute.FunctionService;
 import com.gemstone.gemfire.cache.lucene.LuceneService;
@@ -680,10 +679,7 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
         if (drc2 == null) {
           return false;
         }
-        if (!RegionAttributesCreation.equal(drc1.getDiskDir(), drc2.getDiskDir())) {
-          return false;
-        }
-        if (!RegionAttributesCreation.equal(drc1.getBridgeWriter(), drc2.getBridgeWriter())) {
+        if (!drc1.equals(drc2)) {
           return false;
         }
       } else {
@@ -731,22 +727,22 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
           : PoolManager.getAll();
         int m1Size = m1.size();
         {
-          // ignore any BridgePool instances
+          // ignore any gateway instances
           Iterator it1 = m1.values().iterator();
           while (it1.hasNext()) {
             Pool cp = (Pool)it1.next();
-            if (cp instanceof BridgePoolImpl || ((PoolImpl)cp).isUsedByGateway()) {
+            if (((PoolImpl)cp).isUsedByGateway()) {
               m1Size--;
             }
           }
         }
         int m2Size = m2.size();
         {
-          // ignore any BridgePool instances
+          // ignore any gateway instances
           Iterator it2 = m2.values().iterator();
           while (it2.hasNext()) {
             Pool cp = (Pool)it2.next();
-            if (cp instanceof BridgePoolImpl || ((PoolImpl)cp).isUsedByGateway()) {
+            if (((PoolImpl)cp).isUsedByGateway()) {
               m2Size--;
             }
           }
@@ -770,8 +766,8 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
           Iterator it1 = m1.values().iterator();
           while (it1.hasNext()) {
             PoolImpl cp = (PoolImpl)it1.next();
-            // ignore any BridgePool instances
-            if (!(cp instanceof BridgePoolImpl) && !(cp).isUsedByGateway()) {
+            // ignore any gateway instances
+            if (!(cp).isUsedByGateway()) {
               cp.sameAs(m2.get(cp.getName()));
             }
           }

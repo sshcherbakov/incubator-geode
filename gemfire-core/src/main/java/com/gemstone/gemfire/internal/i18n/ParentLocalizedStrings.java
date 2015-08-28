@@ -1625,7 +1625,7 @@ class ParentLocalizedStrings {
   public static final StringId DummyQRegion_NOT_YET_IMPLEMENTED = new StringIdImpl(2610, "Not yet implemented");
   public static final StringId DumpB2NRegion_WAITED_TOO_LONG_FOR_REGION_TO_INITIALIZE_0 = new StringIdImpl(2611, "Waited too long for region to initialize {0}");
   public static final StringId DynamicRegionFactory_DYNAMIC_REGION_0_HAS_NOT_BEEN_CREATED = new StringIdImpl(2612, "Dynamic region \"{0}\" has not been created.");
-  public static final StringId DynamicRegionFactory_THE_CLIENT_POOL_OF_A_DYNAMICREGIONFACTORY_MUST_BE_CONFIGURED_WITH_ESTABLISHCALLBACKCONNECTION_SET_TO_TRUE = new StringIdImpl(2613, "The client pool of a DynamicRegionFactory must be configured with establishCallbackConnection set to true.");
+  // ok to reuse 2613
   public static final StringId ElderState_CANNOT_FORCE_GRANTOR_RECOVERY_FOR_GRANTOR_THAT_IS_TRANSFERRING = new StringIdImpl(2614, "Cannot force grantor recovery for grantor that is transferring");
   public static final StringId EndpointImpl_0_ALL_EXISTING_CONNECTIONS_TO_THIS_SERVER_ARE_IN_USE = new StringIdImpl(2615, "{0} : all existing connections to this server are in use");
   public static final StringId EndpointImpl_0_THE_CACHESERVER_HAS_DIED_UNEXPECTEDLY = new StringIdImpl(2616, "{0} : The CacheServer has died unexpectedly");

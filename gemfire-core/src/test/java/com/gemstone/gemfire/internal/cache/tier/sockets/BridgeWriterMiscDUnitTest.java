@@ -23,7 +23,6 @@ import com.gemstone.gemfire.cache.client.internal.Connection;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.client.internal.RegisterInterestTracker;
 import com.gemstone.gemfire.cache.util.BridgeServer;
-import com.gemstone.gemfire.cache.util.BridgeWriterException;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache30.CacheTestCase;
 import com.gemstone.gemfire.cache30.LRUEvictionControllerDUnitTest;
@@ -748,8 +747,6 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
       fail("expected ShutdownException");
     }
     catch(IllegalStateException expected) {
-    }
-    catch (BridgeWriterException expected) {
     }
     catch (DistributedSystemDisconnectedException expected) {
     } 

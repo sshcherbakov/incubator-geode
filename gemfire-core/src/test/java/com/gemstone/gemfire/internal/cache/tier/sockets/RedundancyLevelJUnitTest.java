@@ -21,7 +21,7 @@ import com.gemstone.gemfire.cache.Cache;
 import com.gemstone.gemfire.cache.CacheFactory;
 import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.client.Pool;
-import com.gemstone.gemfire.cache.util.BridgeWriter;
+import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.cache.tier.ConnectionProxy;
@@ -114,16 +114,14 @@ public class RedundancyLevelJUnitTest
         assertNotNull("cache was null", cache);
         Region region = cache.getRegion("/root/exampleRegion");
         assertNotNull(region);
-        BridgeWriter writer = (BridgeWriter)region.getAttributes()
-            .getCacheWriter();
-        Pool pool = (Pool)writer.getConnectionProxy();
+        Pool pool = PoolManager.find("clientPool");
         assertEquals(
             "Redundancy level not matching the one specified in cache-xml", 6,
             pool.getSubscriptionRedundancy());
       } finally {
         final String removeExpected =
           "<ExpectedException action=remove>" + expected + "</ExpectedException>";
-        cache.getLogger().info(removeExpected);
+        system.getLogWriter().info(removeExpected);
       }
   }
 

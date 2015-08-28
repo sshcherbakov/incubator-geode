@@ -1986,7 +1986,6 @@ public class GemFireCacheImpl implements InternalCache, ClientCache, HasCachePer
       TXStateProxy tx = null;
       try {
         this.keepAlive = keepalive;
-        PoolManagerImpl.setKeepAlive(keepalive);
 
         if (this.txMgr != null) {
           tx = this.txMgr.internalSuspend();
