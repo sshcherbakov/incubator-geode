@@ -20,7 +20,7 @@ import com.gemstone.gemfire.cache.client.internal.Connection;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.client.internal.RegisterInterestTracker;
 import com.gemstone.gemfire.cache.client.internal.ServerRegionProxy;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
@@ -399,21 +399,21 @@ public class HAInterestBaseTest extends DistributedTestCase {
   }
 
   public static void verifyDispatcherIsAlive() {
-    assertEquals("More than one BridgeServer", 1, cache.getBridgeServers().size());
+    assertEquals("More than one BridgeServer", 1, cache.getCacheServers().size());
     
     WaitCriterion wc = new WaitCriterion() {
       @Override
       public boolean done() {
-        return cache.getBridgeServers().size() == 1;
+        return cache.getCacheServers().size() == 1;
       }
       @Override
       public String description() {
-        return "waiting for cache.getBridgeServers().size() == 1";
+        return "waiting for cache.getCacheServers().size() == 1";
       }
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getBridgeServers().iterator().next();
+    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -458,16 +458,16 @@ public class HAInterestBaseTest extends DistributedTestCase {
     WaitCriterion wc = new WaitCriterion() {
       @Override
       public boolean done() {
-        return cache.getBridgeServers().size() == 1;
+        return cache.getCacheServers().size() == 1;
       }
       @Override
       public String description() {
-        return "cache.getBridgeServers().size() == 1";
+        return "cache.getCacheServers().size() == 1";
       }
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getBridgeServers().iterator().next();
+    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -551,15 +551,15 @@ public class HAInterestBaseTest extends DistributedTestCase {
 
   public static void startServer() throws IOException {
     Cache c = CacheFactory.getAnyInstance();
-    assertEquals("More than one BridgeServer", 1, c.getBridgeServers().size());
-    BridgeServerImpl bs = (BridgeServerImpl) c.getBridgeServers().iterator().next();
+    assertEquals("More than one BridgeServer", 1, c.getCacheServers().size());
+    BridgeServerImpl bs = (BridgeServerImpl) c.getCacheServers().iterator().next();
     assertNotNull(bs);
     bs.start();
   }
 
   public static void stopServer() {
-    assertEquals("More than one BridgeServer", 1, cache.getBridgeServers().size());
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getBridgeServers().iterator().next();
+    assertEquals("More than one BridgeServer", 1, cache.getCacheServers().size());
+    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     bs.stop();
   }
@@ -749,16 +749,16 @@ public class HAInterestBaseTest extends DistributedTestCase {
     WaitCriterion wc = new WaitCriterion() {
       @Override
       public boolean done() {
-        return cache.getBridgeServers().size() == 1;
+        return cache.getCacheServers().size() == 1;
       }
       @Override
       public String description() {
-        return "waiting for cache.getBridgeServers().size() == 1";
+        return "waiting for cache.getCacheServers().size() == 1";
       }
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getBridgeServers().iterator().next();
+    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -809,16 +809,16 @@ public class HAInterestBaseTest extends DistributedTestCase {
     WaitCriterion wc = new WaitCriterion() {
       @Override
       public boolean done() {
-        return cache.getBridgeServers().size() == 1;
+        return cache.getCacheServers().size() == 1;
       }
       @Override
       public String description() {
-        return "waiting for cache.getBridgeServers().size() == 1";
+        return "waiting for cache.getCacheServers().size() == 1";
       }
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getBridgeServers().iterator().next();
+    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -976,7 +976,7 @@ public class HAInterestBaseTest extends DistributedTestCase {
     factory.setConcurrencyChecksEnabled(true);
     cache.createRegion(REGION_NAME, factory.create());
 
-    BridgeServer server = cache.addBridgeServer();
+    CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);
     server.setMaximumTimeBetweenPings(180000);
@@ -994,7 +994,7 @@ public class HAInterestBaseTest extends DistributedTestCase {
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
 
-    BridgeServer server = cache.addBridgeServer();
+    CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);
     // ensures updates to be sent instead of invalidations

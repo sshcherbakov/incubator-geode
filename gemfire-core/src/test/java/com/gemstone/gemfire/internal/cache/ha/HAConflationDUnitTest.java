@@ -346,7 +346,7 @@ public class HAConflationDUnitTest extends CacheTestCase
     }
     RegionAttributes attrs = factory.create();
     cache.createRegion(regionName, attrs);
-    BridgeServerImpl server = (BridgeServerImpl)cache.addBridgeServer();
+    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

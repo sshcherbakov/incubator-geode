@@ -170,7 +170,7 @@ public class OperationsPropagationDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     region = cache.createRegion(REGION_NAME, attrs);
 
-    BridgeServerImpl server = (BridgeServerImpl)cache.addBridgeServer();
+    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

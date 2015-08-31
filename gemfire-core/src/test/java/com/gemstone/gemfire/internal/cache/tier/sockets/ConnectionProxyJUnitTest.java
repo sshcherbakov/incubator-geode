@@ -37,7 +37,7 @@ import com.gemstone.gemfire.cache.client.internal.Connection;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.client.internal.PutOp;
 import com.gemstone.gemfire.cache.client.internal.QueueStateImpl.SequenceIdAndExpirationObject;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
@@ -123,7 +123,7 @@ public class ConnectionProxyJUnitTest
     int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     Region testRegion = null ;
     try {
-      BridgeServer server = this.cache.addBridgeServer();
+      CacheServer server = this.cache.addCacheServer();
       server.setMaximumTimeBetweenPings(10000);
       server.setPort(port3);
       server.start();
@@ -232,10 +232,10 @@ public class ConnectionProxyJUnitTest
 //    long start = System.currentTimeMillis();
     assertEquals(0, proxy.getConnectedServerCount());
     //start the server
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
       server.setMaximumTimeBetweenPings(15000);
       server.setPort(port3);
       server.start();
@@ -293,10 +293,10 @@ public class ConnectionProxyJUnitTest
 //    long start = System.currentTimeMillis();
     assertEquals(0, proxy.getConnectedServerCount());
     //start the server
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
       server.setMaximumTimeBetweenPings(15000);
       server.setPort(port3);
       server.start();
@@ -326,10 +326,10 @@ public class ConnectionProxyJUnitTest
   public void testThreadIdToSequenceIdMapCreation()
   {
     int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
       server.setMaximumTimeBetweenPings(10000);
       server.setPort(port3);
       server.start();
@@ -370,10 +370,10 @@ public class ConnectionProxyJUnitTest
   public void testThreadIdToSequenceIdMapExpiryPositive()
  {
    int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setMaximumTimeBetweenPings(10000);
      server.setPort(port3);
      server.start();
@@ -420,10 +420,10 @@ public class ConnectionProxyJUnitTest
   public void testThreadIdToSequenceIdMapExpiryNegative()
  {
    int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setMaximumTimeBetweenPings(10000);     
      server.setPort(port3);
      server.start();
@@ -472,10 +472,10 @@ public class ConnectionProxyJUnitTest
   public void testThreadIdToSequenceIdMapConcurrency()
  {
    int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setMaximumTimeBetweenPings(10000);
      server.setPort(port3);
      server.start();
@@ -527,10 +527,10 @@ public class ConnectionProxyJUnitTest
   public void testDuplicateSeqIdLesserThanCurrentSeqIdBeingIgnored()
  {
    int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setMaximumTimeBetweenPings(10000);
      server.setPort(port3);
      server.start();
@@ -586,10 +586,10 @@ public class ConnectionProxyJUnitTest
   public void testCleanCloseOfThreadIdToSeqId()
  {
    int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setMaximumTimeBetweenPings(10000);
      server.setPort(port3);
      server.start();
@@ -644,10 +644,10 @@ public class ConnectionProxyJUnitTest
   public void testTwoClientsHavingDifferentThreadIdMaps()
  {
    int port3 = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setMaximumTimeBetweenPings(10000);
      server.setPort(port3);
      server.start();
@@ -696,10 +696,10 @@ public class ConnectionProxyJUnitTest
   public void testPeriodicAckSendByClient()
  {
    int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setPort(port);
      server.start();
    }
@@ -767,10 +767,10 @@ public class ConnectionProxyJUnitTest
   public void testNoAckSendByClient()
  {
    int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-   BridgeServer server = null;
+   CacheServer server = null;
    try {
    try {
-     server = this.cache.addBridgeServer();
+     server = this.cache.addCacheServer();
      server.setPort(port);
      server.start();
    }

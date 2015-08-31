@@ -16,7 +16,7 @@ import com.gemstone.gemfire.internal.offheap.SimpleMemoryAllocatorImpl;
 import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache.client.*;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 
 import dunit.*;
 
@@ -680,7 +680,7 @@ import java.util.*;
         }
         try {
           Cache cache = getCache();
-          BridgeServer bridge = cache.addBridgeServer();
+          CacheServer bridge = cache.addCacheServer();
           bridge.setPort(serverPort);
           // for off-heap I want the server to use a selector
           bridge.setMaxThreads(offheap ? 16 : getMaxThreads());

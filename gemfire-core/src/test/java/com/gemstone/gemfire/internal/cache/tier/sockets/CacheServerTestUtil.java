@@ -31,7 +31,7 @@ import com.gemstone.gemfire.cache.client.Pool;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.query.CqEvent;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.cache.util.CqListenerAdapter;
 import com.gemstone.gemfire.distributed.DistributedSystem;
@@ -356,7 +356,7 @@ public class CacheServerTestUtil extends DistributedTestCase
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     cache.createRegion(regionName, attrs);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);
     server1.setNotifyBySubscription(notifyBySubscription.booleanValue());
@@ -378,7 +378,7 @@ public class CacheServerTestUtil extends DistributedTestCase
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     cache.createRegion(regionName, attrs);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);
     server1.setNotifyBySubscription(notifyBySubscription.booleanValue());
@@ -407,7 +407,7 @@ public class CacheServerTestUtil extends DistributedTestCase
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     cache.createRegion(regionName, attrs);
-    BridgeServer server = cache.addBridgeServer();
+    CacheServer server = cache.addCacheServer();
     server.setPort(serverPort.intValue());
     server.setNotifyBySubscription(notifyBySubscription.booleanValue());
     server.start();
@@ -428,7 +428,7 @@ public class CacheServerTestUtil extends DistributedTestCase
     if (!regionName2.equals("")) {
       cache.createRegion(regionName2, attrs);
     }
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);
     server1.setNotifyBySubscription(notifyBySubscription.booleanValue());
@@ -504,18 +504,18 @@ public class CacheServerTestUtil extends DistributedTestCase
   }
   
   public static void stopCacheServers() {
-    Iterator iter = getCache().getBridgeServers().iterator();
+    Iterator iter = getCache().getCacheServers().iterator();
     if (iter.hasNext()) {
-      BridgeServer server = (BridgeServer) iter.next();
+      CacheServer server = (CacheServer) iter.next();
       server.stop();
       assertFalse(server.isRunning());
     }
   }
 
   public static void restartCacheServers() {
-    Iterator iter = getCache().getBridgeServers().iterator();
+    Iterator iter = getCache().getCacheServers().iterator();
     if (iter.hasNext()) {
-      BridgeServer server = (BridgeServer) iter.next();
+      CacheServer server = (CacheServer) iter.next();
       try {
         server.start();
       } catch(Exception e) {

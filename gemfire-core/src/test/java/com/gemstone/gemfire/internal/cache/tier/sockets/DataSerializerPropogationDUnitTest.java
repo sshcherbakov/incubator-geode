@@ -27,7 +27,7 @@ import com.gemstone.gemfire.cache.Scope;
 import com.gemstone.gemfire.cache.client.Pool;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
@@ -132,7 +132,7 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setMaxThreads(maxThreads.intValue());
     server1.setNotifyBySubscription(true);
@@ -353,9 +353,9 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
 
   public static void stopServer() {
     try {
-      assertEquals("Expected exactly one BridgeServer", 1, cache
-          .getBridgeServers().size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getBridgeServers()
+      assertEquals("Expected exactly one CacheServer", 1, cache
+          .getCacheServers().size());
+      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       bs.stop();
@@ -368,9 +368,9 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
   public static void startServer() {
     try {
       Cache c = CacheFactory.getAnyInstance();
-      assertEquals("Expected exactly one BridgeServer", 1, c.getBridgeServers()
+      assertEquals("Expected exactly one CacheServer", 1, c.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)c.getBridgeServers().iterator()
+      BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
           .next();
       assertNotNull(bs);
       bs.start();
@@ -873,7 +873,7 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setMaxThreads(maxThreads.intValue());
     server1.setNotifyBySubscription(true);
@@ -897,7 +897,7 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setMaxThreads(maxThreads.intValue());
     server1.setNotifyBySubscription(true);

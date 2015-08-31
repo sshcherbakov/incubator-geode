@@ -13,7 +13,7 @@ import com.gemstone.gemfire.cache.*;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.query.*;
 import com.gemstone.gemfire.cache.query.internal.*;
-import com.gemstone.gemfire.cache.util.*;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache30.CacheTestCase;
@@ -1348,7 +1348,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
     throws IOException {
 
     Cache cache = getCache();
-    BridgeServer bridge = cache.addBridgeServer();
+    CacheServer bridge = cache.addCacheServer();
     bridge.setPort(port);
     bridge.setNotifyBySubscription(notifyBySubscription);
     bridge.start();
@@ -1359,8 +1359,8 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
    * Stops the bridge server that serves up the given cache.
    */
   protected void stopBridgeServer(Cache cache) {
-    BridgeServer bridge =
-      (BridgeServer) cache.getBridgeServers().iterator().next();
+    CacheServer bridge =
+      (CacheServer) cache.getCacheServers().iterator().next();
     bridge.stop();
     assertFalse(bridge.isRunning());
   }

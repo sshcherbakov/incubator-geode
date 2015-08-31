@@ -3013,7 +3013,7 @@ protected boolean checkEventForRemoval(Long counter, ThreadIdentifier threadid, 
                 && !queueRemovalMessageList.isEmpty()) { // messages exist
               QueueRemovalMessage qrm = new QueueRemovalMessage();
               qrm.resetRecipients();
-              List<BridgeServerImpl> servers = this.cache.getBridgeServers();
+              List<BridgeServerImpl> servers = this.cache.getCacheServers();
               List<DistributedMember> recipients = new LinkedList();
               for (BridgeServerImpl server: servers) {
                 recipients.addAll(server.getCacheServerAdvisor().adviseBridgeServers());

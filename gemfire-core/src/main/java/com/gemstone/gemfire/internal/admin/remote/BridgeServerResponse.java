@@ -56,7 +56,7 @@ public final class BridgeServerResponse extends AdminResponse {
         switch (operation) {
         case BridgeServerRequest.ADD_OPERATION: {
           BridgeServerImpl bridge =
-            (BridgeServerImpl) cache.addBridgeServer();
+            (BridgeServerImpl) cache.addCacheServer();
           m.bridgeInfo = new RemoteBridgeServer(bridge);
           break;
         }
@@ -65,7 +65,7 @@ public final class BridgeServerResponse extends AdminResponse {
           int id = request.getBridgeId();
           // Note that since this is only an informational request
           // it is not necessary to synchronize on allBridgeServersLock
-          for (Iterator iter = cache.getBridgeServers().iterator();
+          for (Iterator iter = cache.getCacheServers().iterator();
                iter.hasNext(); ) {
             BridgeServerImpl bridge = (BridgeServerImpl) iter.next();
             if (System.identityHashCode(bridge) == id) {
@@ -81,7 +81,7 @@ public final class BridgeServerResponse extends AdminResponse {
 
         case BridgeServerRequest.START_OPERATION: {
           RemoteBridgeServer config = request.getBridgeInfo();
-          for (Iterator iter = cache.getBridgeServers().iterator();
+          for (Iterator iter = cache.getCacheServers().iterator();
                iter.hasNext(); ) {
             BridgeServerImpl bridge = (BridgeServerImpl) iter.next();
             if (System.identityHashCode(bridge) == config.getId()) {
@@ -99,7 +99,7 @@ public final class BridgeServerResponse extends AdminResponse {
 
         case BridgeServerRequest.STOP_OPERATION: {
           RemoteBridgeServer config = request.getBridgeInfo();
-          for (Iterator iter = cache.getBridgeServers().iterator();
+          for (Iterator iter = cache.getCacheServers().iterator();
                iter.hasNext(); ) {
             BridgeServerImpl bridge = (BridgeServerImpl) iter.next();
             if (System.identityHashCode(bridge) == config.getId()) {

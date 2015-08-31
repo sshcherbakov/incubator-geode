@@ -22,7 +22,7 @@ import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.Connection;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.client.internal.RegisterInterestTracker;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache30.CacheTestCase;
 import com.gemstone.gemfire.cache30.LRUEvictionControllerDUnitTest;
@@ -863,7 +863,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     assertNotNull(r2);
     assertNotNull(pr);
 
-    BridgeServer server = cache.addBridgeServer();
+    CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     r1.getCache().getDistributedSystem().getLogWriter().info("Starting server on port " + port);
     server.setPort(port);
@@ -1010,9 +1010,9 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   {
     try {
       Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
-      assertEquals("More than one BridgeServer", 1, cache.getBridgeServers()
+      assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getBridgeServers()
+      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -1040,9 +1040,9 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   {
     try {
       Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
-      assertEquals("More than one BridgeServer", 1, cache.getBridgeServers()
+      assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getBridgeServers()
+      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -1085,9 +1085,9 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   {
     try {
       Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
-      assertEquals("More than one BridgeServer", 1, cache.getBridgeServers()
+      assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getBridgeServers()
+      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());

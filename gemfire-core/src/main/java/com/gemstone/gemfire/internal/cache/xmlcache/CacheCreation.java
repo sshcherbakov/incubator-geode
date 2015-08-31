@@ -73,7 +73,6 @@ import com.gemstone.gemfire.cache.query.RegionNotFoundException;
 import com.gemstone.gemfire.cache.query.internal.cq.CqService;
 import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.snapshot.CacheSnapshotService;
-import com.gemstone.gemfire.cache.util.BridgeServer;
 import com.gemstone.gemfire.cache.util.GatewayConflictResolver;
 import com.gemstone.gemfire.cache.wan.GatewayReceiver;
 import com.gemstone.gemfire.cache.wan.GatewayReceiverFactory;
@@ -981,11 +980,6 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
     return (Region)this.roots.get(path);
   }
 
-  @SuppressWarnings("deprecation")
-  public BridgeServer addBridgeServer() {
-    return (BridgeServer)addCacheServer();
-  }
-  
   public CacheServer addCacheServer() {
     return addCacheServer(false);
   }
@@ -1000,9 +994,6 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
     this.declarablePropertiesMap.put(declarable, properties);
   }
   
-  public List getBridgeServers() {
-    return getCacheServers();
-  }
   public List getCacheServers() {
     return this.bridgeServers;
   }

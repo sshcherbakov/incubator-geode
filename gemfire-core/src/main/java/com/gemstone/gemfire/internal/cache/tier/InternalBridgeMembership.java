@@ -283,7 +283,7 @@ public final class InternalBridgeMembership  {
     if(onlyClientsNotifiedByThisServer) {
       // Note it is not necessary to synchronize on the list of bridge servers here, 
       // since this is only a status (snapshot) of the system.
-      for (Iterator bsii = CacheFactory.getAnyInstance().getBridgeServers().iterator(); bsii.hasNext(); ) {
+      for (Iterator bsii = CacheFactory.getAnyInstance().getCacheServers().iterator(); bsii.hasNext(); ) {
         BridgeServerImpl bsi = (BridgeServerImpl) bsii.next();
         AcceptorImpl ai = bsi.getAcceptor();
         if (ai != null && ai.getCacheClientNotifier() != null) {
@@ -338,7 +338,7 @@ public final class InternalBridgeMembership  {
 
     // Get all clients
     Map allClients = new HashMap();
-    for (Iterator bsii = CacheFactory.getAnyInstance().getBridgeServers().iterator(); bsii.hasNext(); ) {
+    for (Iterator bsii = CacheFactory.getAnyInstance().getCacheServers().iterator(); bsii.hasNext(); ) {
       BridgeServerImpl bsi = (BridgeServerImpl) bsii.next();
       AcceptorImpl ai = bsi.getAcceptor();
       if (ai != null && ai.getCacheClientNotifier() != null) {
@@ -359,7 +359,7 @@ public final class InternalBridgeMembership  {
     if (c==null) // Add a NULL Check
       return clientQueueSizes;
 
-    for (Iterator bsii = c.getBridgeServers().iterator(); bsii.hasNext(); ) {
+    for (Iterator bsii = c.getCacheServers().iterator(); bsii.hasNext(); ) {
       BridgeServerImpl bsi = (BridgeServerImpl) bsii.next();
       AcceptorImpl ai = bsi.getAcceptor();
       if (ai != null && ai.getCacheClientNotifier() != null) {

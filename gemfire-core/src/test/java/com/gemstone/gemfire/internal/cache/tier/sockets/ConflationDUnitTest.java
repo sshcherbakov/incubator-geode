@@ -19,7 +19,7 @@ import com.gemstone.gemfire.cache.EntryEvent;
 import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.RegionAttributes;
 import com.gemstone.gemfire.cache.Scope;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
@@ -648,7 +648,7 @@ public class ConflationDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME1, attrs);
     cache.createRegion(REGION_NAME2, attrs);
-    BridgeServer server = cache.addBridgeServer();
+    CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET) ;
     server.setPort(port);
     server.setNotifyBySubscription(true);
@@ -793,7 +793,7 @@ public class ConflationDUnitTest extends DistributedTestCase
   public static void getStatsOnServer()
   {
     Cache cache = GemFireCacheImpl.getInstance();
-    Iterator itr = cache.getBridgeServers().iterator();
+    Iterator itr = cache.getCacheServers().iterator();
     BridgeServerImpl server = (BridgeServerImpl)itr.next();
     Iterator iter_prox = server.getAcceptor().getCacheClientNotifier()
         .getClientProxies().iterator();

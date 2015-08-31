@@ -894,7 +894,7 @@ public abstract class DynamicRegionFactory  {
     @Override
     protected boolean shouldNotifyBridgeClients()
     {
-      return getCache().getBridgeServers().size() > 0;
+      return getCache().getCacheServers().size() > 0;
     }
 
     // Over-ride the super behavior to perform the destruction of the dynamic region
@@ -1005,7 +1005,7 @@ public abstract class DynamicRegionFactory  {
     @Override
     final public boolean shouldNotifyBridgeClients()
     {
-      return getCache().getBridgeServers().size() > 0;
+      return getCache().getCacheServers().size() > 0;
     }    
    
     // Over-ride the super behavior to perform the destruction of the dynamic region

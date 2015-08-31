@@ -8,8 +8,9 @@
 package com.gemstone.gemfire.cache30;
 
 import com.gemstone.gemfire.cache.*;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.internal.cache.xmlcache.*;
+
 import java.io.*;
 
 import org.xml.sax.SAXException;
@@ -40,7 +41,7 @@ public class CacheXml41DUnitTest extends CacheXml40DUnitTest
   // ////// Test methods
 
   
-  public void setBridgeAttributes(BridgeServer bridge1)
+  public void setBridgeAttributes(CacheServer bridge1)
   {
     super.setBridgeAttributes(bridge1);
     bridge1.setMaximumTimeBetweenPings(12345);

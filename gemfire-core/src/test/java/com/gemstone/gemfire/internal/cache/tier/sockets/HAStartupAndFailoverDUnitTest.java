@@ -22,7 +22,7 @@ import com.gemstone.gemfire.cache.Scope;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.client.internal.Connection;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
@@ -383,8 +383,8 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
     {
     try {
       assertEquals("Expected exactly one BridgeServer", 1, cache
-          .getBridgeServers().size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getBridgeServers()
+          .getCacheServers().size());
+      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       bs.stop();
@@ -430,8 +430,8 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
     try {
       Cache c = CacheFactory.getAnyInstance();
       assertEquals("Expected exactly one BridgeServer", 1,
-          c.getBridgeServers().size());
-      BridgeServerImpl bs = (BridgeServerImpl) c.getBridgeServers()
+          c.getCacheServers().size());
+      BridgeServerImpl bs = (BridgeServerImpl) c.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       bs.start();
@@ -473,7 +473,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       WaitCriterion wc = new WaitCriterion() {
         String excuse;
         public boolean done() {
-          return cache.getBridgeServers().size() == 1;
+          return cache.getCacheServers().size() == 1;
         }
         public String description() {
           return excuse;
@@ -481,7 +481,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       };
       DistributedTestCase.waitForCriterion(wc, 60 * 1000, 1000, true);
       
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getBridgeServers()
+      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -529,11 +529,11 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
     try {
       Cache c = CacheFactory.getAnyInstance();
       // assertEquals("More than one BridgeServer", 1,
-      // c.getBridgeServers().size());
+      // c.getCacheServers().size());
       WaitCriterion wc = new WaitCriterion() {
         String excuse;
         public boolean done() {
-          return cache.getBridgeServers().size() == 1;
+          return cache.getCacheServers().size() == 1;
         }
         public String description() {
           return excuse;
@@ -541,7 +541,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       };
       DistributedTestCase.waitForCriterion(wc, 60 * 1000, 1000, true);
       
-      BridgeServerImpl bs = (BridgeServerImpl)c.getBridgeServers().iterator()
+      BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
           .next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -714,7 +714,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
 
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET) ;
     server1.setPort(port);
     // ensures updates to be sent instead of invalidations

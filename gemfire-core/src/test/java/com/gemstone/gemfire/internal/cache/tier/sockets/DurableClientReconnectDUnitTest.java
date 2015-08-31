@@ -28,7 +28,7 @@ import com.gemstone.gemfire.cache.client.PoolFactory;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.Connection;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
@@ -464,7 +464,7 @@ public class DurableClientReconnectDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     Region r = cache.createRegion(REGION_NAME, attrs);
     assertNotNull(r);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);
     server1.setNotifyBySubscription(true);
@@ -564,7 +564,7 @@ public class DurableClientReconnectDUnitTest extends DistributedTestCase
   }
   
   private static BridgeServerImpl getBridgeServer() {
-    BridgeServerImpl bridgeServer = (BridgeServerImpl) cache.getBridgeServers().iterator().next();
+    BridgeServerImpl bridgeServer = (BridgeServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bridgeServer);
     return bridgeServer;
   }

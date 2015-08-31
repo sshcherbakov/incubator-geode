@@ -32,7 +32,7 @@ import com.gemstone.gemfire.cache.query.internal.DefaultQuery;
 import com.gemstone.gemfire.cache.query.internal.QueryObserverAdapter;
 import com.gemstone.gemfire.cache.query.internal.QueryObserverHolder;
 import com.gemstone.gemfire.cache.query.types.ObjectType;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache30.CacheTestCase;
@@ -2421,7 +2421,7 @@ public class QueryUsingPoolDUnitTest extends CacheTestCase {
   throws IOException {
 
     Cache cache = getCache();
-    BridgeServer bridge = cache.addBridgeServer();
+    CacheServer bridge = cache.addCacheServer();
     bridge.setPort(port);
     bridge.setNotifyBySubscription(notifyBySubscription);
     bridge.start();
@@ -2432,8 +2432,8 @@ public class QueryUsingPoolDUnitTest extends CacheTestCase {
    * Stops the bridge server that serves up the given cache.
    */
   protected void stopBridgeServer(Cache cache) {
-    BridgeServer bridge =
-      (BridgeServer) cache.getBridgeServers().iterator().next();
+    CacheServer bridge =
+      (CacheServer) cache.getCacheServers().iterator().next();
     bridge.stop();
     assertFalse(bridge.isRunning());
   }

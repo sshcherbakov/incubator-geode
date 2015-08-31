@@ -214,7 +214,7 @@ public class RegisterInterestBeforeRegionCreationDUnitTest extends DistributedTe
       RegionAttributes attrs = factory.createRegionAttributes();
       cache.createVMRegion(REGION_NAME, attrs);
     }
-    BridgeServerImpl server = (BridgeServerImpl)cache.addBridgeServer();
+    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

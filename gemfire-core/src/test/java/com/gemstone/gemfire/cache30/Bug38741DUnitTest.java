@@ -178,7 +178,7 @@ public class Bug38741DUnitTest extends BridgeTestCase {
       public void run2() throws CacheException {
         Region r = getRootRegion(rName);
         BridgeServerImpl bsi = (BridgeServerImpl)
-          getCache().getBridgeServers().iterator().next();
+          getCache().getCacheServers().iterator().next();
         Collection cp = bsi.getAcceptor().getCacheClientNotifier().getClientProxies();
         // Should only be one because only one client is connected
         assertEquals(1, cp.size());

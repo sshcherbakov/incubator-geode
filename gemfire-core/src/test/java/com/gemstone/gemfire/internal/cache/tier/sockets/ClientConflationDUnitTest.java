@@ -22,7 +22,7 @@ import com.gemstone.gemfire.cache.client.Pool;
 import com.gemstone.gemfire.cache.client.PoolFactory;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
@@ -282,7 +282,7 @@ public class ClientConflationDUnitTest extends DistributedTestCase
    * Assert all queues are empty to aid later assertion for listener event counts.
    */
   public static void assertAllQueuesEmpty() {
-    Iterator servers = cacheServer.getBridgeServers().iterator();
+    Iterator servers = cacheServer.getCacheServers().iterator();
     while (servers.hasNext()) {
       Iterator proxies = ((BridgeServerImpl)servers.next()).getAcceptor().
         getCacheClientNotifier().getClientProxies().iterator();
@@ -402,7 +402,7 @@ public class ClientConflationDUnitTest extends DistributedTestCase
     RegionAttributes attrs2 = factory.create();
     cacheServer.createRegion(REGION_NAME1, attrs1);
     cacheServer.createRegion(REGION_NAME2, attrs2);
-    BridgeServer server = cacheServer.addBridgeServer();
+    CacheServer server = cacheServer.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET) ;
     server.setPort(port);
     server.setNotifyBySubscription(true);

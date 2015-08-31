@@ -24,7 +24,7 @@ import com.gemstone.gemfire.cache.InterestResultPolicy;
 import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.RegionAttributes;
 import com.gemstone.gemfire.cache.Scope;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
@@ -226,7 +226,7 @@ public class InterestListRecoveryDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET) ;
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setNotifyBySubscription(true);
     server1.start();
@@ -452,8 +452,8 @@ public class InterestListRecoveryDUnitTest extends DistributedTestCase
 
  public static Set getCacheClientProxies() {
    Cache c = CacheFactory.getAnyInstance();
-   assertEquals("More than one BridgeServer", 1, c.getBridgeServers().size());
-   BridgeServerImpl bs = (BridgeServerImpl)c.getBridgeServers().iterator()
+   assertEquals("More than one CacheServer", 1, c.getCacheServers().size());
+   BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
    .next();
    assertNotNull(bs);
    assertNotNull(bs.getAcceptor());

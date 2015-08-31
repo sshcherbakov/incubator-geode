@@ -20,7 +20,7 @@ import com.gemstone.gemfire.cache.EntryEvent;
 import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.RegionAttributes;
 import com.gemstone.gemfire.cache.Scope;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
@@ -157,7 +157,7 @@ public class FailoverDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     cache.createRegion(regionName, attrs);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET) ;
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setNotifyBySubscription(true);
     server1.start();
@@ -224,9 +224,9 @@ public class FailoverDUnitTest extends DistributedTestCase
   public static void stopServer()
   {
     try {
-      Iterator iter = cache.getBridgeServers().iterator();
+      Iterator iter = cache.getCacheServers().iterator();
       if (iter.hasNext()) {
-        BridgeServer server = (BridgeServer)iter.next();
+        CacheServer server = (CacheServer)iter.next();
           server.stop();
       }
     }

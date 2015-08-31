@@ -270,7 +270,7 @@ public class DurableClientStatsDUnitTest extends DistributedTestCase {
       Cache cache = CacheServerTestUtil.getCache();
       com.gemstone.gemfire.LogWriter logger = cache.getLogger();
       BridgeServerImpl currentServer = (BridgeServerImpl)(new ArrayList(cache
-          .getBridgeServers()).get(0));
+          .getCacheServers()).get(0));
       AcceptorImpl ai = currentServer.getAcceptor();
       CacheClientNotifier notifier = ai.getCacheClientNotifier();
       CacheClientNotifierStats stats = notifier.getStats();
@@ -291,7 +291,7 @@ public class DurableClientStatsDUnitTest extends DistributedTestCase {
       Cache cache = CacheServerTestUtil.getCache();
       com.gemstone.gemfire.LogWriter logger = cache.getLogger();
       BridgeServerImpl currentServer = (BridgeServerImpl)(new ArrayList(cache
-          .getBridgeServers()).get(0));
+          .getCacheServers()).get(0));
       AcceptorImpl ai = currentServer.getAcceptor();
       CacheClientNotifier notifier = ai.getCacheClientNotifier();
       CacheClientNotifierStats stats = notifier.getStats();

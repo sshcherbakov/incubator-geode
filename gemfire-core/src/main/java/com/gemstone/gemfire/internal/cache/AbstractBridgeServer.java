@@ -16,7 +16,6 @@ import com.gemstone.gemfire.cache.util.BridgeMembership;
 import com.gemstone.gemfire.cache.util.BridgeMembershipEvent;
 import com.gemstone.gemfire.cache.util.BridgeMembershipListener;
 import com.gemstone.gemfire.cache.util.BridgeMembershipListenerAdapter;
-import com.gemstone.gemfire.cache.util.BridgeServer;
 import com.gemstone.gemfire.distributed.DistributedMember;
 import com.gemstone.gemfire.distributed.internal.DM;
 import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
@@ -34,7 +33,7 @@ import java.util.Set;
  * @author darrel
  * @since 5.7
  */
-public abstract class AbstractBridgeServer implements CacheServer, BridgeServer {
+public abstract class AbstractBridgeServer implements CacheServer {
 
   public static final String TEST_OVERRIDE_DEFAULT_PORT_PROPERTY = "gemfire.test.CacheServer.OVERRIDE_DEFAULT_PORT";
 

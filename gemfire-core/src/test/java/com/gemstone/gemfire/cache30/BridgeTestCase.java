@@ -21,7 +21,7 @@ import com.gemstone.gemfire.cache.Scope;
 import com.gemstone.gemfire.cache.client.Pool;
 import com.gemstone.gemfire.cache.client.PoolFactory;
 import com.gemstone.gemfire.cache.client.PoolManager;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedMember;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
@@ -69,7 +69,7 @@ public class BridgeTestCase extends CacheTestCase {
     throws IOException {
 
     Cache cache = getCache();
-    BridgeServer bridge = cache.addBridgeServer();
+    CacheServer bridge = cache.addCacheServer();
     bridge.setPort(port);
     bridge.setMaxThreads(getMaxThreads());
     bridge.start();
@@ -90,9 +90,9 @@ public class BridgeTestCase extends CacheTestCase {
    * @since 4.0
    */
   public void stopBridgeServers(Cache cache) {
-    BridgeServer bridge = null;
-    for (Iterator bsI = cache.getBridgeServers().iterator();bsI.hasNext(); ) {
-      bridge = (BridgeServer) bsI.next();
+    CacheServer bridge = null;
+    for (Iterator bsI = cache.getCacheServers().iterator();bsI.hasNext(); ) {
+      bridge = (CacheServer) bsI.next();
     bridge.stop();
     assertFalse(bridge.isRunning());
   }

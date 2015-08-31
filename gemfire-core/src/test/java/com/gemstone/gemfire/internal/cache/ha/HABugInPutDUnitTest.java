@@ -132,7 +132,7 @@ public class HABugInPutDUnitTest extends DistributedTestCase
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
-    BridgeServerImpl server = (BridgeServerImpl)cache.addBridgeServer();
+    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

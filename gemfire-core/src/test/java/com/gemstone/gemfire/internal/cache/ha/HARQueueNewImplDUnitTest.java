@@ -27,7 +27,7 @@ import com.gemstone.gemfire.cache.EntryEvent;
 import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.RegionAttributes;
 import com.gemstone.gemfire.cache.Scope;
-import com.gemstone.gemfire.cache.util.BridgeServer;
+import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
@@ -165,7 +165,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
     logger = cache.getLogger();
 
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setNotifyBySubscription(true);
     if (ePolicy != null) {
@@ -186,7 +186,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
   public static Integer createOneMoreBridgeServer(Boolean notifyBySubscription)
       throws Exception {
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
-    BridgeServer server1 = cache.addBridgeServer();
+    CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
     server1.setNotifyBySubscription(notifyBySubscription.booleanValue());
     server1.getClientSubscriptionConfig().setEvictionPolicy(
@@ -913,7 +913,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
       }
     }
     else {
-      r = ((BridgeServerImpl)cache.getBridgeServers().toArray()[0])
+      r = ((BridgeServerImpl)cache.getCacheServers().toArray()[0])
           .getAcceptor().getCacheClientNotifier().getHaContainer();
       if (r != null) {
         assertTrue(r.isEmpty());
@@ -942,9 +942,9 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
 
   private static void setHACapacity(Integer cap) {
     try {
-      Iterator iter = cache.getBridgeServers().iterator();
+      Iterator iter = cache.getCacheServers().iterator();
       if (iter.hasNext()) {
-        BridgeServer server = (BridgeServer)iter.next();
+        CacheServer server = (CacheServer)iter.next();
         server.getClientSubscriptionConfig().setCapacity(cap.intValue());
       }
     }
@@ -955,9 +955,9 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
 
   private static void stopOneBridgeServer(Integer port) {
     try {
-      Iterator iter = cache.getBridgeServers().iterator();
+      Iterator iter = cache.getCacheServers().iterator();
       if (iter.hasNext()) {
-        BridgeServer server = (BridgeServer)iter.next();
+        CacheServer server = (CacheServer)iter.next();
         if (server.getPort() == port.intValue()) {
           server.stop();
         }
@@ -970,9 +970,9 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
 
   public static void stopServer() {
     try {
-      Iterator iter = cache.getBridgeServers().iterator();
+      Iterator iter = cache.getCacheServers().iterator();
       if (iter.hasNext()) {
-        BridgeServer server = (BridgeServer)iter.next();
+        CacheServer server = (CacheServer)iter.next();
         server.stop();
       }
     }
@@ -1117,9 +1117,9 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
 
   public static void startServer() {
     try {
-      Iterator iter = cache.getBridgeServers().iterator();
+      Iterator iter = cache.getCacheServers().iterator();
       if (iter.hasNext()) {
-        BridgeServer server = (BridgeServer)iter.next();
+        CacheServer server = (CacheServer)iter.next();
         server.start();
       }
     }
@@ -1173,7 +1173,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
             return false;
           }
           
-          Iterator iter = cache.getBridgeServers().iterator();
+          Iterator iter = cache.getCacheServers().iterator();
           if (iter.hasNext()) {
             BridgeServerImpl server = (BridgeServerImpl)iter.next();
             Map msgsRegion = server.getAcceptor().getCacheClientNotifier()
@@ -1215,7 +1215,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
                 ", actual = " + sz;
             return false;
           }
-          Iterator iter = cache.getBridgeServers().iterator();
+          Iterator iter = cache.getCacheServers().iterator();
           if (!iter.hasNext()) {
             return true;
           }
@@ -1246,14 +1246,14 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
       if (isRegion.booleanValue()) {
         assertNotNull(haMap);
         assertTrue(haMap instanceof LocalRegion);
-        haMap = ((BridgeServerImpl)cache.getBridgeServers().toArray()[0])
+        haMap = ((BridgeServerImpl)cache.getCacheServers().toArray()[0])
             .getAcceptor().getCacheClientNotifier().getHaContainer();
         assertNotNull(haMap);
         assertTrue(haMap instanceof HAContainerRegion);
       }
       else {
         assertNull(haMap);
-        haMap = ((BridgeServerImpl)cache.getBridgeServers().toArray()[0])
+        haMap = ((BridgeServerImpl)cache.getCacheServers().toArray()[0])
             .getAcceptor().getCacheClientNotifier().getHaContainer();
         assertNotNull(haMap);
         assertTrue(haMap instanceof HAContainerMap);
@@ -1325,7 +1325,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
       haContainer = cache.getRegion(Region.SEPARATOR
           + BridgeServerImpl.generateNameForClientMsgsRegion(port.intValue()));
       if (haContainer == null) {
-        Object[] servers = cache.getBridgeServers().toArray();
+        Object[] servers = cache.getCacheServers().toArray();
         for (int i = 0; i < servers.length; i++) {
           if (port.intValue() == ((BridgeServerImpl)servers[i]).getPort()) {
             haContainer = ((BridgeServerImpl)servers[i]).getAcceptor()

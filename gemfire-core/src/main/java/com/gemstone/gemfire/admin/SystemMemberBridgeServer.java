@@ -14,7 +14,7 @@ import com.gemstone.gemfire.cache.server.ServerLoadProbe;
  * com.gemstone.gemfire.cache.util.BridgeServer BridgeServer} that
  * serves the contents of a system member's cache. 
  *
- * @see SystemMemberCache#addBridgeServer
+ * @see SystemMemberCache#addCacheServer
  *
  * @author David Whitlock
  * @since 4.0

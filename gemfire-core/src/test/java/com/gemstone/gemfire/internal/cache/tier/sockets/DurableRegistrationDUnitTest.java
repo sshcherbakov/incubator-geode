@@ -837,7 +837,7 @@ public class DurableRegistrationDUnitTest extends DistributedTestCase {
 
   private static BridgeServerImpl getBridgeServer() {
     BridgeServerImpl bridgeServer = (BridgeServerImpl)CacheServerTestUtil
-        .getCache().getBridgeServers().iterator().next();
+        .getCache().getCacheServers().iterator().next();
     assertNotNull(bridgeServer);
     return bridgeServer;
   }

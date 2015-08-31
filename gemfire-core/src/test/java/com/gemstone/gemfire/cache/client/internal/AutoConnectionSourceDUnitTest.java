@@ -269,7 +269,7 @@ public class AutoConnectionSourceDUnitTest extends LocatorTestBase {
     final String locators = getServerHostName(vm0.getHost()) + "[" + locatorPort + "]";
     
     final int serverPort1 =startBridgeServerInVM(vm1, new String[] {"group1"}, locators);
-    final int serverPort2 =addBridgeServerInVM(vm1, new String[] {"group2"});
+    final int serverPort2 =addCacheServerInVM(vm1, new String[] {"group2"});
     
     startBridgeClientInVM(vm2, "group2", getServerHostName(vm0.getHost()), locatorPort);
     
