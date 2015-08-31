@@ -6,7 +6,7 @@ package com.gemstone.gemfire.cache30;
  * @author darrel
  * @since 5.1
  */
-public class BridgeMembershipSelectorDUnitTest extends BridgeMembershipDUnitTest {
+public class BridgeMembershipSelectorDUnitTest extends ClientMembershipDUnitTest {
   public BridgeMembershipSelectorDUnitTest(String name) {
     super(name);
   }

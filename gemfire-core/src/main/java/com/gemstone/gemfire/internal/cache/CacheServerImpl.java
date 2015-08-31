@@ -41,8 +41,6 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.server.ClientSubscriptionConfig;
 import com.gemstone.gemfire.cache.server.ServerLoadProbe;
 import com.gemstone.gemfire.cache.server.internal.LoadMonitor;
-import com.gemstone.gemfire.cache.util.BridgeMembership;
-import com.gemstone.gemfire.cache.util.BridgeMembershipListener;
 import com.gemstone.gemfire.cache.wan.GatewayTransportFilter;
 import com.gemstone.gemfire.distributed.DistributedMember;
 import com.gemstone.gemfire.distributed.internal.DM;
@@ -65,6 +63,8 @@ import com.gemstone.gemfire.internal.cache.tier.sockets.ClientProxyMembershipID;
 import com.gemstone.gemfire.internal.i18n.LocalizedStrings;
 import com.gemstone.gemfire.internal.logging.LogService;
 import com.gemstone.gemfire.internal.logging.log4j.LocalizedMessage;
+import com.gemstone.gemfire.management.membership.ClientMembership;
+import com.gemstone.gemfire.management.membership.ClientMembershipListener;
 
 /**
  * An implementation of the <code>CacheServer</code> interface that delegates
@@ -353,11 +353,11 @@ public class CacheServerImpl
      * won't be registered as would the case when start() is invoked for the 
      * first time.  
      */
-    BridgeMembershipListener[] membershipListeners = 
-                                BridgeMembership.getBridgeMembershipListeners();
+    ClientMembershipListener[] membershipListeners = 
+                                ClientMembership.getClientMembershipListeners();
     
     boolean membershipListenerRegistered = false;
-    for (BridgeMembershipListener membershipListener : membershipListeners) {
+    for (ClientMembershipListener membershipListener : membershipListeners) {
       //just checking by reference as the listener instance is final
       if (listener == membershipListener) {
         membershipListenerRegistered = true;
@@ -366,7 +366,7 @@ public class CacheServerImpl
     }
     
     if (!membershipListenerRegistered) {
-      BridgeMembership.registerBridgeMembershipListener(listener);
+      ClientMembership.registerClientMembershipListener(listener);
     }
     
     if (!isGatewayReceiver) {
@@ -460,7 +460,7 @@ public class CacheServerImpl
     // cache.removeBridgeServer(this);
 
     /* Assuming start won't be called after stop */
-    BridgeMembership.unregisterBridgeMembershipListener(this.listener);
+    ClientMembership.unregisterClientMembershipListener(listener);
     
     TXManagerImpl txMgr = (TXManagerImpl) cache.getCacheTransactionManager();
     txMgr.removeHostedTXStatesForClients();

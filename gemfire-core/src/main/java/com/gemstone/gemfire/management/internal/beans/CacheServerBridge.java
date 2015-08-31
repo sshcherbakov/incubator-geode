@@ -35,14 +35,13 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.server.ServerLoad;
 import com.gemstone.gemfire.cache.server.ServerLoadProbe;
 import com.gemstone.gemfire.cache.server.internal.ServerMetricsImpl;
-import com.gemstone.gemfire.cache.util.BridgeMembershipListener;
 import com.gemstone.gemfire.internal.Version;
 import com.gemstone.gemfire.internal.admin.ClientHealthMonitoringRegion;
 import com.gemstone.gemfire.internal.admin.remote.ClientHealthStats;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 import com.gemstone.gemfire.internal.cache.ha.HARegionQueue;
-import com.gemstone.gemfire.internal.cache.tier.InternalBridgeMembership;
+import com.gemstone.gemfire.internal.cache.tier.InternalClientMembership;
 import com.gemstone.gemfire.internal.cache.tier.sockets.AcceptorImpl;
 import com.gemstone.gemfire.internal.cache.tier.sockets.CacheClientNotifier;
 import com.gemstone.gemfire.internal.cache.tier.sockets.CacheClientProxy;
@@ -60,6 +59,7 @@ import com.gemstone.gemfire.management.internal.beans.stats.StatsAverageLatency;
 import com.gemstone.gemfire.management.internal.beans.stats.StatsKey;
 import com.gemstone.gemfire.management.internal.beans.stats.StatsRate;
 import com.gemstone.gemfire.management.internal.cli.CliUtil;
+import com.gemstone.gemfire.management.membership.ClientMembershipListener;
 
 /**
  * Represents the GemFire CacheServer . Provides data and notifications about
@@ -86,7 +86,7 @@ public class CacheServerBridge extends ServerBridge{
   
   private MemberMBeanBridge memberMBeanBridge;
 
-  private BridgeMembershipListener membershipListener;
+  private ClientMembershipListener membershipListener;
   
   public static ThreadLocal<Version> clientVersion = new ThreadLocal<Version>();
 
@@ -661,16 +661,16 @@ public class CacheServerBridge extends ServerBridge{
   }
 
   public int getNumSubscriptions() {
-    Map clientProxyMembershipIDMap = InternalBridgeMembership.getClientQueueSizes();
+    Map clientProxyMembershipIDMap = InternalClientMembership.getClientQueueSizes();
     return clientProxyMembershipIDMap.keySet().size();
   }
 
-  public void setBridgeMembershipListener(
-      BridgeMembershipListener membershipListener) {
+  public void setClientMembershipListener(
+      ClientMembershipListener membershipListener) {
     this.membershipListener = membershipListener;
   }
   
-  public BridgeMembershipListener getBridgeMembershipListener() {
+  public ClientMembershipListener getClientMembershipListener() {
     return this.membershipListener;
   }
   

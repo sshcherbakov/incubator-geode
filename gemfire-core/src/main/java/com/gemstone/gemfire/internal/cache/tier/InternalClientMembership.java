@@ -27,8 +27,6 @@ import com.gemstone.gemfire.SystemFailure;
 import com.gemstone.gemfire.cache.CacheFactory;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
-import com.gemstone.gemfire.cache.util.BridgeMembershipEvent;
-import com.gemstone.gemfire.cache.util.BridgeMembershipListener;
 import com.gemstone.gemfire.distributed.DistributedMember;
 import com.gemstone.gemfire.distributed.DistributedSystemDisconnectedException;
 import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
@@ -46,13 +44,13 @@ import com.gemstone.gemfire.management.membership.ClientMembershipListener;
 
 /**
  * Handles registration and event notification duties for
- * <code>BridgeMembershipListener</code>s. The public counterpart for this
- * class is {@link com.gemstone.gemfire.cache.util.BridgeMembership}.
+ * <code>ClientMembershipListener</code>s. The public counterpart for this
+ * class is {@link com.gemstone.gemfire.management.membership.ClientMembership}.
  *
  * @author Kirk Lund
  * @since 4.2.1
  */
-public final class InternalBridgeMembership  {
+public final class InternalClientMembership  {
 
   private static final Logger logger = LogService.getLogger();
   
@@ -62,9 +60,6 @@ public final class InternalBridgeMembership  {
    * This list is never modified in place, and a new list is installed
    * only under the control of (@link #membershipLock}.
    */
-  private static volatile List<BridgeMembershipListener> membershipListeners = Collections.emptyList();
-  
-  
   private static volatile List<ClientMembershipListener> clientMembershipListeners = Collections.emptyList();
   
   /**
@@ -133,26 +128,8 @@ public final class InternalBridgeMembership  {
     } // synchronized
   }
   
-  private InternalBridgeMembership() {}
+  private InternalClientMembership() {}
 
-  /**
-   * Registers a {@link BridgeMembershipListener} for notification of
-   * connection changes for BridgeServers and bridge clients.
-   * @param listener a BridgeMembershipListener to be registered
-   * @deprecated use newer registerClientMembershipListener instead
-   */
-  public static void registerBridgeMembershipListener(BridgeMembershipListener listener) {
-    startMonitoring();
-    synchronized (membershipLock) {
-      List<BridgeMembershipListener> oldListeners = membershipListeners;
-      if (!oldListeners.contains(listener)) {
-        List<BridgeMembershipListener> newListeners = new ArrayList<BridgeMembershipListener>(oldListeners);
-        newListeners.add(listener);
-        membershipListeners = newListeners;
-      }
-    }
-  }
-  
   /**
    * Registers a {@link ClientMembershipListener} for notification of connection
    * changes for CacheServer and clients.
@@ -168,25 +145,6 @@ public final class InternalBridgeMembership  {
         List<ClientMembershipListener> newListeners = new ArrayList<ClientMembershipListener>(oldListeners);
         newListeners.add(listener);
         clientMembershipListeners = newListeners;
-      }
-    }
-  }
-  
-  /**
-   * Removes registration of a previously registered {@link
-   * BridgeMembershipListener}.
-   * @param listener a BridgeMembershipListener to be unregistered
-   * @deprecated
-   */
-  public static void unregisterBridgeMembershipListener(BridgeMembershipListener listener) {
-    startMonitoring();
-    synchronized (membershipLock) {
-      List<BridgeMembershipListener> oldListeners = membershipListeners;
-      if (oldListeners.contains(listener)) {
-        List<BridgeMembershipListener> newListeners = new ArrayList<BridgeMembershipListener>(oldListeners);
-        if (newListeners.remove(listener)) {
-          membershipListeners = newListeners;
-        }
       }
     }
   }
@@ -211,26 +169,6 @@ public final class InternalBridgeMembership  {
     }
   }
 
-  /**
-   * Returns an array of all the currently registered
-   * <code>BridgeMembershipListener</code>s. Modifications to the returned
-   * array will not effect the registration of these listeners.
-   * @return the registered <code>BridgeMembershipListener</code>s; an empty
-   * array if no listeners
-   * @deprecated
-   */
-  public static BridgeMembershipListener[] getBridgeMembershipListeners() {
-    startMonitoring();
-    // Synchronization is not needed because we never modify this list
-    // in place.
-    
-    List<BridgeMembershipListener> l = membershipListeners; // volatile fetch
-    // convert to an array
-    BridgeMembershipListener[] listeners = (BridgeMembershipListener[]) 
-        l.toArray(new BridgeMembershipListener[l.size()]);
-    return listeners;
-  }
-  
   /**
    * Returns an array of all the currently registered
    * <code>ClientMembershipListener</code>s. Modifications to the returned array
@@ -258,7 +196,6 @@ public final class InternalBridgeMembership  {
   public static void unregisterAllListeners() {
     startMonitoring();
     synchronized (membershipLock) {
-      membershipListeners = new ArrayList<BridgeMembershipListener>();
       clientMembershipListeners = new ArrayList<ClientMembershipListener>();
     }
   }
@@ -427,18 +364,16 @@ public final class InternalBridgeMembership  {
       return;
     }
 
-    final BridgeMembershipEvent event =
+    final ClientMembershipEvent event =
         new InternalBridgeMembershipEvent(member, client);
     if (forceSynchronous) {
       doNotifyClientMembershipListener(member, client, event,EventType.CLIENT_JOINED);
-      doNotifyBridgeMembershipListener(member, client, event,EventType.CLIENT_JOINED);
     }
     else {
       try {
           queuedExecutor.execute(new Runnable() {
               public void run() {
                 doNotifyClientMembershipListener(member, client, event,EventType.CLIENT_JOINED);
-                doNotifyBridgeMembershipListener(member, client, event,EventType.CLIENT_JOINED);
               }
             });
       }
@@ -466,18 +401,16 @@ public final class InternalBridgeMembership  {
     }
 
     
-    final BridgeMembershipEvent event =
+    final ClientMembershipEvent event =
         new InternalBridgeMembershipEvent(member, client);
     if (forceSynchronous) {
       doNotifyClientMembershipListener(member, client, event,EventType.CLIENT_LEFT);
-      doNotifyBridgeMembershipListener(member, client, event,EventType.CLIENT_LEFT);
     }
     else {
       try {
           queuedExecutor.execute(new Runnable() {
               public void run() {
                 doNotifyClientMembershipListener(member, client, event,EventType.CLIENT_LEFT);
-                doNotifyBridgeMembershipListener(member, client, event,EventType.CLIENT_LEFT);
               }
             });
       }
@@ -502,11 +435,10 @@ public final class InternalBridgeMembership  {
       return;
     }
 
-    final BridgeMembershipEvent event =
+    final ClientMembershipEvent event =
         new InternalBridgeMembershipEvent(member, client);
     if (forceSynchronous) {
       doNotifyClientMembershipListener(member, client, event,EventType.CLIENT_CRASHED);
-      doNotifyBridgeMembershipListener(member, client, event,EventType.CLIENT_CRASHED);
     }
     else {
 
@@ -514,7 +446,6 @@ public final class InternalBridgeMembership  {
           queuedExecutor.execute(new Runnable() {
             public void run() {
               doNotifyClientMembershipListener(member, client, event,EventType.CLIENT_CRASHED);
-              doNotifyBridgeMembershipListener(member, client, event,EventType.CLIENT_CRASHED);
             }
           });
       }
@@ -552,35 +483,6 @@ public final class InternalBridgeMembership  {
     }
   }
   
-  private static void doNotifyBridgeMembershipListener(DistributedMember member, boolean client,
-      BridgeMembershipEvent bridgeMembershipEvent, EventType eventType) {
-
-    for (Iterator<BridgeMembershipListener> iter = membershipListeners.iterator(); iter.hasNext();) {
-
-      BridgeMembershipListener listener = iter.next();
-      try {
-        if (eventType.equals(EventType.CLIENT_JOINED)) {
-          listener.memberJoined(bridgeMembershipEvent);
-        } else if (eventType.equals(EventType.CLIENT_LEFT)) {
-          listener.memberLeft(bridgeMembershipEvent);
-        } else {
-          listener.memberCrashed(bridgeMembershipEvent);
-        }
-      } catch (CancelException e) {
-        // this can be thrown by a bridge server when the system is shutting
-        // down
-        return;
-      } catch (VirtualMachineError e) {
-        SystemFailure.initiateFailure(e);
-        throw e;
-      } catch (Throwable t) {
-        SystemFailure.checkFailure();
-        logger.warn(LocalizedMessage.create(LocalizedStrings.LocalRegion_UNEXPECTED_EXCEPTION), t);
-      }
-    }
-  }
-  
-
 //  /**
 //   * Returns true if there are any registered
 //   * <code>BridgeMembershipListener</code>s.
@@ -666,7 +568,7 @@ for (int i=0; i<queueElementsAfter.length; i++) {
    * Internal implementation of BridgeMembershipEvent.
    */
   protected static class InternalBridgeMembershipEvent
-  implements BridgeMembershipEvent,ClientMembershipEvent {
+  implements ClientMembershipEvent {
 
     private final DistributedMember member;
     private final boolean client;

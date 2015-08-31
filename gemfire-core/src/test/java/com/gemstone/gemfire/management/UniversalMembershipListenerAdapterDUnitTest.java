@@ -30,7 +30,7 @@ import com.gemstone.gemfire.distributed.DurableClientAttributes;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
-import com.gemstone.gemfire.internal.cache.tier.InternalBridgeMembership;
+import com.gemstone.gemfire.internal.cache.tier.InternalClientMembership;
 import com.gemstone.gemfire.internal.cache.tier.sockets.ServerConnection;
 import com.gemstone.gemfire.internal.logging.InternalLogWriter;
 import com.gemstone.gemfire.internal.logging.LocalLogWriter;
@@ -81,7 +81,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
   @Override
   public void tearDown2() throws Exception {
     super.tearDown2();
-    InternalBridgeMembership.unregisterAllListeners();
+    InternalClientMembership.unregisterAllListeners();
   }
   
   /**
@@ -115,7 +115,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     };
     
     DistributedMember clientJoined = new TestDistributedMember("clientJoined");
-    InternalBridgeMembership.notifyJoined(clientJoined, true);
+    InternalClientMembership.notifyJoined(clientJoined, true);
     synchronized(listener) {
       if (!fired[0]) {
         listener.wait(SYNC_ASYNC_EVENT_WAIT_MILLIS);
@@ -173,7 +173,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     DistributedMember memberA = new TestDistributedMember("memberA");
     
     // first join
-    InternalBridgeMembership.notifyJoined(memberA, true);
+    InternalClientMembership.notifyJoined(memberA, true);
     synchronized(listener) {
       if (!fired[JOINED]) {
         listener.wait(SYNC_ASYNC_EVENT_WAIT_MILLIS);
@@ -187,14 +187,14 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     memberId[JOINED] = null;
 
     // duplicate join
-    InternalBridgeMembership.notifyJoined(memberA, true);
+    InternalClientMembership.notifyJoined(memberA, true);
     pause(BRIEF_PAUSE_MILLIS);
     assertFalse(fired[JOINED]);
     assertNull(member[JOINED]);
     assertNull(memberId[JOINED]);
 
     // first left
-    InternalBridgeMembership.notifyLeft(memberA, true);
+    InternalClientMembership.notifyLeft(memberA, true);
     synchronized(listener) {
       if (!fired[LEFT]) {
         listener.wait(SYNC_ASYNC_EVENT_WAIT_MILLIS);
@@ -208,14 +208,14 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     memberId[LEFT] = null;
 
     // duplicate left
-    InternalBridgeMembership.notifyLeft(memberA, true);
+    InternalClientMembership.notifyLeft(memberA, true);
     pause(BRIEF_PAUSE_MILLIS);
     assertFalse(fired[LEFT]);
     assertNull(member[LEFT]);
     assertNull(memberId[LEFT]);
     
     // rejoin
-    InternalBridgeMembership.notifyJoined(memberA, true);
+    InternalClientMembership.notifyJoined(memberA, true);
     synchronized(listener) {
       if (!fired[JOINED]) {
         listener.wait(SYNC_ASYNC_EVENT_WAIT_MILLIS);
