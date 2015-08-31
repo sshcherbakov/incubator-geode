@@ -47,7 +47,7 @@ public class DurableClientInfoResponse extends AdminResponse
           .getSystem());
       if (c.getCacheServers().size() > 0) {
 
-        BridgeServerImpl server = (BridgeServerImpl)c.getCacheServers()
+        CacheServerImpl server = (CacheServerImpl)c.getCacheServers()
             .iterator().next();
         switch (request.action) {
         case DurableClientInfoRequest.HAS_DURABLE_CLIENT_REQUEST: {

@@ -28,7 +28,7 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.LocalRegion;
 import com.gemstone.gemfire.cache.client.*;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
@@ -453,7 +453,7 @@ public class InterestListRecoveryDUnitTest extends DistributedTestCase
  public static Set getCacheClientProxies() {
    Cache c = CacheFactory.getAnyInstance();
    assertEquals("More than one CacheServer", 1, c.getCacheServers().size());
-   BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
+   CacheServerImpl bs = (CacheServerImpl)c.getCacheServers().iterator()
    .next();
    assertNotNull(bs);
    assertNotNull(bs.getAcceptor());

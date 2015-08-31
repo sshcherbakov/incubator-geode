@@ -22,7 +22,7 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.ha.HARegionQueue;
 import com.gemstone.gemfire.cache.client.*;
 
@@ -224,7 +224,7 @@ public class Bug37210DUnitTest extends DistributedTestCase
   {
     assertEquals("More than one BridgeServers found ", 1, cache
         .getCacheServers().size());
-    BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers().iterator()
+    CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers().iterator()
         .next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());

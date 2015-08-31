@@ -1552,7 +1552,7 @@ public class GemFireCacheImpl implements InternalCache, ClientCache, HasCachePer
     {
       Iterator allCacheServersItr = inst.allCacheServers.iterator();
       while (allCacheServersItr.hasNext()) {
-        BridgeServerImpl bs = (BridgeServerImpl) allCacheServersItr.next();
+        CacheServerImpl bs = (CacheServerImpl) allCacheServersItr.next();
         AcceptorImpl ai = bs.getAcceptor();
         if (ai != null) {
           ai.emergencyClose();
@@ -2619,7 +2619,7 @@ public class GemFireCacheImpl implements InternalCache, ClientCache, HasCachePer
     boolean stoppedCacheServer = false;
     Iterator allCacheServersIterator = this.allCacheServers.iterator();
     while (allCacheServersIterator.hasNext()) {
-      BridgeServerImpl bridge = (BridgeServerImpl) allCacheServersIterator.next();
+      CacheServerImpl bridge = (CacheServerImpl) allCacheServersIterator.next();
       if (isDebugEnabled) {
         logger.debug("stopping bridge {}", bridge);
       }
@@ -3792,7 +3792,7 @@ public class GemFireCacheImpl implements InternalCache, ClientCache, HasCachePer
     }
     stopper.checkCancelInProgress(null);
 
-    BridgeServerImpl bridge = new BridgeServerImpl(this, isGatewayReceiver);
+    CacheServerImpl bridge = new CacheServerImpl(this, isGatewayReceiver);
     allCacheServers.add(bridge);
 
     sendAddCacheServerProfileMessage();
@@ -3971,7 +3971,7 @@ public class GemFireCacheImpl implements InternalCache, ClientCache, HasCachePer
     if (!allCacheServers.isEmpty()) {
     Iterator allCacheServersIterator = allCacheServers.iterator();
     while (allCacheServersIterator.hasNext()) {
-      BridgeServerImpl cacheServer = (BridgeServerImpl) allCacheServersIterator.next();
+      CacheServerImpl cacheServer = (CacheServerImpl) allCacheServersIterator.next();
       // If CacheServer is a GatewayReceiver, don't return as part of CacheServers
       if (!cacheServer.isGatewayReceiver()) {
         if (cacheServersWithoutReceiver == null) {
@@ -4118,7 +4118,7 @@ public class GemFireCacheImpl implements InternalCache, ClientCache, HasCachePer
       if (!result) {
         Iterator allCacheServersIterator = allCacheServers.iterator();
         while (allCacheServersIterator.hasNext()) {
-          BridgeServerImpl server = (BridgeServerImpl) allCacheServersIterator.next();
+          CacheServerImpl server = (CacheServerImpl) allCacheServersIterator.next();
           if (!server.getNotifyBySubscription()) {
             result = true;
             break;

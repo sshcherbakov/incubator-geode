@@ -79,7 +79,7 @@ import com.gemstone.gemfire.internal.Version;
 import com.gemstone.gemfire.internal.cache.BridgeObserver;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
 import com.gemstone.gemfire.internal.cache.BridgeRegionEventImpl;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.CacheClientStatus;
 import com.gemstone.gemfire.internal.cache.CacheDistributionAdvisor;
 import com.gemstone.gemfire.internal.cache.CachedDeserializable;
@@ -2134,7 +2134,7 @@ public class CacheClientNotifier {
         && !HARegionQueue.HA_EVICTION_POLICY_NONE.equals(overflowAttributesList
             .get(0))) {
       haContainer = new HAContainerRegion(cache.getRegion(Region.SEPARATOR
-          + BridgeServerImpl.clientMessagesRegion((GemFireCacheImpl)cache,
+          + CacheServerImpl.clientMessagesRegion((GemFireCacheImpl)cache,
               (String)overflowAttributesList.get(0),
               ((Integer)overflowAttributesList.get(1)).intValue(),
               ((Integer)overflowAttributesList.get(2)).intValue(),

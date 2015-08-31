@@ -123,7 +123,7 @@ public class ClientServerTransactionDUnitTest extends RemoteTransactionDUnitTest
           int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
           CacheServer s = getCache().addCacheServer();
           s.setPort(port);
-          ((BridgeServerImpl)s).setTransactionTimeToLive(10);
+          ((CacheServerImpl)s).setTransactionTimeToLive(10);
           s.start();
           return port;
         }
@@ -148,7 +148,7 @@ public class ClientServerTransactionDUnitTest extends RemoteTransactionDUnitTest
           int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
           CacheServer s = cache.addCacheServer();
           s.setPort(port);
-          ((BridgeServerImpl)s).setTransactionTimeToLive(10);
+          ((CacheServerImpl)s).setTransactionTimeToLive(10);
           s.start();
           return port;
         }
@@ -216,7 +216,7 @@ public class ClientServerTransactionDUnitTest extends RemoteTransactionDUnitTest
         int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
         CacheServer s = getCache().addCacheServer();
         s.setPort(port);
-        ((BridgeServerImpl)s).setTransactionTimeToLive(10);
+        ((CacheServerImpl)s).setTransactionTimeToLive(10);
         s.start();
         return port;
       }

@@ -36,13 +36,13 @@ import dunit.DistributedTestCase;
 import dunit.DistributedTestCase.WaitCriterion;
 
 /**
- * Make sure max-connections on bridge server is enforced
+ * Make sure max-connections on cache server is enforced
  *
  * @author darrel
  *
  */
 @Category(IntegrationTest.class)
-public class BridgeServerMaxConnectionsJUnitTest
+public class CacheServerMaxConnectionsJUnitTest
 
 {
 

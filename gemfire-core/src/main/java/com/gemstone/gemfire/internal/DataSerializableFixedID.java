@@ -135,7 +135,7 @@ public interface DataSerializableFixedID extends SerializationVersions {
   public static final byte PR_FUNCTION_REPLY_MESSAGE = -93;
 
   public static final byte PROFILES_REPLY_MESSAGE = -92;
-  public static final byte BRIDGE_SERVER_PROFILE = -91;
+  public static final byte CACHE_SERVER_PROFILE = -91;
   public static final byte CONTROLLER_PROFILE = -90;
 
   public static final byte CREATE_REGION_MESSAGE = -89;

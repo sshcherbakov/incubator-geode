@@ -877,7 +877,7 @@ public class DeltaPropagationDUnitTest extends DistributedTestCase {
   public static void confirmEviction(Integer port) {
     final EnableLRU cc = ((VMLRURegionMap)((LocalRegion)cache
         .getRegion(Region.SEPARATOR
-            + BridgeServerImpl.generateNameForClientMsgsRegion(port))).entries)
+            + CacheServerImpl.generateNameForClientMsgsRegion(port))).entries)
         ._getCCHelper();
 
     WaitCriterion wc = new WaitCriterion() {
@@ -1423,7 +1423,7 @@ public class DeltaPropagationDUnitTest extends DistributedTestCase {
     try {
       // Get the clientMessagesRegion and check the size.
       Region region = (Region)cache.getRegion("/" + regionName);
-      Region msgsRegion = (Region)cache.getRegion(BridgeServerImpl
+      Region msgsRegion = (Region)cache.getRegion(CacheServerImpl
           .generateNameForClientMsgsRegion(port.intValue()));
       logger.fine("size<serverRegion, clientMsgsRegion>: " + region.size()
           + ", " + msgsRegion.size());

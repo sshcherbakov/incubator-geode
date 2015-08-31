@@ -89,7 +89,7 @@ import com.gemstone.gemfire.cache.hdfs.internal.HDFSIntegrationUtil;
 import com.gemstone.gemfire.cache.hdfs.internal.HDFSStoreCreation;
 import com.gemstone.gemfire.cache.hdfs.internal.HDFSStoreFactoryImpl;
 import com.gemstone.gemfire.cache.hdfs.internal.HDFSStoreImpl;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.CacheConfig;
 import com.gemstone.gemfire.internal.cache.CacheServerLauncher;
 import com.gemstone.gemfire.internal.cache.DiskStoreFactoryImpl;
@@ -578,14 +578,14 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
       }
       
       if (!existingCacheServer) {
-        this.getCacheServers().add(new BridgeServerCreation(cache, false));
+        this.getCacheServers().add(new CacheServerCreation(cache, false));
       }
     }
     
     for (Iterator iter = this.getCacheServers().iterator(); iter.hasNext();) {
-      BridgeServerCreation bridge = (BridgeServerCreation)iter.next();
+      CacheServerCreation bridge = (CacheServerCreation)iter.next();
       
-      BridgeServerImpl impl = (BridgeServerImpl)cache.addCacheServer();
+      CacheServerImpl impl = (CacheServerImpl)cache.addCacheServer();
       impl.configureFrom(bridge);
 
       if (serverPort != null && serverPort != CacheServer.DEFAULT_PORT) {
@@ -702,8 +702,8 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
       }
 
       for (Iterator myIter = myBridges.iterator(); myIter.hasNext(); ) {
-        BridgeServerCreation myBridge =
-          (BridgeServerCreation) myIter.next();
+        CacheServerCreation myBridge =
+          (CacheServerCreation) myIter.next();
         boolean found = false;
         for (Iterator otherIter = otherBridges.iterator();
              otherIter.hasNext(); ) {
@@ -985,7 +985,7 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
   }
   
   public CacheServer addCacheServer(boolean isGatewayReceiver) {
-    CacheServer bridge = new BridgeServerCreation(this, false);
+    CacheServer bridge = new CacheServerCreation(this, false);
     this.bridgeServers.add(bridge);
     return bridge;
   }

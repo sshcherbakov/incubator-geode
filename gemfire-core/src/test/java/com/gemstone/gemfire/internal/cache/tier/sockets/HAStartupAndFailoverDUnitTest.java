@@ -29,7 +29,7 @@ import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
 import dunit.Host;
@@ -384,7 +384,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
     try {
       assertEquals("Expected exactly one BridgeServer", 1, cache
           .getCacheServers().size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       bs.stop();
@@ -431,7 +431,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       Cache c = CacheFactory.getAnyInstance();
       assertEquals("Expected exactly one BridgeServer", 1,
           c.getCacheServers().size());
-      BridgeServerImpl bs = (BridgeServerImpl) c.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl) c.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       bs.start();
@@ -481,7 +481,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       };
       DistributedTestCase.waitForCriterion(wc, 60 * 1000, 1000, true);
       
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -541,7 +541,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       };
       DistributedTestCase.waitForCriterion(wc, 60 * 1000, 1000, true);
       
-      BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
+      CacheServerImpl bs = (CacheServerImpl)c.getCacheServers().iterator()
           .next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());

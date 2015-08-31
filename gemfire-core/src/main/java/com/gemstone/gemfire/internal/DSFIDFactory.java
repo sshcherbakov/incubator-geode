@@ -181,7 +181,7 @@ import com.gemstone.gemfire.internal.admin.statalerts.GaugeThresholdDecoratorImp
 import com.gemstone.gemfire.internal.admin.statalerts.NumberThresholdDecoratorImpl;
 import com.gemstone.gemfire.internal.cache.AddCacheServerProfileMessage;
 import com.gemstone.gemfire.internal.cache.BridgeRegionEventImpl;
-import com.gemstone.gemfire.internal.cache.BridgeServerAdvisor.BridgeServerProfile;
+import com.gemstone.gemfire.internal.cache.CacheServerAdvisor.CacheServerProfile;
 import com.gemstone.gemfire.internal.cache.BucketAdvisor;
 import com.gemstone.gemfire.internal.cache.CacheDistributionAdvisor;
 import com.gemstone.gemfire.internal.cache.CloseCacheMessage;
@@ -861,7 +861,7 @@ public final class DSFIDFactory implements DataSerializableFixedID {
     registerDSFID(FIND_DURABLE_QUEUE, FindDurableQueueMessage.class);
     registerDSFID(FIND_DURABLE_QUEUE_REPLY, FindDurableQueueReply.class);
     registerDSFID(BRIDGE_SERVER_LOAD_MESSAGE, BridgeServerLoadMessage.class);
-    registerDSFID(BRIDGE_SERVER_PROFILE, BridgeServerProfile.class);
+    registerDSFID(CACHE_SERVER_PROFILE, CacheServerProfile.class);
     registerDSFID(CONTROLLER_PROFILE, ControllerProfile.class);
     registerDSFID(DLOCK_QUERY_MESSAGE,
         DLockQueryProcessor.DLockQueryMessage.class);

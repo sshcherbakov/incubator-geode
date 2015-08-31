@@ -56,7 +56,7 @@ import com.gemstone.gemfire.distributed.internal.membership.MemberAttributes;
 import com.gemstone.gemfire.internal.Assert;
 import com.gemstone.gemfire.internal.OSProcess;
 import com.gemstone.gemfire.internal.admin.ClientHealthMonitoringRegion;
-import com.gemstone.gemfire.internal.cache.BridgeServerAdvisor.BridgeServerProfile;
+import com.gemstone.gemfire.internal.cache.CacheServerAdvisor.CacheServerProfile;
 import com.gemstone.gemfire.internal.cache.ha.HARegionQueue;
 import com.gemstone.gemfire.internal.cache.tier.Acceptor;
 import com.gemstone.gemfire.internal.cache.tier.sockets.AcceptorImpl;
@@ -74,8 +74,8 @@ import com.gemstone.gemfire.internal.logging.log4j.LocalizedMessage;
  * @since 4.0
  */
 @SuppressWarnings("deprecation")
-public class BridgeServerImpl
-  extends AbstractBridgeServer
+public class CacheServerImpl
+  extends AbstractCacheServer
   implements DistributionAdvisee {
 
   private static final Logger logger = LogService.getLogger();
@@ -85,15 +85,11 @@ public class BridgeServerImpl
   /** The acceptor that does the actual serving */
   private volatile AcceptorImpl acceptor;
 
-  // moved to AbstractBridgeServer
-
-
-
   /**
-   * The advisor used by this bridge sever.
+   * The advisor used by this cache server.
    * @since 5.7
    */
-  private volatile BridgeServerAdvisor advisor;
+  private volatile CacheServerAdvisor advisor;
 
   /**
    * The monitor used to monitor load on this
@@ -125,7 +121,7 @@ public class BridgeServerImpl
    * Creates a new <code>BridgeServerImpl</code> that serves the contents of
    * the give <code>Cache</code>. It has the default configuration.
    */
-  public BridgeServerImpl(GemFireCacheImpl cache, boolean isGatewayReceiver) {
+  public CacheServerImpl(GemFireCacheImpl cache, boolean isGatewayReceiver) {
     super(cache);
     this.isGatewayReceiver = isGatewayReceiver;
   }
@@ -192,7 +188,7 @@ public class BridgeServerImpl
   @Override
   public void setNotifyBySubscription(boolean b) {
     checkRunning();
-    if (BridgeServerImpl.ENABLE_NOTIFY_BY_SUBSCRIPTION_FALSE) {
+    if (CacheServerImpl.ENABLE_NOTIFY_BY_SUBSCRIPTION_FALSE) {
       this.notifyBySubscription = b;
     }
   }
@@ -303,7 +299,7 @@ public class BridgeServerImpl
         this.notifyBySubscription = true;
       }
     }
-    this.advisor = BridgeServerAdvisor.createBridgeServerAdvisor(this);
+    this.advisor = CacheServerAdvisor.createCacheServerAdvisor(this);
     this.loadMonitor = new LoadMonitor(loadProbe, maxConnections,
         loadPollInterval, FORCE_LOAD_UPDATE_FREQUENCY, 
         advisor);
@@ -692,7 +688,7 @@ public class BridgeServerImpl
   /**
    * Returns the BridgeServerAdvisor for this server
    */
-  public BridgeServerAdvisor getCacheServerAdvisor() {
+  public CacheServerAdvisor getCacheServerAdvisor() {
     return this.advisor;
   }
   
@@ -748,8 +744,8 @@ public class BridgeServerImpl
   }
   
   public /*synchronized causes deadlock*/ void fillInProfile(Profile profile) {
-    assert profile instanceof BridgeServerProfile;
-    BridgeServerProfile bp = (BridgeServerProfile)profile;
+    assert profile instanceof CacheServerProfile;
+    CacheServerProfile bp = (CacheServerProfile)profile;
     bp.setHost(getExternalAddress(false));
     bp.setPort(getPort());
     bp.setGroups(getCombinedGroups());

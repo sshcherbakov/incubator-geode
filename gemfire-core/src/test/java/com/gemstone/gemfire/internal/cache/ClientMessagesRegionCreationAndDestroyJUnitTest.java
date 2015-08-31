@@ -67,7 +67,7 @@ public class ClientMessagesRegionCreationAndDestroyJUnitTest {
    */
   
   private void attachBridgeServer() throws IOException {
-    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
+    CacheServerImpl server = (CacheServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);
@@ -123,7 +123,7 @@ public class ClientMessagesRegionCreationAndDestroyJUnitTest {
   private void dettachmentOfBridgeServer() {
     // detach all bridge server to test destroy of client_messages_region
     for (Iterator itr = cache.getCacheServers().iterator(); itr.hasNext();) {
-      BridgeServerImpl server = (BridgeServerImpl)itr.next();
+      CacheServerImpl server = (CacheServerImpl)itr.next();
       String rName = ((HAContainerWrapper)server.getAcceptor().getCacheClientNotifier().getHaContainer()).getName();
       assertNotNull("client messages region is null ", cache.getRegion(Region.SEPARATOR + rName));
       server.stop();

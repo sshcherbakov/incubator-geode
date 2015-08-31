@@ -30,7 +30,7 @@ import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.EntryEventImpl;
 import com.gemstone.gemfire.internal.cache.EventID;
 
@@ -73,7 +73,7 @@ public class PutAllDUnitTest extends DistributedTestCase
   /** cache **/
   private static Cache cache = null;
   /** server **/
-  static BridgeServerImpl server = null;
+  static CacheServerImpl server = null;
 
   /** test constructor **/
   public PutAllDUnitTest(String name) {
@@ -148,7 +148,7 @@ public class PutAllDUnitTest extends DistributedTestCase
     factory.setCacheListener(clientListener);
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
-    server = (BridgeServerImpl)cache.addCacheServer();
+    server = (CacheServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

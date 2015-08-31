@@ -27,7 +27,7 @@ import com.gemstone.gemfire.cache.RegionAttributes;
 import com.gemstone.gemfire.cache.Scope;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.NanoTimer;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.BucketRegion;
 import com.gemstone.gemfire.internal.cache.BucketRegion.RawValue;
 import com.gemstone.gemfire.internal.cache.CachedDeserializable;
@@ -177,7 +177,7 @@ public class Bug38741DUnitTest extends BridgeTestCase {
     server.invoke(new CacheSerializableRunnable("Assert copy behavior after client is setup") {
       public void run2() throws CacheException {
         Region r = getRootRegion(rName);
-        BridgeServerImpl bsi = (BridgeServerImpl)
+        CacheServerImpl bsi = (CacheServerImpl)
           getCache().getCacheServers().iterator().next();
         Collection cp = bsi.getAcceptor().getCacheClientNotifier().getClientProxies();
         // Should only be one because only one client is connected

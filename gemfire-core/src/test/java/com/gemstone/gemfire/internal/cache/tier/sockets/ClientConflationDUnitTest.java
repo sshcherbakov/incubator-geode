@@ -30,7 +30,7 @@ import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
 import dunit.Host;
@@ -284,7 +284,7 @@ public class ClientConflationDUnitTest extends DistributedTestCase
   public static void assertAllQueuesEmpty() {
     Iterator servers = cacheServer.getCacheServers().iterator();
     while (servers.hasNext()) {
-      Iterator proxies = ((BridgeServerImpl)servers.next()).getAcceptor().
+      Iterator proxies = ((CacheServerImpl)servers.next()).getAcceptor().
         getCacheClientNotifier().getClientProxies().iterator();
       while (proxies.hasNext()) {
         int qsize = ((CacheClientProxy)proxies.next()).getQueueSize();

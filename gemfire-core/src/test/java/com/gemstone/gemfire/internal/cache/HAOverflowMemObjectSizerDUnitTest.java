@@ -140,7 +140,7 @@ public class HAOverflowMemObjectSizerDUnitTest extends DistributedTestCase {
      * storing capacity controller reference
      */
     cc = ((VMLRURegionMap)((LocalRegion)cache.getRegion(Region.SEPARATOR
-        + BridgeServerImpl.generateNameForClientMsgsRegion(port))).entries)
+        + CacheServerImpl.generateNameForClientMsgsRegion(port))).entries)
         ._getCCHelper();
     return new Integer(server1.getPort());
   }
@@ -227,7 +227,7 @@ public class HAOverflowMemObjectSizerDUnitTest extends DistributedTestCase {
    */
   public static void sizerTestForMemCapacityController(Integer port) {
     region = cache.getRegion(Region.SEPARATOR
-        + BridgeServerImpl.generateNameForClientMsgsRegion(port.intValue()));
+        + CacheServerImpl.generateNameForClientMsgsRegion(port.intValue()));
     assertNotNull(region);
     Set entries = region.entrySet();
     assertTrue(entries.size() > 0);

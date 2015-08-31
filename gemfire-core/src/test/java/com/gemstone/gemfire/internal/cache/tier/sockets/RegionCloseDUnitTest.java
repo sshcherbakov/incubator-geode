@@ -21,7 +21,7 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.tier.sockets.CacheClientProxy;
 import com.gemstone.gemfire.cache.client.*;
 
@@ -140,7 +140,7 @@ public class RegionCloseDUnitTest extends DistributedTestCase
     assertEquals("More than one CacheServer", 1, c.getCacheServers().size());
 
 
-    final BridgeServerImpl bs = (BridgeServerImpl) c.getCacheServers().iterator().next();
+    final CacheServerImpl bs = (CacheServerImpl) c.getCacheServers().iterator().next();
     WaitCriterion ev = new WaitCriterion() {
       public boolean done() {
         return bs.getAcceptor().getCacheClientNotifier().getClientProxies().size() == 1;
@@ -190,7 +190,7 @@ public class RegionCloseDUnitTest extends DistributedTestCase
     };
     DistributedTestCase.waitForCriterion(ev, 40 * 1000, 200, true);
 
-    final BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
+    final CacheServerImpl bs = (CacheServerImpl)c.getCacheServers().iterator()
         .next();
     ev = new WaitCriterion() {
       public boolean done() {

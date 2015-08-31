@@ -28,7 +28,7 @@ import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
 import dunit.Host;
@@ -67,7 +67,7 @@ public class HADuplicateDUnitTest extends DistributedTestCase
 
   static boolean isEventDuplicate = true;
 
-  static BridgeServerImpl server = null;
+  static CacheServerImpl server = null;
 
   static final int NO_OF_PUTS = 100;
 
@@ -240,7 +240,7 @@ public class HADuplicateDUnitTest extends DistributedTestCase
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     cache.createRegion(REGION_NAME, attrs);
-    server = (BridgeServerImpl)cache.addCacheServer();
+    server = (CacheServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

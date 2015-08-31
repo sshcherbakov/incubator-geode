@@ -23,7 +23,7 @@ import com.gemstone.gemfire.cache30.BridgeTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
 import dunit.Host;
@@ -170,7 +170,7 @@ public class OperationsPropagationDUnitTest extends DistributedTestCase
     RegionAttributes attrs = factory.create();
     region = cache.createRegion(REGION_NAME, attrs);
 
-    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
+    CacheServerImpl server = (CacheServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

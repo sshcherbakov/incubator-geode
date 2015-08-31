@@ -33,7 +33,7 @@ import com.gemstone.gemfire.distributed.DistributedMember;
 import com.gemstone.gemfire.distributed.DistributedSystemDisconnectedException;
 import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 import com.gemstone.gemfire.internal.cache.tier.sockets.AcceptorImpl;
 import com.gemstone.gemfire.internal.cache.tier.sockets.ClientHealthMonitor;
@@ -284,7 +284,7 @@ public final class InternalBridgeMembership  {
       // Note it is not necessary to synchronize on the list of bridge servers here, 
       // since this is only a status (snapshot) of the system.
       for (Iterator bsii = CacheFactory.getAnyInstance().getCacheServers().iterator(); bsii.hasNext(); ) {
-        BridgeServerImpl bsi = (BridgeServerImpl) bsii.next();
+        CacheServerImpl bsi = (CacheServerImpl) bsii.next();
         AcceptorImpl ai = bsi.getAcceptor();
         if (ai != null && ai.getCacheClientNotifier() != null) {
           if (filterProxyIDs != null) {
@@ -339,7 +339,7 @@ public final class InternalBridgeMembership  {
     // Get all clients
     Map allClients = new HashMap();
     for (Iterator bsii = CacheFactory.getAnyInstance().getCacheServers().iterator(); bsii.hasNext(); ) {
-      BridgeServerImpl bsi = (BridgeServerImpl) bsii.next();
+      CacheServerImpl bsi = (CacheServerImpl) bsii.next();
       AcceptorImpl ai = bsi.getAcceptor();
       if (ai != null && ai.getCacheClientNotifier() != null) {
         allClients.putAll(ai.getCacheClientNotifier().getAllClients());
@@ -360,7 +360,7 @@ public final class InternalBridgeMembership  {
       return clientQueueSizes;
 
     for (Iterator bsii = c.getCacheServers().iterator(); bsii.hasNext(); ) {
-      BridgeServerImpl bsi = (BridgeServerImpl) bsii.next();
+      CacheServerImpl bsi = (CacheServerImpl) bsii.next();
       AcceptorImpl ai = bsi.getAcceptor();
       if (ai != null && ai.getCacheClientNotifier() != null) {
         clientQueueSizes.putAll(ai.getCacheClientNotifier().getClientQueueSizes());

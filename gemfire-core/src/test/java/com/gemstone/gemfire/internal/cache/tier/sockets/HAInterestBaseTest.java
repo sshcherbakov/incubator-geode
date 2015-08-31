@@ -27,7 +27,7 @@ import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.LocalRegion;
 import com.gemstone.gemfire.internal.cache.tier.InterestType;
 
@@ -413,7 +413,7 @@ public class HAInterestBaseTest extends DistributedTestCase {
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
+    CacheServerImpl bs = (CacheServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -467,7 +467,7 @@ public class HAInterestBaseTest extends DistributedTestCase {
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
+    CacheServerImpl bs = (CacheServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -552,14 +552,14 @@ public class HAInterestBaseTest extends DistributedTestCase {
   public static void startServer() throws IOException {
     Cache c = CacheFactory.getAnyInstance();
     assertEquals("More than one BridgeServer", 1, c.getCacheServers().size());
-    BridgeServerImpl bs = (BridgeServerImpl) c.getCacheServers().iterator().next();
+    CacheServerImpl bs = (CacheServerImpl) c.getCacheServers().iterator().next();
     assertNotNull(bs);
     bs.start();
   }
 
   public static void stopServer() {
     assertEquals("More than one BridgeServer", 1, cache.getCacheServers().size());
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
+    CacheServerImpl bs = (CacheServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     bs.stop();
   }
@@ -758,7 +758,7 @@ public class HAInterestBaseTest extends DistributedTestCase {
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
+    CacheServerImpl bs = (CacheServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());
@@ -818,7 +818,7 @@ public class HAInterestBaseTest extends DistributedTestCase {
     };
     DistributedTestCase.waitForCriterion(wc, TIMEOUT_MILLIS, INTERVAL_MILLIS, true);
 
-    BridgeServerImpl bs = (BridgeServerImpl) cache.getCacheServers().iterator().next();
+    CacheServerImpl bs = (CacheServerImpl) cache.getCacheServers().iterator().next();
     assertNotNull(bs);
     assertNotNull(bs.getAcceptor());
     assertNotNull(bs.getAcceptor().getCacheClientNotifier());

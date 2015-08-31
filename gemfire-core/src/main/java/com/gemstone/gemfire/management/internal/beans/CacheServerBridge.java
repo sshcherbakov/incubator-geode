@@ -39,7 +39,7 @@ import com.gemstone.gemfire.cache.util.BridgeMembershipListener;
 import com.gemstone.gemfire.internal.Version;
 import com.gemstone.gemfire.internal.admin.ClientHealthMonitoringRegion;
 import com.gemstone.gemfire.internal.admin.remote.ClientHealthStats;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 import com.gemstone.gemfire.internal.cache.ha.HARegionQueue;
 import com.gemstone.gemfire.internal.cache.tier.InternalBridgeMembership;
@@ -404,7 +404,7 @@ public class CacheServerBridge extends ServerBridge{
       return null;      
     }
        
-    BridgeServerImpl server = (BridgeServerImpl)cache.getCacheServers().iterator().next();
+    CacheServerImpl server = (CacheServerImpl)cache.getCacheServers().iterator().next();
     
     if(server == null){
       return null;

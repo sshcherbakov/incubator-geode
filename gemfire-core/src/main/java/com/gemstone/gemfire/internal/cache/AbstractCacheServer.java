@@ -33,7 +33,7 @@ import java.util.Set;
  * @author darrel
  * @since 5.7
  */
-public abstract class AbstractBridgeServer implements CacheServer {
+public abstract class AbstractCacheServer implements CacheServer {
 
   public static final String TEST_OVERRIDE_DEFAULT_PORT_PROPERTY = "gemfire.test.CacheServer.OVERRIDE_DEFAULT_PORT";
 
@@ -127,11 +127,11 @@ public abstract class AbstractBridgeServer implements CacheServer {
    * @param cache
    *        The cache being served
    */
-  public AbstractBridgeServer(InternalCache cache) {
+  public AbstractCacheServer(InternalCache cache) {
     this(cache, true);
   }
 
-  public AbstractBridgeServer(InternalCache cache, boolean attachListener) {
+  public AbstractCacheServer(InternalCache cache, boolean attachListener) {
     this.cache = cache;
     this.port = Integer.getInteger(TEST_OVERRIDE_DEFAULT_PORT_PROPERTY, CacheServer.DEFAULT_PORT);
     this.maxConnections = CacheServer.DEFAULT_MAX_CONNECTIONS;
@@ -215,7 +215,7 @@ public abstract class AbstractBridgeServer implements CacheServer {
        */
       private void createAndSendMessage(BridgeMembershipEvent event, int type) {
         InternalDistributedSystem ds = null;
-        Cache cacheInstance = AbstractBridgeServer.this.cache;
+        Cache cacheInstance = AbstractCacheServer.this.cache;
         if (cacheInstance != null && !(cacheInstance instanceof CacheCreation)) {
           ds = (InternalDistributedSystem)cacheInstance.getDistributedSystem();
         } else {

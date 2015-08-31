@@ -36,7 +36,7 @@ import com.gemstone.gemfire.internal.InternalDataSerializer;
 import com.gemstone.gemfire.internal.InternalDataSerializer.SerializerAttributesHolder;
 import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.EventID;
 
 import dunit.DistributedTestCase;
@@ -355,7 +355,7 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     try {
       assertEquals("Expected exactly one CacheServer", 1, cache
           .getCacheServers().size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       bs.stop();
@@ -370,7 +370,7 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
       Cache c = CacheFactory.getAnyInstance();
       assertEquals("Expected exactly one CacheServer", 1, c.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)c.getCacheServers().iterator()
+      CacheServerImpl bs = (CacheServerImpl)c.getCacheServers().iterator()
           .next();
       assertNotNull(bs);
       bs.start();

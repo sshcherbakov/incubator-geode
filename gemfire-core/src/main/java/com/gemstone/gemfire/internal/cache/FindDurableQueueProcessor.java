@@ -80,7 +80,7 @@ public class FindDurableQueueProcessor extends ReplyProcessor21 {
       if(l!=null) {
         Iterator i = l.iterator();
         while(i.hasNext()) {
-          BridgeServerImpl bs = (BridgeServerImpl)i.next();
+          CacheServerImpl bs = (CacheServerImpl)i.next();
           if(bs.getAcceptor().getCacheClientNotifier().getClientProxy(proxyId)!=null) {
             ServerLocation loc = new ServerLocation(bs.getExternalAddress(),bs.getPort());
             matches.add(loc);

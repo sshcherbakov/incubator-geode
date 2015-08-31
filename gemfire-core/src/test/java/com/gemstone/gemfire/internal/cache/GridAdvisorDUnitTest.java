@@ -198,8 +198,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(4, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort1) {
                 assertEquals(Arrays.asList(new String[] {"bs1Group1", "bs1Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -234,8 +234,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(4, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort1) {
                 assertEquals(Arrays.asList(new String[] {"bs1Group1", "bs1Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -261,7 +261,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
           assertEquals(2, bslist.size());
           for (int i=0; i < bslist.size(); i++) {
             DistributionAdvisee advisee = (DistributionAdvisee)bslist.get(i);
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchBridgeServers();
             getLogWriter().info("found these bridgeservers in " + advisee + ": " + others);
             assertEquals(3, others.size());
@@ -289,7 +289,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
           assertEquals(2, bslist.size());
           for (int i=0; i < bslist.size(); i++) {
             DistributionAdvisee advisee = (DistributionAdvisee)bslist.get(i);
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchBridgeServers();
             getLogWriter().info("found these bridgeservers in " + advisee + ": " + others);
             assertEquals(3, others.size());
@@ -342,8 +342,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(3, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort2) {
                 assertEquals(Arrays.asList(new String[] {"bs2Group1", "bs2Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -375,8 +375,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(3, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort2) {
                 assertEquals(Arrays.asList(new String[] {"bs2Group1", "bs2Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -431,7 +431,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
           assertEquals(2, bslist.size());
           for (int i=0; i < bslist.size(); i++) {
             DistributionAdvisee advisee = (DistributionAdvisee)bslist.get(i);
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchControllers();
             assertEquals(1, others.size());
             for (int j=0; j < others.size(); j++) {
@@ -458,7 +458,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
               // skip this one since it is stopped
               continue;
             }
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchControllers();
             assertEquals(1, others.size());
             for (int j=0; j < others.size(); j++) {
@@ -505,8 +505,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             List others = ca.fetchBridgeServers();
             assertEquals(4, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort1) {
                 assertEquals(Arrays.asList(new String[] {"bs1Group1", "bs1Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -712,8 +712,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(4, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort1) {
                 assertEquals(Arrays.asList(new String[] {"bs1Group1", "bs1Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -748,8 +748,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(4, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort1) {
                 assertEquals(Arrays.asList(new String[] {"bs1Group1", "bs1Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -775,7 +775,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
           assertEquals(2, bslist.size());
           for (int i=0; i < bslist.size(); i++) {
             DistributionAdvisee advisee = (DistributionAdvisee)bslist.get(i);
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchBridgeServers();
             getLogWriter().info("found these bridgeservers in " + advisee + ": " + others);
             assertEquals(3, others.size());
@@ -803,7 +803,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
           assertEquals(2, bslist.size());
           for (int i=0; i < bslist.size(); i++) {
             DistributionAdvisee advisee = (DistributionAdvisee)bslist.get(i);
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchBridgeServers();
             getLogWriter().info("found these bridgeservers in " + advisee + ": " + others);
             assertEquals(3, others.size());
@@ -856,8 +856,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(3, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort2) {
                 assertEquals(Arrays.asList(new String[] {"bs2Group1", "bs2Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -889,8 +889,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             others = ca.fetchBridgeServers();
             assertEquals(3, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort2) {
                 assertEquals(Arrays.asList(new String[] {"bs2Group1", "bs2Group2"}),
                              Arrays.asList(bsp.getGroups()));
@@ -942,7 +942,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
           assertEquals(2, bslist.size());
           for (int i=0; i < bslist.size(); i++) {
             DistributionAdvisee advisee = (DistributionAdvisee)bslist.get(i);
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchControllers();
             assertEquals(1, others.size());
             for (int j=0; j < others.size(); j++) {
@@ -969,7 +969,7 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
               // skip this one since it is stopped
               continue;
             }
-            BridgeServerAdvisor bsa = (BridgeServerAdvisor)advisee.getDistributionAdvisor();
+            CacheServerAdvisor bsa = (CacheServerAdvisor)advisee.getDistributionAdvisor();
             List others = bsa.fetchControllers();
             assertEquals(1, others.size());
             for (int j=0; j < others.size(); j++) {
@@ -1016,8 +1016,8 @@ public class GridAdvisorDUnitTest extends DistributedTestCase {
             List others = ca.fetchBridgeServers();
             assertEquals(4, others.size());
             for (int j=0; j < others.size(); j++) {
-              BridgeServerAdvisor.BridgeServerProfile bsp =
-                (BridgeServerAdvisor.BridgeServerProfile)others.get(j);
+              CacheServerAdvisor.CacheServerProfile bsp =
+                (CacheServerAdvisor.CacheServerProfile)others.get(j);
               if (bsp.getPort() == bsPort1) {
                 assertEquals(Arrays.asList(new String[] {"bs1Group1", "bs1Group2"}),
                              Arrays.asList(bsp.getGroups()));

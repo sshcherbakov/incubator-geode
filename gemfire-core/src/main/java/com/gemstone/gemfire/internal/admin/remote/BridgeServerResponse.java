@@ -12,7 +12,7 @@ import com.gemstone.gemfire.DataSerializer;
 import com.gemstone.gemfire.cache.CacheFactory;
 import com.gemstone.gemfire.distributed.internal.DistributionManager;
 import com.gemstone.gemfire.internal.Assert;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 import java.io.*;
 import java.util.*;
@@ -55,8 +55,8 @@ public final class BridgeServerResponse extends AdminResponse {
         int operation = request.getOperation();
         switch (operation) {
         case BridgeServerRequest.ADD_OPERATION: {
-          BridgeServerImpl bridge =
-            (BridgeServerImpl) cache.addCacheServer();
+          CacheServerImpl bridge =
+            (CacheServerImpl) cache.addCacheServer();
           m.bridgeInfo = new RemoteBridgeServer(bridge);
           break;
         }
@@ -67,7 +67,7 @@ public final class BridgeServerResponse extends AdminResponse {
           // it is not necessary to synchronize on allBridgeServersLock
           for (Iterator iter = cache.getCacheServers().iterator();
                iter.hasNext(); ) {
-            BridgeServerImpl bridge = (BridgeServerImpl) iter.next();
+            CacheServerImpl bridge = (CacheServerImpl) iter.next();
             if (System.identityHashCode(bridge) == id) {
               m.bridgeInfo = new RemoteBridgeServer(bridge);
               break;
@@ -83,7 +83,7 @@ public final class BridgeServerResponse extends AdminResponse {
           RemoteBridgeServer config = request.getBridgeInfo();
           for (Iterator iter = cache.getCacheServers().iterator();
                iter.hasNext(); ) {
-            BridgeServerImpl bridge = (BridgeServerImpl) iter.next();
+            CacheServerImpl bridge = (CacheServerImpl) iter.next();
             if (System.identityHashCode(bridge) == config.getId()) {
               bridge.configureFrom(config);
               bridge.start();
@@ -101,7 +101,7 @@ public final class BridgeServerResponse extends AdminResponse {
           RemoteBridgeServer config = request.getBridgeInfo();
           for (Iterator iter = cache.getCacheServers().iterator();
                iter.hasNext(); ) {
-            BridgeServerImpl bridge = (BridgeServerImpl) iter.next();
+            CacheServerImpl bridge = (CacheServerImpl) iter.next();
             if (System.identityHashCode(bridge) == config.getId()) {
               bridge.stop();
               m.bridgeInfo = new RemoteBridgeServer(bridge);

@@ -5896,7 +5896,7 @@ public class PartitionedRegion extends LocalRegion implements
     Collections.addAll(localServerGroups, MemberAttributes.parseGroups(null, c.getSystem().getConfig().getGroups()));
     
     for (Object object : servers) {
-      BridgeServerImpl server = (BridgeServerImpl)object;
+      CacheServerImpl server = (CacheServerImpl)object;
       if (server.isRunning() && (server.getExternalAddress() != null)) {
         Collections.addAll(localServerGroups, server.getGroups());
       }

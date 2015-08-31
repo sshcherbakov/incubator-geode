@@ -28,7 +28,7 @@ import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 
 import dunit.DistributedTestCase;
@@ -405,7 +405,7 @@ public class ClientInterestNotifyDUnitTest extends DistributedTestCase
     Iterator servers = cacheServer.getCacheServers().iterator();
     assertTrue("No servers found!", servers.hasNext());
     while (servers.hasNext()) {
-      Iterator proxies = ((BridgeServerImpl)servers.next()).getAcceptor().
+      Iterator proxies = ((CacheServerImpl)servers.next()).getAcceptor().
         getCacheClientNotifier().getClientProxies().iterator();
       assertTrue("No proxies found!", proxies.hasNext());
       while (proxies.hasNext()) {
@@ -420,7 +420,7 @@ public class ClientInterestNotifyDUnitTest extends DistributedTestCase
       String excuse;
       public boolean done() {
         // assume a single cache server as configured in this test
-        BridgeServerImpl bridgeServer = (BridgeServerImpl) cacheServer.
+        CacheServerImpl bridgeServer = (CacheServerImpl) cacheServer.
           getCacheServers().iterator().next();
         if (bridgeServer == null) {
           excuse = "No Cache Server";

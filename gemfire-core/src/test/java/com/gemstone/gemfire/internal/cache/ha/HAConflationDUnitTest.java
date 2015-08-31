@@ -27,7 +27,7 @@ import com.gemstone.gemfire.cache30.CacheTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.tier.sockets.ConflationDUnitTest;
 
 import dunit.Host;
@@ -346,7 +346,7 @@ public class HAConflationDUnitTest extends CacheTestCase
     }
     RegionAttributes attrs = factory.create();
     cache.createRegion(regionName, attrs);
-    BridgeServerImpl server = (BridgeServerImpl)cache.addCacheServer();
+    CacheServerImpl server = (CacheServerImpl)cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

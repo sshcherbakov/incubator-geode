@@ -18,7 +18,7 @@ import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.cache.client.*;
 import com.gemstone.gemfire.internal.cache.PoolFactoryImpl;
 
@@ -269,7 +269,7 @@ public class DurableClientStatsDUnitTest extends DistributedTestCase {
     try {
       Cache cache = CacheServerTestUtil.getCache();
       com.gemstone.gemfire.LogWriter logger = cache.getLogger();
-      BridgeServerImpl currentServer = (BridgeServerImpl)(new ArrayList(cache
+      CacheServerImpl currentServer = (CacheServerImpl)(new ArrayList(cache
           .getCacheServers()).get(0));
       AcceptorImpl ai = currentServer.getAcceptor();
       CacheClientNotifier notifier = ai.getCacheClientNotifier();
@@ -290,7 +290,7 @@ public class DurableClientStatsDUnitTest extends DistributedTestCase {
     try {
       Cache cache = CacheServerTestUtil.getCache();
       com.gemstone.gemfire.LogWriter logger = cache.getLogger();
-      BridgeServerImpl currentServer = (BridgeServerImpl)(new ArrayList(cache
+      CacheServerImpl currentServer = (CacheServerImpl)(new ArrayList(cache
           .getCacheServers()).get(0));
       AcceptorImpl ai = currentServer.getAcceptor();
       CacheClientNotifier notifier = ai.getCacheClientNotifier();

@@ -26,7 +26,7 @@ import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 import com.gemstone.gemfire.internal.cache.HARegion;
 import com.gemstone.gemfire.internal.cache.ha.HAHelper;
@@ -794,7 +794,7 @@ public class ConflationDUnitTest extends DistributedTestCase
   {
     Cache cache = GemFireCacheImpl.getInstance();
     Iterator itr = cache.getCacheServers().iterator();
-    BridgeServerImpl server = (BridgeServerImpl)itr.next();
+    CacheServerImpl server = (CacheServerImpl)itr.next();
     Iterator iter_prox = server.getAcceptor().getCacheClientNotifier()
         .getClientProxies().iterator();
     int ccpCount=0;

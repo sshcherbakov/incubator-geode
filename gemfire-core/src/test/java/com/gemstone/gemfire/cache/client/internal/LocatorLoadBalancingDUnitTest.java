@@ -34,7 +34,7 @@ import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.distributed.internal.ServerLocator;
 import com.gemstone.gemfire.distributed.internal.tcpserver.TcpClient;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.PoolFactoryImpl;
 import com.gemstone.gemfire.internal.logging.InternalLogWriter;
 import com.gemstone.gemfire.internal.logging.LocalLogWriter;
@@ -241,7 +241,7 @@ public class LocatorLoadBalancingDUnitTest extends LocatorTestBase {
     Runnable checkConnectionCount = new SerializableRunnable("checkConnectionCount") {
       public void run() {
         Cache cache = (Cache) remoteObjects.get(CACHE_KEY);
-        final BridgeServerImpl server = (BridgeServerImpl)
+        final CacheServerImpl server = (CacheServerImpl)
             cache.getCacheServers().get(0);
         WaitCriterion wc = new WaitCriterion() {
           String excuse;

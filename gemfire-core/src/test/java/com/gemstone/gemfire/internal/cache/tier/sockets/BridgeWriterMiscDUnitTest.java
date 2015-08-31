@@ -30,7 +30,7 @@ import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.DistributedSystemDisconnectedException;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeServerImpl;
+import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
 
 import dunit.DistributedTestCase;
@@ -1012,7 +1012,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
       Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
       assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -1042,7 +1042,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
       Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
       assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
@@ -1087,7 +1087,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
       Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
       assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
-      BridgeServerImpl bs = (BridgeServerImpl)cache.getCacheServers()
+      CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
           .iterator().next();
       assertNotNull(bs);
       assertNotNull(bs.getAcceptor());
