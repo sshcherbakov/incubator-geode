@@ -91,8 +91,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * Implements the acceptor thread on the bridge server. Accepts connections from
  * the edge and starts up threads to process requests from these.
  * 
- * @see com.gemstone.gemfire.cache.util.BridgeServer
- * 
  * @author Sudhir Menon
  * @since 2.0.2
  */

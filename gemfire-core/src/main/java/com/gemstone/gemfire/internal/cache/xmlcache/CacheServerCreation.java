@@ -223,23 +223,14 @@ public class CacheServerCreation extends AbstractCacheServer {
     //TODO Yogesh : implement me
   }
 
-  /* (non-Javadoc)
-   * @see com.gemstone.gemfire.cache.util.BridgeServer#getAllClientSessions()
-   */
   public Set getAllClientSessions() {
     throw new UnsupportedOperationException("Shouldn't be invoked");
   }
 
-  /* (non-Javadoc)
-   * @see com.gemstone.gemfire.cache.util.BridgeServer#getClientSession(com.gemstone.gemfire.distributed.DistributedMember)
-   */
   public ClientSession getClientSession(DistributedMember member) {
     throw new UnsupportedOperationException("Shouldn't be invoked");
   }
 
-  /* (non-Javadoc)
-   * @see com.gemstone.gemfire.cache.util.BridgeServer#getClientSession(java.lang.String)
-   */
   public ClientSession getClientSession(String durableClientId) {
     throw new UnsupportedOperationException("Shouldn't be invoked");
   }
