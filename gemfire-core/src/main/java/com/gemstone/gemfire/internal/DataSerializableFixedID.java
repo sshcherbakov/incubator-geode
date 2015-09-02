@@ -341,7 +341,7 @@ public interface DataSerializableFixedID extends SerializationVersions {
   public static final byte PARTITION_PROFILE = 18;
 
   public static final byte ROLE_EVENT = 19;
-  public static final byte BRIDGE_REGION_EVENT = 20;
+  public static final byte CLIENT_REGION_EVENT = 20;
 
   public static final byte CONCURRENT_HASH_MAP = 21;
   public static final byte FIND_DURABLE_QUEUE = 22;

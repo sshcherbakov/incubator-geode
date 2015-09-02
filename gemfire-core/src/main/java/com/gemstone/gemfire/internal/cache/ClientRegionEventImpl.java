@@ -27,7 +27,7 @@ import com.gemstone.gemfire.internal.cache.tier.sockets.ClientProxyMembershipID;
  * 
  * @since 5.1
  */
-public final class BridgeRegionEventImpl extends RegionEventImpl
+public final class ClientRegionEventImpl extends RegionEventImpl
   {
 
   /**
@@ -35,7 +35,7 @@ public final class BridgeRegionEventImpl extends RegionEventImpl
    */
   private  ClientProxyMembershipID context;
 
-  public BridgeRegionEventImpl() {
+  public ClientRegionEventImpl() {
   }
   
   /**
@@ -46,12 +46,12 @@ public final class BridgeRegionEventImpl extends RegionEventImpl
    * @param originRemote
    * @param distributedMember
    */
-  public BridgeRegionEventImpl(LocalRegion region, Operation op, Object callbackArgument,boolean originRemote, DistributedMember distributedMember,ClientProxyMembershipID contx) {
+  public ClientRegionEventImpl(LocalRegion region, Operation op, Object callbackArgument,boolean originRemote, DistributedMember distributedMember,ClientProxyMembershipID contx) {
     super(region, op,callbackArgument, originRemote,distributedMember);
     setContext(contx);
   }
 
-  public BridgeRegionEventImpl(LocalRegion region, Operation op, Object callbackArgument,boolean originRemote, DistributedMember distributedMember,ClientProxyMembershipID contx,EventID eventId) {
+  public ClientRegionEventImpl(LocalRegion region, Operation op, Object callbackArgument,boolean originRemote, DistributedMember distributedMember,ClientProxyMembershipID contx,EventID eventId) {
       super(region, op,callbackArgument, originRemote,distributedMember, eventId);
       setContext(contx);
   }

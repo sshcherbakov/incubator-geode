@@ -78,7 +78,7 @@ import com.gemstone.gemfire.internal.SystemTimer;
 import com.gemstone.gemfire.internal.Version;
 import com.gemstone.gemfire.internal.cache.BridgeObserver;
 import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
-import com.gemstone.gemfire.internal.cache.BridgeRegionEventImpl;
+import com.gemstone.gemfire.internal.cache.ClientRegionEventImpl;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.CacheClientStatus;
 import com.gemstone.gemfire.internal.cache.CacheDistributionAdvisor;
@@ -1158,8 +1158,8 @@ public class CacheClientNotifier {
       RegionEventImpl regionEvent = (RegionEventImpl)event;
       callbackArgument = regionEvent.getRawCallbackArgument();
       eventIdentifier = regionEvent.getEventId();
-      if (event instanceof BridgeRegionEventImpl) {
-        BridgeRegionEventImpl bridgeEvent = (BridgeRegionEventImpl)event;
+      if (event instanceof ClientRegionEventImpl) {
+        ClientRegionEventImpl bridgeEvent = (ClientRegionEventImpl)event;
         membershipID = bridgeEvent.getContext();
       }
     }
