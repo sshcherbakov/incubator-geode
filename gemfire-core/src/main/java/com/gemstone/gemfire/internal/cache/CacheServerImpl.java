@@ -424,7 +424,7 @@ public class CacheServerImpl
         this.loadMonitor.stop();
       }
     } catch(RuntimeException e) {
-      cache.getLoggerI18n().warning(LocalizedStrings.BridgeServerImpl_CACHESERVER_ERROR_CLOSING_LOAD_MONITOR, e);
+      cache.getLoggerI18n().warning(LocalizedStrings.CacheServerImpl_CACHESERVER_ERROR_CLOSING_LOAD_MONITOR, e);
       firstException = e;
     }
     
@@ -433,7 +433,7 @@ public class CacheServerImpl
         this.advisor.close();
       }
     } catch(RuntimeException e) {
-      cache.getLoggerI18n().warning(LocalizedStrings.BridgeServerImpl_CACHESERVER_ERROR_CLOSING_ADVISOR, e);
+      cache.getLoggerI18n().warning(LocalizedStrings.CacheServerImpl_CACHESERVER_ERROR_CLOSING_ADVISOR, e);
       firstException = e;
     } 
     
@@ -442,7 +442,7 @@ public class CacheServerImpl
         this.acceptor.close();
       }
     } catch(RuntimeException e) {
-      logger.warn(LocalizedMessage.create(LocalizedStrings.BridgeServerImpl_CACHESERVER_ERROR_CLOSING_ACCEPTOR_MONITOR), e);
+      logger.warn(LocalizedMessage.create(LocalizedStrings.CacheServerImpl_CACHESERVER_ERROR_CLOSING_ACCEPTOR_MONITOR), e);
       if (firstException != null) {
         firstException = e;
       }
@@ -616,7 +616,7 @@ public class CacheServerImpl
     else {
       // throw invalid eviction policy exception
       throw new InvalidValueException(
-        LocalizedStrings.BridgeServerImpl__0_INVALID_EVICTION_POLICY.toLocalizedString(ePolicy));
+        LocalizedStrings.CacheServerImpl__0_INVALID_EVICTION_POLICY.toLocalizedString(ePolicy));
     }
     return factory;
   }
@@ -777,7 +777,7 @@ public class CacheServerImpl
   public void registerInterestRegistrationListener(
       InterestRegistrationListener listener) {
     if (!this.isRunning()) {
-      throw new IllegalStateException(LocalizedStrings.BridgeServerImpl_MUST_BE_RUNNING.toLocalizedString());
+      throw new IllegalStateException(LocalizedStrings.CacheServerImpl_MUST_BE_RUNNING.toLocalizedString());
     }
     getCacheClientNotifier().registerInterestRegistrationListener(listener); 
   }

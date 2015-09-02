@@ -2844,7 +2844,7 @@ public final class InternalDistributedSystem
                   }
                 } catch (IOException ex) {
                   throw new GemFireIOException(
-                      LocalizedStrings.CacheCreation_WHILE_STARTING_BRIDGE_SERVER_0
+                      LocalizedStrings.CacheCreation_WHILE_STARTING_CACHE_SERVER_0
                           .toLocalizedString(impl), ex);
                 }
               }
