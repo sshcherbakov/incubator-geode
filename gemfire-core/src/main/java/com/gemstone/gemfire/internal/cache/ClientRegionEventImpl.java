@@ -19,8 +19,8 @@ import com.gemstone.gemfire.internal.cache.tier.sockets.ClientProxyMembershipID;
 //import com.gemstone.gemfire.internal.cache.tier.sockets.ClientProxyMembershipID;
 
 /**
- * Class <code>BridgeRegionEventImpl</code> is an implementation of a bridge
- * region event, which is just an <code>RegionEvent</code> with the client's
+ * Class <code>ClientRegionEventImpl</code> is a
+ * region event with the client's
  * host and port for notification purposes.
  * 
  * @author Girish Thombare
@@ -89,7 +89,7 @@ public final class ClientRegionEventImpl extends RegionEventImpl
 
   @Override
   public int getDSFID() {
-    return BRIDGE_REGION_EVENT;
+    return CLIENT_REGION_EVENT;
   }
 
   @Override
