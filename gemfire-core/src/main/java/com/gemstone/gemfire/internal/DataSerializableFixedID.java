@@ -346,7 +346,7 @@ public interface DataSerializableFixedID extends SerializationVersions {
   public static final byte CONCURRENT_HASH_MAP = 21;
   public static final byte FIND_DURABLE_QUEUE = 22;
   public static final byte FIND_DURABLE_QUEUE_REPLY = 23;
-  public static final byte BRIDGE_SERVER_LOAD_MESSAGE = 24;
+  public static final byte CACHE_SERVER_LOAD_MESSAGE = 24;
 
   /** A header byte meaning that the next element in the stream is a
    * <code>ObjectPartList</code>.

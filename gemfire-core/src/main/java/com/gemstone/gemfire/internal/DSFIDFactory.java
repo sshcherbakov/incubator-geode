@@ -30,7 +30,7 @@ import com.gemstone.gemfire.admin.internal.PrepareBackupResponse;
 import com.gemstone.gemfire.admin.internal.SystemMemberCacheEventProcessor;
 import com.gemstone.gemfire.admin.jmx.internal.StatAlertNotification;
 import com.gemstone.gemfire.cache.InterestResultPolicy;
-import com.gemstone.gemfire.cache.client.internal.BridgeServerLoadMessage;
+import com.gemstone.gemfire.cache.client.internal.CacheServerLoadMessage;
 import com.gemstone.gemfire.cache.client.internal.locator.ClientConnectionRequest;
 import com.gemstone.gemfire.cache.client.internal.locator.ClientConnectionResponse;
 import com.gemstone.gemfire.cache.client.internal.locator.ClientReplacementRequest;
@@ -860,7 +860,7 @@ public final class DSFIDFactory implements DataSerializableFixedID {
     registerDSFID(ALERTS_NOTIF_MESSAGE, AlertsNotificationMessage.class);
     registerDSFID(FIND_DURABLE_QUEUE, FindDurableQueueMessage.class);
     registerDSFID(FIND_DURABLE_QUEUE_REPLY, FindDurableQueueReply.class);
-    registerDSFID(BRIDGE_SERVER_LOAD_MESSAGE, BridgeServerLoadMessage.class);
+    registerDSFID(CACHE_SERVER_LOAD_MESSAGE, CacheServerLoadMessage.class);
     registerDSFID(CACHE_SERVER_PROFILE, CacheServerProfile.class);
     registerDSFID(CONTROLLER_PROFILE, ControllerProfile.class);
     registerDSFID(DLOCK_QUERY_MESSAGE,

@@ -34,7 +34,7 @@ com/gemstone/gemfire/cache/SubscriptionAttributes,2
 fromData,14,2a2bb9000f0100b80010b50003b1
 toData,14,2b2ab40003b4000db9000e0200b1
 
-com/gemstone/gemfire/cache/client/internal/BridgeServerLoadMessage,2
+com/gemstone/gemfire/cache/client/internal/CacheServerLoadMessage,2
 fromData,52,2a2bb7000c2abb000d59b7000eb500022ab400022bb8000f2abb001059b70011b500032ab400032bb8000f2a2bb80012b50004b1
 toData,30,2a2bb700132ab400022bb800142ab400032bb800142ab400042bb80015b1
 

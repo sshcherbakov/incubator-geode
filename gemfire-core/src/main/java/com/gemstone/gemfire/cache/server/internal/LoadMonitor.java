@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.gemstone.gemfire.CancelException;
 import com.gemstone.gemfire.SystemFailure;
-import com.gemstone.gemfire.cache.client.internal.BridgeServerLoadMessage;
+import com.gemstone.gemfire.cache.client.internal.CacheServerLoadMessage;
 import com.gemstone.gemfire.cache.server.ServerLoad;
 import com.gemstone.gemfire.cache.server.ServerLoadProbe;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
@@ -195,8 +195,8 @@ public class LoadMonitor implements ConnectionListener {
             
             stats.setLoad(load);
             if (locators != null) {
-              BridgeServerLoadMessage message =
-                new BridgeServerLoadMessage(load, location, myClientIds);
+              CacheServerLoadMessage message =
+                new CacheServerLoadMessage(load, location, myClientIds);
               message.setRecipients(locators);
               MembershipManager mgr = advisor.getDistributionManager().getMembershipManager();
               if (mgr == null || !mgr.isBeingSick()) { // test hook
