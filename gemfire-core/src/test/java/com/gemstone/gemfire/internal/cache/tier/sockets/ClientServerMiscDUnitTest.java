@@ -46,7 +46,7 @@ import java.util.Set;
 import junit.framework.AssertionFailedError;
 
 /**
- * Tests corner cases between Region, BridgeWriter and PoolImpl
+ * Tests client server corner cases between Region and Pool
  *
  * @author Yogesh Mahajan
  *
@@ -356,12 +356,12 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
   }
 
   /**
-   * Test for single BridgeWriter used across two regions: notify by subscription is true.
+   * Test two regions: notify by subscription is true.
    * For region1 the interest list is empty , for region 2 the intetest list is all keys.
    * If an update/create is made on region1 , the client should not receive any.
    * If the create/update is on region2 , the client should receive the update.
    */
-  public void testSameBridgeWriterForTwoRegionHavingDifferentInterestList()
+  public void testForTwoRegionHavingDifferentInterestList()
       throws Exception
   {
     // start server first
@@ -385,7 +385,7 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
   }
 
   /**
-   * Test for single BridgeWriter used across two regions: notify by subscription is true.
+   * Test two regions: notify by subscription is true.
    * Both the regions have registered interest in all the keys.
    * Now close region1 on the client.
    * The region1 should get removed from the interest list on CCP at server.
@@ -394,7 +394,7 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
    * ( which is diferent from not receiving a callbak on the client).
    * If an update on region2 is made on the server , then client should receive the calback
    */
-  public void testSameBridgeWriterForTwoRegionHavingALLKEYSInterest()
+  public void testForTwoRegionHavingALLKEYSInterest()
       throws Exception
   {
     // start server first
@@ -411,14 +411,14 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
     verifyUpdatesOnRegion2();
   }
 
-  /** Test for single BridgeWriter used across two regions: notify by subscription is true.
+  /** Test two regions: notify by subscription is true.
    * Both the regions have registered interest in all the keys.
    * Close both the regions. When the last region is closed ,
    * it should close the ConnectionProxy on the client ,
    * close all the server connection threads on the server &
    * remove the CacheClientProxy from the CacheClient notifier
    */
-  public void testRegionCloseWithSameBridgeWriter() throws Exception
+  public void testRegionClose() throws Exception
   {
     // start server first
     PORT1 = initServerCache(true);
@@ -436,7 +436,7 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
   }
 
   /**
-   * Test for single BridgeWriter used across two regions: notify by
+   * Test two regions: notify by
    * subscription is true. Both the regions have registered interest in all the
    * keys. Destroy region1 on the client. It should reach the server , kill the
    * region on the server , propagate it to the interested clients , but it
@@ -476,12 +476,12 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
   }
 
   /**
-   * Test for single BridgeWriter used across two regions:If notify by
+   * Test two regions:If notify by
    * subscription is false , both the regions should receive invalidates for the
    * updates on server in their respective regions
    *
    */
-  public void testInvalidatesPropagateOnTwoRegionsHavingCommonBridgeWriter()
+  public void testInvalidatesPropagateOnTwoRegions()
       throws Exception
   {
     // start server first
@@ -535,16 +535,16 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
   }
 
   /**
-   * Create cache, create bridge writer, notify-by-subscription=false,
+   * Create cache, create pool, notify-by-subscription=false,
    * create a region and on client and on server.
-   * Do not attach Bridge writer to region ,
+   * Do not attach pool to region ,
    * populate some entries on region both on client and server.
    * Update the entries on server the client.
    * The client should not have entry invalidate.
    *
    * @throws Exception
    */
-  public void testInvalidatesPropagateOnRegionHavingNoBridgeWriter()
+  public void testInvalidatesPropagateOnRegionHavingNoPool()
       throws Exception
   {
     // start server first
@@ -565,7 +565,7 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
       .setPingInterval(2000)
       // .setRetryAttempts(5)
       // .setRetryInterval(2000)
-      .create("testInvalidatesPropagateOnRegionHavingNoBridgeWriter");
+      .create("testInvalidatesPropagateOnRegionHavingNoPool");
 
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
@@ -685,14 +685,14 @@ public class ClientServerMiscDUnitTest extends CacheTestCase
   }
   /**
    * 
-   * Cycling a DistributedSystem with an initialized BridgeWriter causes interest registration NPE
+   * Cycling a DistributedSystem with an initialized pool causes interest registration NPE
    * 
    * Test Scenario:
    *  
    * Create a DistributedSystem (DS1). 
-   * Create a BridgeWriter (BW), initialize (creates a proxy with DS1 memberid) 
+   * Create a pool, initialize (creates a proxy with DS1 memberid) 
    * Disconnect DS1.  Create a DistributedSystem (DS2). 
-   * Create a Region with BW, it attempts to register interest using DS2 memberid, gets NPE.
+   * Create a Region with pool, it attempts to register interest using DS2 memberid, gets NPE.
    *  
    * @throws Exception
    */

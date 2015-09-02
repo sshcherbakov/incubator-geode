@@ -288,31 +288,6 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       verifyDeadAndLiveServers(1,2);
     }
 
-
-  // darrel: this following is an invalid test.
-  // A "primary" is only identified when you have a callback connection
-//     /**
-//      * Tests failover initialization by cache operation Threads on Primary
-//      */
-//     public void testInitiateFailoverByCacheOperationThreads_Primary() throws Exception
-//     {
-//       // create a client with large retry interval for server monitors and no client updater thread
-//       // so that only cache operation can detect a server failure and should initiate failover
-//       createClientCacheWithLargeRetryIntervalAndWithoutCallbackConnection(this.getName());
-//       setClientServerObserver();
-//       server1.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
-//       releaseConnection();//Added by Jason
-//       put();
-//       waitForPrimaryIdentification();
-//       unSetClientServerObserver();
-//       verifyDeadAndLiveServers(1,2);
-//     }
-//     public static void releaseConnection() {
-//       Region r1 = cache.getRegion("/" + REGION_NAME);
-//       BridgeWriter bw = (BridgeWriter)r1.getAttributes().getCacheWriter();
-//       bw.release();
-//     }
-
     public static void put()
     {
       try {

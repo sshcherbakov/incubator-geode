@@ -64,42 +64,16 @@ public class CacheServerTestUtil extends DistributedTestCase
     super(name);
   }
 
-   
-  
-//  public static void createCacheClient(Properties props, String regionName)
-//      throws Exception {
-//    createCacheClient(props, regionName, getClientProperties(), Boolean.FALSE);
-//  }
   public static void createCacheClient(Pool poolAttr, String regionName)
       throws Exception {
     createCacheClient(poolAttr, regionName, getClientProperties(), Boolean.FALSE);
   }
 
-//  public static void createCacheClient(Properties props, String regionName,
-//      Properties dsProperties) throws Exception {
-//    createCacheClient(props, regionName, dsProperties, Boolean.FALSE);
-//  }
   public static void createCacheClient(Pool poolAttr, String regionName,
       Properties dsProperties) throws Exception {
     createCacheClient(poolAttr, regionName, dsProperties, Boolean.FALSE);
   }
 
-//  public static void createCacheClient(Properties props, String regionName,
-//    Properties dsProperties, Boolean addControlListener) throws Exception {
-//    new CacheServerTestUtil("temp").createCache(dsProperties);
-//    BridgeWriter writer = new BridgeWriter();
-//    writer.init(props);
-//    AttributesFactory factory = new AttributesFactory();
-//    factory.setScope(Scope.LOCAL);
-//    factory.setCacheWriter(writer);
-//    if (addControlListener.booleanValue()) {
-//      factory.addCacheListener(new ControlListener());
-//    }
-//    RegionAttributes attrs = factory.create();
-//    cache.createRegion(regionName, attrs);
-//    pool = (PoolImpl)writer.getConnectionProxy();
-//  }
-  
   public static void createClientCache(Pool poolAttr, String regionName) throws Exception {
     createClientCache(poolAttr, regionName, getClientProperties());
   }
@@ -299,7 +273,7 @@ public class CacheServerTestUtil extends DistributedTestCase
   }
 
   /**
-   * Create client regions each with their own BridgeWriter instance.
+   * Create client regions
    * @param props
    * @param regionName1
    * @param regionName2
@@ -534,11 +508,6 @@ public class CacheServerTestUtil extends DistributedTestCase
   {
     return pool;
   }
-
-//   public static BridgeWriter getWriter()
-//   {
-//     return writer;
-//   }
 
   /**
    * Disables the shuffling of endpoints for a client

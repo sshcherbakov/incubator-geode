@@ -177,7 +177,7 @@ public class EventIDVerificationDUnitTest extends DistributedTestCase
     ClientServerTestCase.configureConnectionPool(factory, host, new int[] {PORT1,PORT2}, true, -1, 2, null, -1, -1, false, -2);
 
     
-    CacheWriter writer = new CacheWriterAdapter() { // couldn't port this test to pool because it subclasses BridgeWriter
+    CacheWriter writer = new CacheWriterAdapter() {
       public void beforeCreate(EntryEvent event)
       {
         vm0.invoke(EventIDVerificationDUnitTest.class, "setEventIDData",
