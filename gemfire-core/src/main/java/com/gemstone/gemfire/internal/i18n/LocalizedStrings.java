@@ -1296,7 +1296,7 @@ public class LocalizedStrings extends ParentLocalizedStrings {
   public static final StringId GatewayImpl_PAUSED__0 = new StringIdImpl(4674, "Paused {0}");
   public static final StringId GatewayImpl_RESUMED__0 = new StringIdImpl(4675, "Resumed {0}");
   public static final StringId CacheClientProxy_NOT_PRIMARY = new StringIdImpl(4676, "This process is not the primary server for the given client");
-  public static final StringId BridgeServerImpl_MUST_BE_RUNNING = new StringIdImpl(4677, "The bridge server must be running to use this operation");
+  public static final StringId CacheServerImpl_MUST_BE_RUNNING = new StringIdImpl(4677, "The cache server must be running to use this operation");
   public static final StringId InitialImageOperation_0_UNABLE_TO_FLUSH_STATE_TO_1 = new StringIdImpl(4678, "{0}: Unable to flush state to {1} for concurrent gii union");
   public static final StringId InstantiatorRecoveryListener_INSTANTIATORRECOVERYTASK_ERROR_CLASSNOTFOUNDEXCEPTION = new StringIdImpl(4679, "InstantiatorRecoveryTask - Error ClassNotFoundException: {0}");
   public static final StringId AbstractRegion_NO_CUSTOM_EVICTION_SET = new StringIdImpl(4680, "Custom eviction not enabled for region {0}");  public static final StringId ResourceAdvisor_MEMBER_CAUGHT_EXCEPTION_PROCESSING_PROFILE = new StringIdImpl(4682, "This member caught exception processing profile {0} {1}");
