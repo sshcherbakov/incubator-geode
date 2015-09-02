@@ -138,7 +138,7 @@ public class CacheServerImpl
    */
   private void checkRunning() {
     if (this.isRunning()) {
-      throw new IllegalStateException(LocalizedStrings.BridgeServerImpl_A_BRIDGE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING.toLocalizedString());
+      throw new IllegalStateException(LocalizedStrings.CacheServerImpl_A_CACHE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING.toLocalizedString());
     }
   }
 
@@ -295,7 +295,7 @@ public class CacheServerImpl
       // force notifyBySubscription to be true so that meta info is pushed
       // from servers to clients instead of invalidates.
       if (!this.notifyBySubscription) {
-        logger.info(LocalizedMessage.create(LocalizedStrings.BridgeServerImpl_FORCING_NOTIFYBYSUBSCRIPTION_TO_SUPPORT_DYNAMIC_REGIONS));
+        logger.info(LocalizedMessage.create(LocalizedStrings.CacheServerImpl_FORCING_NOTIFYBYSUBSCRIPTION_TO_SUPPORT_DYNAMIC_REGIONS));
         this.notifyBySubscription = true;
       }
     }
@@ -345,7 +345,7 @@ public class CacheServerImpl
     if(cache instanceof GemFireCacheImpl) {
       ClientHealthMonitoringRegion.getInstance((GemFireCacheImpl)cache);
     }
-    this.cache.getLoggerI18n().config(LocalizedStrings.BridgeServerImpl_CACHESERVER_CONFIGURATION___0, getConfig());
+    this.cache.getLoggerI18n().config(LocalizedStrings.CacheServerImpl_CACHESERVER_CONFIGURATION___0, getConfig());
     
     /* 
      * If the stopped bridge server is restarted, we'll need to re-register the 

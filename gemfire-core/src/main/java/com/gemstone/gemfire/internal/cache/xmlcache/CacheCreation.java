@@ -698,7 +698,7 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
       Collection myBridges = this.getCacheServers();
       Collection otherBridges = other.getCacheServers();
       if (myBridges.size() != otherBridges.size()) {
-        throw new RuntimeException(LocalizedStrings.CacheCreation_BRIDGESERVERS_SIZE.toLocalizedString());
+        throw new RuntimeException(LocalizedStrings.CacheCreation_CACHESERVERS_SIZE.toLocalizedString());
       }
 
       for (Iterator myIter = myBridges.iterator(); myIter.hasNext(); ) {
@@ -715,7 +715,7 @@ public class CacheCreation implements InternalCache, Extensible<Cache> {
         }
 
         if (!found) {
-          throw new RuntimeException(LocalizedStrings.CacheCreation_BRIDGE_0_NOT_FOUND.toLocalizedString(myBridge));
+          throw new RuntimeException(LocalizedStrings.CacheCreation_CACHE_SERVER_0_NOT_FOUND.toLocalizedString(myBridge));
         }
       }
 

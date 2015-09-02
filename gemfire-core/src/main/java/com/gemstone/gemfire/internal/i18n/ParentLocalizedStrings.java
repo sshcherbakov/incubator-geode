@@ -41,13 +41,13 @@ class ParentLocalizedStrings {
   public static final StringId AbstractHealthEvaluator_POOR_HEALTH__0 = new StringIdImpl(1026, "POOR_HEALTH:  {0}");
   public static final StringId AbstractRegion_CACHECALLBACK_CLOSE_EXCEPTION = new StringIdImpl(1027, "CacheCallback close exception");
   // ok to reuse 1028
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_CONNECTION_LISTENER_BOUND_TO_ADDRESS_0_WITH_BACKLOG_1 = new StringIdImpl(1029, "Bridge server connection listener bound to address {0} with backlog {1}.");
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_FAILED_ACCEPTING_CLIENT_CONNECTION_DUE_TO_SOCKET_TIMEOUT = new StringIdImpl(1030, "Bridge server: failed accepting client connection due to socket timeout.");
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_FAILED_ACCEPTING_CLIENT_CONNECTION__0 = new StringIdImpl(1031, "Bridge server: failed accepting client connection  {0}");
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_ON_PORT_0_IS_SHUTTING_DOWN = new StringIdImpl(1032, "Bridge server on port {0} is shutting down.");
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_TIMED_OUT_WAITING_FOR_HANDSHAKE_FROM__0 = new StringIdImpl(1033, "Bridge server: timed out waiting for handshake from  {0}");
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_UNEXPECTED_EXCEPTION = new StringIdImpl(1034, "Bridge server: Unexpected Exception");
-  public static final StringId AcceptorImpl_BRIDGE_SERVER_UNEXPECTED_IOEXCEPTION_FROM_ACCEPT = new StringIdImpl(1035, "Bridge server: Unexpected IOException from accept");
+  public static final StringId AcceptorImpl_CACHE_SERVER_CONNECTION_LISTENER_BOUND_TO_ADDRESS_0_WITH_BACKLOG_1 = new StringIdImpl(1029, "Cache server connection listener bound to address {0} with backlog {1}.");
+  public static final StringId AcceptorImpl_CACHE_SERVER_FAILED_ACCEPTING_CLIENT_CONNECTION_DUE_TO_SOCKET_TIMEOUT = new StringIdImpl(1030, "Cache server: failed accepting client connection due to socket timeout.");
+  public static final StringId AcceptorImpl_CACHE_SERVER_FAILED_ACCEPTING_CLIENT_CONNECTION__0 = new StringIdImpl(1031, "Cache server: failed accepting client connection  {0}");
+  public static final StringId AcceptorImpl_CACHE_SERVER_ON_PORT_0_IS_SHUTTING_DOWN = new StringIdImpl(1032, "Cache server on port {0} is shutting down.");
+  public static final StringId AcceptorImpl_CACHE_SERVER_TIMED_OUT_WAITING_FOR_HANDSHAKE_FROM__0 = new StringIdImpl(1033, "Cache server: timed out waiting for handshake from  {0}");
+  public static final StringId AcceptorImpl_CACHE_SERVER_UNEXPECTED_EXCEPTION = new StringIdImpl(1034, "Cache server: Unexpected Exception");
+  public static final StringId AcceptorImpl_CACHE_SERVER_UNEXPECTED_IOEXCEPTION_FROM_ACCEPT = new StringIdImpl(1035, "Cache server: Unexpected IOException from accept");
   public static final StringId AcceptorImpl_EXCEEDED_MAX_CONNECTIONS_0 = new StringIdImpl(1036, "exceeded max-connections {0}");
   public static final StringId AcceptorImpl_IGNORING = new StringIdImpl(1037, "ignoring");
   public static final StringId AcceptorImpl_IGNORING_EVENT_ON_SELECTOR_KEY__0 = new StringIdImpl(1038, "ignoring event on selector key  {0}");
@@ -133,10 +133,9 @@ class ParentLocalizedStrings {
   public static final StringId BaseCommand_SEVERE_CACHE_EXCEPTION_0 = new StringIdImpl(1118, "Severe cache exception : {0}");
   public static final StringId BaseCommand_UNEXPECTED_QUERYINVALIDEXCEPTION_WHILE_PROCESSING_QUERY_0 = new StringIdImpl(1119, "Unexpected QueryInvalidException while processing query {0}");
   // ok to reuse 1120..1121
-  public static final StringId BridgeServerImpl_CACHESERVER_CONFIGURATION___0 = new StringIdImpl(1122, "CacheServer Configuration:   {0}");
-  public static final StringId BridgeServerImpl_FORCING_NOTIFYBYSUBSCRIPTION_TO_SUPPORT_DYNAMIC_REGIONS = new StringIdImpl(1123, "Forcing notifyBySubscription to support dynamic regions");
-  public static final StringId BridgeServerImpl_STARTED__0 = new StringIdImpl(1124, "Started  {0}");
-  // ok to reuse 1126..1130
+  public static final StringId CacheServerImpl_CACHESERVER_CONFIGURATION___0 = new StringIdImpl(1122, "CacheServer Configuration:   {0}");
+  public static final StringId CacheServerImpl_FORCING_NOTIFYBYSUBSCRIPTION_TO_SUPPORT_DYNAMIC_REGIONS = new StringIdImpl(1123, "Forcing notifyBySubscription to support dynamic regions");
+  // ok to reuse 1124..1130
   public static final StringId BucketAdvisor_ATTEMPTED_TO_CLOSE_BUCKETADVISOR_THAT_IS_ALREADY_CLOSED = new StringIdImpl(1131, "Attempted to close BucketAdvisor that is already CLOSED");
   public static final StringId AgentImpl_COULD_NOT_TAIL_0_BECAUSE_1 = new StringIdImpl(1132, "Could not tail \"{0}\" because: {1}");
   public static final StringId SystemAdmin_USED_TO_SPECIFY_A_HOST_NAME_OR_IP_ADDRESS_TO_GIVE_TO_CLIENTS_SO_THEY_CAN_CONNECT_TO_A_LOCATOR = new StringIdImpl(1133, "Used to specify a host name or IP address to give to clients so they can connect to a locator.");
@@ -674,7 +673,7 @@ class ParentLocalizedStrings {
   public static final StringId IndexCreationMsg_REGION_IS_LOCALLY_DESTROYED_THROWING_REGIONDESTROYEDEXCEPTION_FOR__0 = new StringIdImpl(1673, "Region is locally destroyed, throwing RegionDestroyedException for  {0}");
   public static final StringId CqQueryImpl_FAILED_TO_STOP_THE_CQ_CQNAME_0_THE_SERVER_ENDPOINTS_ON_WHICH_THIS_CQ_WAS_REGISTERED_WERE_NOT_FOUND = new StringIdImpl(1676, "Failed to stop the cq. CqName: {0}. The server endpoints on which this cq was registered were not found.");
   public static final StringId InitialImageOperation_IGNORING_EXCEPTION_DURING_GETFROMALL = new StringIdImpl(1677, "Ignoring exception during getFromAll");
-  public static final StringId InternalBridgeMembership_DONOTIFYJOINED_HAS_NO_LISTENERS_TO_NOTIFY_FOR__0 = new StringIdImpl(1678, "doNotifyJoined has no listeners to notify for  {0}");
+  // ok to reuse 1678
   public static final StringId InternalDataSerializer_COULD_NOT_LOAD_DATASERIALIZER_CLASS_0 = new StringIdImpl(1679, "Could not load DataSerializer class: {0}");
   public static final StringId InternalDataSerializer_REGISTER_DATASERIALIZER_0_OF_CLASS_1 = new StringIdImpl(1680, "Register DataSerializer {0} of class {1}");
   public static final StringId InternalDistributedSystem_CONNECTLISTENER_THREW = new StringIdImpl(1681, "ConnectListener threw...");
@@ -914,7 +913,7 @@ class ParentLocalizedStrings {
   public static final StringId PartitionedRegion_WILL_BE_CREATING_INDEX_ON_THIS_VM_BECAUSE_OF_CREATEINDEX_MESSAGE_COMING_FROM_REMOTE_VM_WITH_THESE_SETTINGS_0 = new StringIdImpl(1909, "Will be creating index on this vm because of createIndex message coming from remote vm with these settings {0} ");
   public static final StringId PartitionedRegion_WILL_BE_REMOVING_ALL_THE_BUCKET_INDEXES = new StringIdImpl(1910, "Will be removing all the bucket indexes");
   public static final StringId PartitionedRegion_WILL_BE_REMOVING_INDEXES_ON___0__BUCKETS = new StringIdImpl(1911, "Will be removing indexes on :  {0}  buckets");
-  public static final StringId PartitionedRegion_WILL_SEND_UPDATED_PROFILE_NOW_FOR_REQUIRING_OLD_VALUE_ON_THIS_BRIDGE_SERVER = new StringIdImpl(1912, "Will send updated profile now for requiring old value on this bridge server.");
+  // ok to reuse 1912
   public static final StringId ProcessBatch_0_CAUGHT_EXCEPTION_PROCESSING_BATCH_CREATE_REQUEST_1_FOR_2_EVENTS = new StringIdImpl(1913, "{0}: Caught exception processing batch create request {1} for {2} events");
   public static final StringId ProcessBatch_0_CAUGHT_EXCEPTION_PROCESSING_BATCH_DESTROY_REQUEST_1_CONTAINING_2_EVENTS = new StringIdImpl(1914, "{0}: Caught exception processing batch destroy request {1} containing {2} events");
   public static final StringId ProcessBatch_0_CAUGHT_EXCEPTION_PROCESSING_BATCH_REQUEST_1_CONTAINING_2_EVENTS = new StringIdImpl(1915, "{0}: Caught exception processing batch request {1} containing {2} events");
@@ -989,7 +988,7 @@ class ParentLocalizedStrings {
   public static final StringId Request_THE_INPUT_REGION_NAME_FOR_THE_GET_REQUEST_IS_NULL = new StringIdImpl(1984, "The input region name for the get request is null.");
   public static final StringId RuntimeDistributionConfigImpl_STILL_USING_PREVIOUS_LICENSE_BECAUSE_A_VALID_LICENSE_WAS_NOT_FOUND_AFTER_CHANGING_THE_LICENSEFILE__0 = new StringIdImpl(1985, "Still using previous license because a valid license was not found after changing the \"license-file\".  {0}");
   public static final StringId RuntimeDistributionConfigImpl_STILL_USING_PREVIOUS_LICENSE_BECAUSE_A_VALID_LICENSE_WAS_NOT_FOUND_AFTER_CHANGING_THE_LICENSETYPE__0 = new StringIdImpl(1986, "Still using previous license because a valid license was not found after changing the \"license-type\".  {0}");
-  public static final StringId LocalRegion_UNHANDLED_EXCEPTION_CAUGHT_WHILE_PROCESSING_BRIDGE_FILTERS = new StringIdImpl(1987, "Unhandled exception caught while processing bridge filters");
+  // ok to reuse 1987
   public static final StringId ServerConnection_0_HANDSHAKE_ACCEPT_FAILED_ON_SOCKET_1_2 = new StringIdImpl(1988, "{0}: Handshake accept failed on socket {1}: {2}");
   public static final StringId ServerConnection_0_HANDSHAKE_REPLY_CODE_TIMEOUT_NOT_RECEIVED_WITH_IN_1_MS = new StringIdImpl(1989, "{0}: Handshake reply code timeout, not received with in {1} ms");
   public static final StringId ServerConnection_0_RECEIVED_NO_HANDSHAKE_REPLY_CODE = new StringIdImpl(1990, "{0}: Received no handshake reply code");
@@ -1037,7 +1036,7 @@ class ParentLocalizedStrings {
   public static final StringId RemoteMessage_REGION_0_NOT_COLOCATED_WITH_TRANSACTION = new StringIdImpl(2026, "Region {0} not colocated with other regions in transaction");
   public static final StringId ServerConnection_BATCH_IDS_ARE_OUT_OF_ORDER_SETTING_LATESTBATCHID_TO_0_IT_WAS_1 = new StringIdImpl(2027, "Batch IDs are out of order. Setting latestBatchId to:{0}. It was:{1}");
   public static final StringId DistributionManager_Cache_Time_Offset_Skew_Warning = new StringIdImpl(2028, "New cache time offset calculated is off more than {0} ms from earlier offset.");
-  public static final StringId ServerConnection_LICENSE_DETAILS_CURRENT_BRIDGE_CONNECTIONS_SIZE_0_VALUES_1 = new StringIdImpl(2029, "License details: current bridge connections (size {0}) values = {1}");
+  // ok to reuse 2029
   public static final StringId CacheXmlParser_UNKNOWN_INDEX_TYPE = new StringIdImpl(2030, "Unknown index type defined as {0}, will be set to range index");
   public static final StringId TXStateStub_LOCAL_DESTROY_NOT_ALLOWED_IN_TRANSACTION = new StringIdImpl(2031, "localDestroy() is not allowed in a transaction");
   public static final StringId TXStateStub_LOCAL_INVALIDATE_NOT_ALLOWED_IN_TRANSACTION = new StringIdImpl(2032, "localInvalidate() is not allowed in a transaction");
@@ -1286,7 +1285,7 @@ class ParentLocalizedStrings {
   public static final StringId BaseRecordManager_NAME_DIRECTORY_MUST_EXIST = new StringIdImpl(2270, "Name directory must exist");
   public static final StringId BaseRecordManager_RECORDMANAGER_HAS_BEEN_CLOSED = new StringIdImpl(2271, "RecordManager has been closed");
   // ok to reuse 2272..2274
-  public static final StringId BridgeServerImpl_A_BRIDGE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING = new StringIdImpl(2275, "A bridge server''s configuration cannot be changed once it is running.");
+  public static final StringId CacheServerImpl_A_CACHE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING = new StringIdImpl(2275, "A cache server''s configuration cannot be changed once it is running.");
   // ok to reuse 2276..2284
   public static final StringId BucketAdvisor_CANNOT_CHANGE_FROM_0_TO_1 = new StringIdImpl(2285, "Cannot change from  {0}  to  {1}");
   public static final StringId BucketRegion_THIS_SHOULD_NEVER_BE_CALLED_ON_0 = new StringIdImpl(2286, "This should never be called on  {0}");
@@ -1306,8 +1305,8 @@ class ParentLocalizedStrings {
   public static final StringId CacheCollector_UNABLE_TO_MIX_REGION_AND_ENTRY_SNAPSHOTS_IN_CACHECOLLECTOR = new StringIdImpl(2300, "Unable to mix region and entry snapshots in CacheCollector.");
   public static final StringId CacheCreation_ATTRIBUTES_FOR_0_DO_NOT_MATCH = new StringIdImpl(2301, "Attributes for  {0}  do not match");
   //ok to reuse 2302,2303
-  public static final StringId CacheCreation_BRIDGESERVERS_SIZE = new StringIdImpl(2304, "bridgeServers size");
-  public static final StringId CacheCreation_BRIDGE_0_NOT_FOUND = new StringIdImpl(2305, "bridge  {0}  not found");
+  public static final StringId CacheCreation_CACHESERVERS_SIZE = new StringIdImpl(2304, "cacheServers size");
+  public static final StringId CacheCreation_CACHE_SERVER_0_NOT_FOUND = new StringIdImpl(2305, "cache server {0} not found");
   public static final StringId CacheCreation_NAMEDATTRIBUTES_SIZE = new StringIdImpl(2306, "namedAttributes size");
   public static final StringId CacheCreation_NO_ATTRIBUTES_FOR_0 = new StringIdImpl(2307, "No attributes for  {0}");
   public static final StringId CacheCreation_NO_ROOT_0 = new StringIdImpl(2308, "no root  {0}");
@@ -1671,7 +1670,7 @@ class ParentLocalizedStrings {
   public static final StringId GatewayHubCreation_NOT_SUPPORTED = new StringIdImpl(2669, "Not supported");
   public static final StringId GatewayHubCreation_REMOVEGATEWAY_IS_NOT_SUPPORTED = new StringIdImpl(2670, "removeGateway is not supported");
   public static final StringId GatewayHubImpl_AN_UNKNOWN_GATEWAY_HUB_POLICY_0_WAS_SPECIFIED_IT_MUST_BE_ONE_OF_1_2_3 = new StringIdImpl(2671, "An unknown gateway hub policy ( {0} ) was specified. It must be one of < {1}   {2}   {3} >.");
-  public static final StringId GatewayHubImpl_A_BRIDGE_SERVERS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING = new StringIdImpl(2672, "A bridge server''s configuration cannot be changed once it is running.");
+  // ok to reuse 2672
   public static final StringId GatewayHubImpl_GATEWAYHUB_0_ALREADY_DEFINES_A_GATEWAY_WITH_ID_1 = new StringIdImpl(2673, "GatewayHub  {0}  already defines a Gateway with id= {1}");
   public static final StringId GatewayHubImpl_GATEWAYHUB_0_DOES_NOT_CONTAIN_A_GATEWAY_WITH_ID_1 = new StringIdImpl(2674, "GatewayHub  {0}  does not contain a Gateway with id= {1}");
   public static final StringId GatewayImpl_A_GATEWAYS_CONFIGURATION_CANNOT_BE_CHANGED_ONCE_IT_IS_RUNNING = new StringIdImpl(2675, "A Gateway''s configuration cannot be changed once it is running.");
