@@ -28,9 +28,9 @@ import dunit.VM;
  * @author Kirk Lund
  * @since 4.2.3
  */
-public class BridgeWriterDUnitTest extends ClientServerTestCase {
+public class ClientRegisterInterestDUnitTest extends ClientServerTestCase {
 
-  public BridgeWriterDUnitTest(String name) {
+  public ClientRegisterInterestDUnitTest(String name) {
     super(name);
   }
   
@@ -75,7 +75,7 @@ public class BridgeWriterDUnitTest extends ClientServerTestCase {
         getLogWriter().info("[testBug35381] serverMemberId=" + getMemberId());
       }
     });
-    ports[whichVM] = vm.invokeInt(BridgeWriterDUnitTest.class, 
+    ports[whichVM] = vm.invokeInt(ClientRegisterInterestDUnitTest.class, 
                                   "getBridgeServerPort");
     assertTrue(ports[whichVM] != 0);
     
@@ -198,10 +198,10 @@ public class BridgeWriterDUnitTest extends ClientServerTestCase {
 
     // get the bridge server ports...
     ports[firstServerIdx] = firstServerVM.invokeInt(
-      BridgeWriterDUnitTest.class, "getBridgeServerPort");
+      ClientRegisterInterestDUnitTest.class, "getBridgeServerPort");
     assertTrue(ports[firstServerIdx] != 0);
     ports[secondServerIdx] = secondServerVM.invokeInt(
-      BridgeWriterDUnitTest.class, "getBridgeServerPort");
+      ClientRegisterInterestDUnitTest.class, "getBridgeServerPort");
     assertTrue(ports[secondServerIdx] != 0);
     assertTrue(ports[firstServerIdx] != ports[secondServerIdx]);
     
