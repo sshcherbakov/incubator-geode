@@ -663,9 +663,9 @@ import java.util.*;
           factory.setOffHeap(true);
         }
         if (expectCallback) {
-          factory.setCacheLoader(new CallbackBridgeServerCacheLoader());
+          factory.setCacheLoader(new CallbackCacheServerCacheLoader());
         } else {
-          factory.setCacheLoader(new BridgeServerCacheLoader());
+          factory.setCacheLoader(new CacheServerCacheLoader());
         }
         if (createPR) {
           factory.setDataPolicy(DataPolicy.PARTITION);
@@ -694,7 +694,7 @@ import java.util.*;
   
   private static final String CALLBACK_ARG = "ClientServerGetAllDUnitTestCB";
 
-  private static class CallbackBridgeServerCacheLoader extends BridgeServerCacheLoader {
+  private static class CallbackCacheServerCacheLoader extends CacheServerCacheLoader {
     @Override
     public Object load2(LoaderHelper helper) {
       if (helper.getArgument() instanceof String) {

@@ -305,20 +305,9 @@ public class ClientServerTestCase extends CacheTestCase {
     return system.getProperties();
   }
 
-  /**
-   * Create a bridgeserver that has a value for every key queried and a unique
-   * key/value in the specified Region that uniquely identifies each instance.
-   *
-   * @param vm
-   *          the VM on which to create the BridgeServer
-   * @param rName
-   *          the name of the Region to create on the BridgeServerf
-   * @param port
-   *          the TCP port on which the BridgeServer should listen
-   */
-  public static class BridgeServerCacheLoader extends TestCacheLoader implements Declarable {
+  public static class CacheServerCacheLoader extends TestCacheLoader implements Declarable {
 
-    public BridgeServerCacheLoader() {}
+    public CacheServerCacheLoader() {}
 
     @Override
     public Object load2(LoaderHelper helper) {
@@ -343,6 +332,17 @@ public class ClientServerTestCase extends CacheTestCase {
   }
 
   public final static String BridgeServerKey = "BridgeServerKey";
+  /**
+   * Create a server that has a value for every key queried and a unique
+   * key/value in the specified Region that uniquely identifies each instance.
+   *
+   * @param vm
+   *          the VM on which to create the server
+   * @param rName
+   *          the name of the Region to create on the server
+   * @param port
+   *          the TCP port on which the server should listen
+   */
   public void createBridgeServer(VM vm, final String rName, final int port) {
     vm.invoke(new CacheSerializableRunnable("Create Region on Server") {
     @Override
@@ -350,7 +350,7 @@ public class ClientServerTestCase extends CacheTestCase {
       try {
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.DISTRIBUTED_ACK); // can't be local since used with registerInterest
-        factory.setCacheLoader(new BridgeServerCacheLoader());
+        factory.setCacheLoader(new CacheServerCacheLoader());
         beginCacheXml();
         createRootRegion(rName, factory.create());
         startBridgeServer(port);

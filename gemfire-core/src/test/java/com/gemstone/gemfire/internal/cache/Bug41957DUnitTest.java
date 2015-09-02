@@ -79,7 +79,7 @@ import java.util.*;
 
         // Create Region
         AttributesFactory factory = new AttributesFactory();
-        factory.setCacheLoader(new BridgeServerCacheLoader());
+        factory.setCacheLoader(new CacheServerCacheLoader());
         if (createPR) {
           factory.setDataPolicy(DataPolicy.PARTITION);
           factory.setPartitionAttributes((new PartitionAttributesFactory()).create());
