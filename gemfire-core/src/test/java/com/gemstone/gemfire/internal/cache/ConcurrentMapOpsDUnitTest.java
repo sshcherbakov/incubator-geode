@@ -47,7 +47,7 @@ import dunit.SerializableRunnable;
 import dunit.VM;
 
 /**
- * tests for the concurrentMapOperations. there are more tests in BridgeWriterMiscDUnitTest
+ * tests for the concurrentMapOperations. there are more tests in ClientServerMiscDUnitTest
  * @author sbawaska
  *
  */

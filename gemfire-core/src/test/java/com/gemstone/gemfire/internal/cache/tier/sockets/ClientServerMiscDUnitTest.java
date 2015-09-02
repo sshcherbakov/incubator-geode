@@ -51,7 +51,7 @@ import junit.framework.AssertionFailedError;
  * @author Yogesh Mahajan
  *
  */
-public class BridgeWriterMiscDUnitTest extends CacheTestCase
+public class ClientServerMiscDUnitTest extends CacheTestCase
 {
 //  private static Cache cache = null;
 
@@ -71,11 +71,11 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
 
   private static final String server_k2 = "server-k2";
 
-  private static final String REGION_NAME1 = "BridgeWriterMiscDUnitTest_region1";
+  private static final String REGION_NAME1 = "ClientServerMiscDUnitTest_region1";
 
-  private static final String REGION_NAME2 = "BridgeWriterMiscDUnitTest_region2";
+  private static final String REGION_NAME2 = "ClientServerMiscDUnitTest_region2";
 
-  private static final String PR_REGION_NAME = "BridgeWriterMiscDUnitTest_PRregion";
+  private static final String PR_REGION_NAME = "ClientServerMiscDUnitTest_PRregion";
 
   private static Host host;
 
@@ -104,7 +104,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   
   
   /** constructor */
-  public BridgeWriterMiscDUnitTest(String name) {
+  public ClientServerMiscDUnitTest(String name) {
     super(name);
   }
 
@@ -118,14 +118,14 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
 
   private int initServerCache(boolean notifyBySub) {
     Object[] args = new Object[] { notifyBySub, getMaxThreads()};
-    return ((Integer)server1.invoke(BridgeWriterMiscDUnitTest.class,
+    return ((Integer)server1.invoke(ClientServerMiscDUnitTest.class,
                                     "createServerCache",
                                     args)).intValue();
   }
   
   private int initServerCache2(boolean notifyBySub) {
     Object[] args = new Object[] {notifyBySub, getMaxThreads()};
-    return ((Integer)server2.invoke(BridgeWriterMiscDUnitTest.class,
+    return ((Integer)server2.invoke(ClientServerMiscDUnitTest.class,
                                     "createServerCache",
                                     args)).intValue();
   }
@@ -369,7 +369,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     createClientCache(getServerHostName(Host.getHost(0)), PORT1);
     populateCache();
     registerInterest();
-    server1.invoke(BridgeWriterMiscDUnitTest.class, "put");
+    server1.invoke(ClientServerMiscDUnitTest.class, "put");
 
 //    pause(5000 + 5000 + 10000);
     /*final int maxWaitTime = Integer.getInteger(WAIT_PROPERTY, WAIT_DEFAULT).intValue();
@@ -404,9 +404,9 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     registerInterestInBothTheRegions();
     closeRegion1();
     pause(6000);
-    server1.invoke(BridgeWriterMiscDUnitTest.class,
+    server1.invoke(ClientServerMiscDUnitTest.class,
         "verifyInterestListOnServer");
-    server1.invoke(BridgeWriterMiscDUnitTest.class, "put");
+    server1.invoke(ClientServerMiscDUnitTest.class, "put");
     //pause(5000);
     verifyUpdatesOnRegion2();
   }
@@ -430,7 +430,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     assertEquals(false, pool.isDestroyed());
     pool.destroy();
     assertEquals(true, pool.isDestroyed());
-    server1.invoke(BridgeWriterMiscDUnitTest.class,
+    server1.invoke(ClientServerMiscDUnitTest.class,
         "verifyNoCacheClientProxyOnServer");
 
   }
@@ -452,7 +452,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     PoolImpl pool = (PoolImpl)createClientCache(getServerHostName(Host.getHost(0)),PORT1);
     destroyRegion1();
     // pause(5000);
-    server1.invoke(BridgeWriterMiscDUnitTest.class,
+    server1.invoke(ClientServerMiscDUnitTest.class,
         "verifyCacheClientProxyOnServer", new Object[] { new String(
             REGION_NAME1) });
     Connection conn = pool.acquireConnection();
@@ -466,7 +466,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     pool.destroy();
     assertEquals(true, pool.isDestroyed());
     // pause(5000);
-    server1.invoke(BridgeWriterMiscDUnitTest.class,
+    server1.invoke(ClientServerMiscDUnitTest.class,
         "verifyNoCacheClientProxyOnServer");
     try {
       getCache().createRegion(REGION_NAME2, attrs);
@@ -489,7 +489,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     createClientCache(getServerHostName(Host.getHost(0)), PORT1);
     registerInterestForInvalidatesInBothTheRegions();
     populateCache();
-    server1.invoke(BridgeWriterMiscDUnitTest.class, "put");
+    server1.invoke(ClientServerMiscDUnitTest.class, "put");
     //pause(5000);
     verifyInvalidatesOnBothRegions();
 
@@ -552,7 +552,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     Properties props = new Properties();
     props.setProperty(DistributionConfig.MCAST_PORT_NAME, "0");
     props.setProperty(DistributionConfig.LOCATORS_NAME, "");
-    new BridgeWriterMiscDUnitTest("temp").createCache(props);
+    new ClientServerMiscDUnitTest("temp").createCache(props);
     String host = getServerHostName(server1.getHost());
     PoolImpl p = (PoolImpl)PoolManager.createFactory()
       .addServer(host, PORT1)
@@ -581,7 +581,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     assertNotNull(conn);
 
     populateCache();
-    server1.invoke(BridgeWriterMiscDUnitTest.class, "put");
+    server1.invoke(ClientServerMiscDUnitTest.class, "put");
     // pause(5000);
     WaitCriterion wc = new WaitCriterion() {
       String excuse;
@@ -679,7 +679,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     //region1.registerInterest(CacheClientProxy.ALL_KEYS);
     region2.registerInterest("ALL_KEYS");
     pause(6000);
-    server1.invoke(BridgeWriterMiscDUnitTest.class,
+    server1.invoke(ClientServerMiscDUnitTest.class,
         "verifyInterestListOnServer");
 
   }
@@ -787,8 +787,8 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     Properties props = new Properties();
     props.setProperty("mcast-port", "0");
     props.setProperty("locators", "");
-    Cache cache = new BridgeWriterMiscDUnitTest("temp").createCacheV(props);
-    BridgeWriterMiscDUnitTest.static_cache = cache;
+    Cache cache = new ClientServerMiscDUnitTest("temp").createCacheV(props);
+    ClientServerMiscDUnitTest.static_cache = cache;
     PoolImpl p = (PoolImpl)PoolManager.createFactory()
       .addServer(h, port)
       .setSubscriptionEnabled(true)
@@ -800,7 +800,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
       .setPingInterval(2000)
       // .setRetryAttempts(5)
       // .setRetryInterval(2000)
-      .create("BridgeWriterMiscDUnitTestPool");
+      .create("ClientServerMiscDUnitTestPool");
 
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
@@ -846,7 +846,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
 
   public static Integer createServerCache(Boolean notifyBySubscription, Integer maxThreads)
   throws Exception {
-    Cache cache = new BridgeWriterMiscDUnitTest("temp").createCacheV(new Properties());
+    Cache cache = new ClientServerMiscDUnitTest("temp").createCacheV(new Properties());
     unsetSlowDispatcherFlag();
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
@@ -882,7 +882,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void registerInterest()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r);
       //r.registerInterestRegex(CacheClientProxy.ALL_KEYS);
@@ -897,7 +897,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void registerInterestForInvalidatesInBothTheRegions()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       assertNotNull(r1);
       Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
@@ -916,7 +916,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void registerInterestInBothTheRegions()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       assertNotNull(r1);
       Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
@@ -935,7 +935,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void closeRegion1()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       assertNotNull(r1);
       r1.close();
@@ -949,7 +949,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void closeBothRegions()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       Region pr = cache.getRegion(Region.SEPARATOR + PR_REGION_NAME);
@@ -969,7 +969,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void destroyRegion1()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       assertNotNull(r1);
       r1.destroyRegion();
@@ -983,7 +983,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void destroyRegion2()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r2);
       r2.destroyRegion();
@@ -996,7 +996,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
 
   public static void destroyPRRegion()  {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r2 = cache.getRegion(Region.SEPARATOR + PR_REGION_NAME);
       assertNotNull(r2);
       r2.destroyRegion();
@@ -1009,7 +1009,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyInterestListOnServer()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
       CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
@@ -1039,7 +1039,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyNoCacheClientProxyOnServer()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
       CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
@@ -1069,7 +1069,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyCacheClientProxyOnServer(String regionName)
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       assertNull(cache.getRegion(Region.SEPARATOR + regionName));
        verifyCacheClientProxyOnServer();
 
@@ -1084,7 +1084,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyCacheClientProxyOnServer()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       assertEquals("More than one BridgeServer", 1, cache.getCacheServers()
           .size());
       CacheServerImpl bs = (CacheServerImpl)cache.getCacheServers()
@@ -1114,7 +1114,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void populateCache()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r1);
@@ -1142,7 +1142,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void put()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r1);
@@ -1167,7 +1167,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyUpdates()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       final Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       final Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r1);
@@ -1234,7 +1234,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyInvalidatesOnBothRegions()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       final Region r1 = cache.getRegion(Region.SEPARATOR + REGION_NAME1);
       final Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r1);
@@ -1313,7 +1313,7 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
   public static void verifyUpdatesOnRegion2()
   {
     try {
-      Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+      Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
       final Region r2 = cache.getRegion(Region.SEPARATOR + REGION_NAME2);
       assertNotNull(r2);
       WaitCriterion wc = new WaitCriterion() {
@@ -1354,13 +1354,13 @@ public class BridgeWriterMiscDUnitTest extends CacheTestCase
     // close the clients first
     closeCache();
     // then close the servers
-    server1.invoke(BridgeWriterMiscDUnitTest.class, "closeCache");
+    server1.invoke(ClientServerMiscDUnitTest.class, "closeCache");
 
   }
 
   public static void closeCache()
   {
-    Cache cache = new BridgeWriterMiscDUnitTest("temp").getCache();
+    Cache cache = new ClientServerMiscDUnitTest("temp").getCache();
     if (cache != null && !cache.isClosed()) {
       cache.close();
       cache.getDistributedSystem().disconnect();
