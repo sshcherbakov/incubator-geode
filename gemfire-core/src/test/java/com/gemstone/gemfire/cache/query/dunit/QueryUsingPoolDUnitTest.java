@@ -33,7 +33,7 @@ import com.gemstone.gemfire.cache.query.internal.QueryObserverAdapter;
 import com.gemstone.gemfire.cache.query.internal.QueryObserverHolder;
 import com.gemstone.gemfire.cache.query.types.ObjectType;
 import com.gemstone.gemfire.cache.server.CacheServer;
-import com.gemstone.gemfire.cache30.BridgeTestCase;
+import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache30.CacheTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
@@ -575,7 +575,7 @@ public class QueryUsingPoolDUnitTest extends CacheTestCase {
         getCache();
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.LOCAL);
-        BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+        ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
         createRegion(name, factory.create());
       }
     });

@@ -28,7 +28,7 @@ import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
 import com.gemstone.gemfire.cache.client.internal.QueueStateImpl.SequenceIdAndExpirationObject;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
-import com.gemstone.gemfire.cache30.BridgeTestCase;
+import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.internal.AvailablePort;
@@ -160,7 +160,7 @@ public class HAEventIdPropagationDUnitTest extends DistributedTestCase
     props.setProperty("locators", "");
     new HAEventIdPropagationDUnitTest("temp").createCache(props);
     AttributesFactory factory = new AttributesFactory();
-    PoolImpl pi = (PoolImpl)BridgeTestCase.configureConnectionPool(factory, hostName, new int[] {PORT1}, true, -1, 2, null);
+    PoolImpl pi = (PoolImpl)ClientServerTestCase.configureConnectionPool(factory, hostName, new int[] {PORT1}, true, -1, 2, null);
     factory.setScope(Scope.DISTRIBUTED_ACK);
     CacheListener clientListener = new HAEventIdPropagationListenerForClient();
     factory.setCacheListener(clientListener);

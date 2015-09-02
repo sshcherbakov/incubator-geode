@@ -29,7 +29,7 @@ import com.gemstone.gemfire.cache.RegionAttributes;
 import com.gemstone.gemfire.cache.Scope;
 import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
-import com.gemstone.gemfire.cache30.BridgeTestCase;
+import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
@@ -205,7 +205,7 @@ public class HARQueueNewImplDUnitTest extends DistributedTestCase {
     props.setProperty(DistributionConfig.LOCATORS_NAME, "");
     new HARQueueNewImplDUnitTest("temp").createCache(props);
     AttributesFactory factory = new AttributesFactory();
-    BridgeTestCase.configureConnectionPool(factory, host, port1
+    ClientServerTestCase.configureConnectionPool(factory, host, port1
         .intValue(), port2.intValue(), true, Integer.parseInt(rLevel), 2, null,
         1000, 250, false);
 

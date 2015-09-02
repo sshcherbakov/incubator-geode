@@ -30,14 +30,14 @@ import com.gemstone.gemfire.internal.AvailablePortHelper;
 import dunit.VM;
 
 /**
- * Provides helper methods for testing BridgeServers and bridge clients. This
+ * Provides helper methods for testing clients and servers. This
  * test case was created by refactoring methods from ConnectionPoolDUnitTest into
  * this class.
  *
  * @author Kirk Lund
  * @since 4.2.1
  */
-public class BridgeTestCase extends CacheTestCase {
+public class ClientServerTestCase extends CacheTestCase {
   
   public static String NON_EXISTENT_KEY = "NON_EXISTENT_KEY";
   
@@ -56,7 +56,7 @@ public class BridgeTestCase extends CacheTestCase {
     disconnectAllFromDS();
   }
 
-  public BridgeTestCase(String name) {
+  public ClientServerTestCase(String name) {
     super(name);
   }
 

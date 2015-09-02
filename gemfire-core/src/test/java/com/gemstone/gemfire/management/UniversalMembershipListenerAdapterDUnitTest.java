@@ -23,7 +23,7 @@ import com.gemstone.gemfire.cache.Scope;
 import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.client.ServerConnectivityException;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
-import com.gemstone.gemfire.cache30.BridgeTestCase;
+import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.distributed.DistributedMember;
 import com.gemstone.gemfire.distributed.DurableClientAttributes;
@@ -52,7 +52,7 @@ import dunit.VM;
  * @since 4.2.1
  */
 
-public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase {
+public class UniversalMembershipListenerAdapterDUnitTest extends ClientServerTestCase {
   protected static final boolean CLIENT = true;
   protected static final boolean SERVER = false;
   
@@ -410,7 +410,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
         getSystem(config);
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.LOCAL);
-        BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, false, -1, -1, null);
+        ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, false, -1, -1, null);
         createRegion(name, factory.create());
         assertNotNull(getRootRegion().getSubregion(name));
       }
@@ -870,7 +870,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
         assertFalse(getCache().isClosed());
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.LOCAL);
-        BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, false, -1, -1, null);
+        ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, false, -1, -1, null);
         createRegion(name, factory.create());
         assertNotNull(getRootRegion().getSubregion(name));
       }
@@ -1880,7 +1880,7 @@ public class UniversalMembershipListenerAdapterDUnitTest extends BridgeTestCase 
     // create region which connects to bridge server
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
-    BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, false, -1, -1, null);
+    ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, false, -1, -1, null);
     createRegion(name, factory.create());
     assertNotNull(getRootRegion().getSubregion(name));
 

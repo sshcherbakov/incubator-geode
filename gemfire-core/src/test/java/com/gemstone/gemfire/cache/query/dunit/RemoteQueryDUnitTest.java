@@ -14,7 +14,7 @@ import com.gemstone.gemfire.cache.client.PoolManager;
 import com.gemstone.gemfire.cache.query.*;
 import com.gemstone.gemfire.cache.query.internal.*;
 import com.gemstone.gemfire.cache.server.CacheServer;
-import com.gemstone.gemfire.cache30.BridgeTestCase;
+import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 import com.gemstone.gemfire.cache30.CacheTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
@@ -117,7 +117,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
           getCache();
           AttributesFactory factory = new AttributesFactory();
           factory.setScope(Scope.LOCAL);
-          BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+          ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
           createRegion(name, factory.create());
         }
       });
@@ -262,7 +262,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
           AttributesFactory factory = new AttributesFactory();
           factory.setScope(Scope.LOCAL);
           
-          BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+          ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
           createRegion(name, factory.create());
         }
       });
@@ -390,7 +390,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
           getCache();
           AttributesFactory factory = new AttributesFactory();
           factory.setScope(Scope.LOCAL);
-          BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+          ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
           createRegion(name, factory.create());
         }
       });
@@ -624,7 +624,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
           getCache();
           AttributesFactory factory = new AttributesFactory();
           factory.setScope(Scope.LOCAL);
-          BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+          ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
           createRegion(name, factory.create());
         }
       });
@@ -712,7 +712,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
           getCache();
           AttributesFactory factory = new AttributesFactory();
           factory.setScope(Scope.LOCAL);
-          BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+          ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
           createRegion(name, factory.create());
         }
       });
@@ -883,7 +883,7 @@ public class RemoteQueryDUnitTest extends CacheTestCase {
           getCache();
           AttributesFactory factory = new AttributesFactory();
           factory.setScope(Scope.LOCAL);
-          BridgeTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
+          ClientServerTestCase.configureConnectionPool(factory, host0, port,-1, true, -1, -1, null);
           createRegion(name+"1", factory.create());
           createRegion(name+"2", factory.create());
         }

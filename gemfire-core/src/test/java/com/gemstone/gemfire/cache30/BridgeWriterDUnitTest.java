@@ -28,7 +28,7 @@ import dunit.VM;
  * @author Kirk Lund
  * @since 4.2.3
  */
-public class BridgeWriterDUnitTest extends BridgeTestCase {
+public class BridgeWriterDUnitTest extends ClientServerTestCase {
 
   public BridgeWriterDUnitTest(String name) {
     super(name);
@@ -91,7 +91,7 @@ public class BridgeWriterDUnitTest extends BridgeTestCase {
 
     getLogWriter().info("[testBug35381] creating connection pool");
     boolean establishCallbackConnection = false; // SOURCE OF BUG 35381
-    BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, establishCallbackConnection, -1, -1, null);
+    ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, establishCallbackConnection, -1, -1, null);
     Region region = createRegion(name, factory.create());
     assertNotNull(getRootRegion().getSubregion(name));
     try {
@@ -225,7 +225,7 @@ public class BridgeWriterDUnitTest extends BridgeTestCase {
 
     getLogWriter().info("[testRegisterInterestFailover] creating connection pool");
     boolean establishCallbackConnection = true;
-    final PoolImpl p = (PoolImpl)BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, establishCallbackConnection, -1, -1, null);
+    final PoolImpl p = (PoolImpl)ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, establishCallbackConnection, -1, -1, null);
 
     final Region region1 = createRootRegion(regionName1, factory.create());
     final Region region2 = createRootRegion(regionName2, factory.create());

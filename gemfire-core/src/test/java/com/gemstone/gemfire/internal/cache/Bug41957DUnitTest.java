@@ -12,7 +12,7 @@ import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.cache.PartitionedRegion;
 
-import com.gemstone.gemfire.cache30.BridgeTestCase;
+import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.cache30.CacheSerializableRunnable;
 
 import com.gemstone.gemfire.cache.client.*;
@@ -30,7 +30,7 @@ import java.util.*;
  * @author darrel
  * @since 6.5
  */
- public class Bug41957DUnitTest extends BridgeTestCase {
+ public class Bug41957DUnitTest extends ClientServerTestCase {
 
   public Bug41957DUnitTest(String name) {
     super(name);

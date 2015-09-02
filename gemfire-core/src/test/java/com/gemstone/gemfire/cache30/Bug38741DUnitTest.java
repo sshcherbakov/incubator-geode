@@ -51,7 +51,7 @@ import dunit.VM;
  * @author Mitch Thomas
  * @since bugfix5.7
  */
-public class Bug38741DUnitTest extends BridgeTestCase {
+public class Bug38741DUnitTest extends ClientServerTestCase {
   private static final long serialVersionUID = 1L;
 
   protected RegionAttributes getRegionAttributes() {
@@ -151,7 +151,7 @@ public class Bug38741DUnitTest extends BridgeTestCase {
         getCache();
         
         AttributesFactory factory = new AttributesFactory();
-        BridgeTestCase.configureConnectionPool(factory, serverHostName, ports, true,-1,1,null);
+        ClientServerTestCase.configureConnectionPool(factory, serverHostName, ports, true,-1,1,null);
         factory.setScope(Scope.LOCAL);
         Region r = createRootRegion(rName, factory.create());
         SerializationCountingKey ks1 = new SerializationCountingKey(k1);

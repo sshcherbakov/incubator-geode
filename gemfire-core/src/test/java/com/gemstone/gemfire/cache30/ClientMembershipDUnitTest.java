@@ -57,7 +57,7 @@ import dunit.DistributedTestCase.WaitCriterion;
  * @author Kirk Lund
  * @since 4.2.1
  */
-public class ClientMembershipDUnitTest extends BridgeTestCase {
+public class ClientMembershipDUnitTest extends ClientServerTestCase {
 
   protected static final boolean CLIENT = true;
   protected static final boolean SERVER = false;
@@ -836,7 +836,7 @@ public class ClientMembershipDUnitTest extends BridgeTestCase {
       getCache();
       AttributesFactory factory = new AttributesFactory();
       factory.setScope(Scope.LOCAL);
-      BridgeTestCase.configureConnectionPool(factory, getServerHostName(Host.getHost(0)), ports, true, -1, -1, null);
+      ClientServerTestCase.configureConnectionPool(factory, getServerHostName(Host.getHost(0)), ports, true, -1, -1, null);
       createRegion(name, factory.create());
       assertNotNull(getRootRegion().getSubregion(name));
     }
@@ -1070,7 +1070,7 @@ public class ClientMembershipDUnitTest extends BridgeTestCase {
         getSystem(config);
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.LOCAL);
-        BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, true, -1, 2, null);
+        ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, true, -1, 2, null);
         createRegion(name, factory.create());
         assertNotNull(getRootRegion().getSubregion(name));
       }
@@ -1338,7 +1338,7 @@ public class ClientMembershipDUnitTest extends BridgeTestCase {
         getSystem(config);
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.LOCAL);
-        BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, true, -1, -1, null);
+        ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, true, -1, -1, null);
         createRegion(name, factory.create());
         assertNotNull(getRootRegion().getSubregion(name));
       }
@@ -1446,7 +1446,7 @@ public class ClientMembershipDUnitTest extends BridgeTestCase {
       getLogWriter().info("[testGetConnectedServers] creating connectionpool for " + 
         getServerHostName(host) + " " + ports[i]);
       int[] thisServerPorts = new int[] { ports[i] };
-      BridgeTestCase.configureConnectionPoolWithName(factory, getServerHostName(host), thisServerPorts, false, -1, -1, null,"pooly"+i);
+      ClientServerTestCase.configureConnectionPoolWithName(factory, getServerHostName(host), thisServerPorts, false, -1, -1, null,"pooly"+i);
       Region region = createRegion(name+"_"+i, factory.create());
       assertNotNull(getRootRegion().getSubregion(name+"_"+i));
       region.get("KEY-1");
@@ -1550,7 +1550,7 @@ public class ClientMembershipDUnitTest extends BridgeTestCase {
     factory.setScope(Scope.LOCAL);
 
     getLogWriter().info("[testGetNotifiedClients] creating connection pool");
-    BridgeTestCase.configureConnectionPool(factory, getServerHostName(host), ports, true, -1, -1, null);
+    ClientServerTestCase.configureConnectionPool(factory, getServerHostName(host), ports, true, -1, -1, null);
     Region region = createRegion(name, factory.create());
     assertNotNull(getRootRegion().getSubregion(name));
     region.registerInterest("KEY-1");
