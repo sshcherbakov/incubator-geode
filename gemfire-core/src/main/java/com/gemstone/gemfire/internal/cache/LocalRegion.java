@@ -3982,22 +3982,6 @@ public class LocalRegion extends AbstractRegion
     reinitialize(inputStream, event);
   }
 
-//   public void createRegionOnServer() throws CacheWriterException
-//   {
-//     if (basicGetWriter() instanceof BridgeWriter) {
-//       if (getParentRegion() != null) {
-//         BridgeWriter bw = (BridgeWriter)basicGetWriter();
-//         bw.createRegionOnServer(getParentRegion().getFullPath(), getName());
-//       }
-//       else {
-//        throw new CacheWriterException(LocalizedStrings.LocalRegion_REGION_0_IS_A_ROOT_REGION_ONLY_NONROOT_REGIONS_CAN_BE_CREATED_ON_THE_SERVER.toLocalizedString(getFullPath()));
-//       }
-//     }
-//     else {
-//      throw new CacheWriterException(LocalizedStrings.LocalRegion_SERVER_REGION_CREATION_IS_ONLY_SUPPORTED_ON_CLIENT_SERVER_TOPOLOGIES_THE_CURRENT_CACHEWRITER_IS_0.toLocalizedString(this.cacheWriter));
-//     }
-//   }
-
   public void registerInterest(Object key)
   {
     registerInterest(key, false);
