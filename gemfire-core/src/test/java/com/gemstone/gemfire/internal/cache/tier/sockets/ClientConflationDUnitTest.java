@@ -28,8 +28,8 @@ import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.InternalDistributedSystem;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
@@ -123,7 +123,7 @@ public class ClientConflationDUnitTest extends DistributedTestCase
     createClientCacheFeeder(getServerHostName(Host.getHost(0)), new Integer(PORT));
     vm1.invoke(ClientConflationDUnitTest.class, "createClientCache", new Object[] { getServerHostName(vm1.getHost()), new Integer(PORT),
       conflation});
-    vm1.invoke(ClientConflationDUnitTest.class, "setBridgeObserverForBeforeInterestRecovery");
+    vm1.invoke(ClientConflationDUnitTest.class, "setClientServerObserverForBeforeInterestRecovery");
     vm1.invoke(ClientConflationDUnitTest.class, "setAllCountersZero");
     vm1.invoke(ClientConflationDUnitTest.class, "assertAllCountersZero");
     vm1.invoke(ClientConflationDUnitTest.class, "registerInterest");
@@ -267,10 +267,10 @@ public class ClientConflationDUnitTest extends DistributedTestCase
    * reset all counters to zero before interest recovery
    *
    */
-  public static void setBridgeObserverForBeforeInterestRecovery()
+  public static void setClientServerObserverForBeforeInterestRecovery()
   {
     PoolImpl.BEFORE_RECOVER_INTEREST_CALLBACK_FLAG = true;
-    BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+    ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
       public void beforeInterestRecovery()
       {
         setAllCountersZero();

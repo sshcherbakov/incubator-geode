@@ -29,8 +29,8 @@ import com.gemstone.gemfire.cache.execute.Function;
 import com.gemstone.gemfire.cache.execute.ResultCollector;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.cache.AbstractRegion;
-import com.gemstone.gemfire.internal.cache.BridgeObserver;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserver;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.EntryEventImpl;
 import com.gemstone.gemfire.internal.cache.EventID;
 import com.gemstone.gemfire.internal.cache.LocalRegion;
@@ -368,7 +368,7 @@ public class ServerRegionProxy extends ServerProxy implements ServerRegionDataAc
             interestType, policy, isDurable, receiveUpdatesAsInvalidates, regionDataPolicy);
         //////// TEST PURPOSE ONLY ///////////
         if (PoolImpl.AFTER_REGISTER_CALLBACK_FLAG) {
-          BridgeObserver bo = BridgeObserverHolder.getInstance();
+          ClientServerObserver bo = ClientServerObserverHolder.getInstance();
           bo.afterInterestRegistration();
         }
         /////////////////////////////////////////
@@ -562,7 +562,7 @@ public class ServerRegionProxy extends ServerProxy implements ServerRegionDataAc
       finished = true;
       //////// TEST PURPOSE ONLY ///////////
       if (PoolImpl.AFTER_REGISTER_CALLBACK_FLAG) {
-        BridgeObserver bo = BridgeObserverHolder.getInstance();
+        ClientServerObserver bo = ClientServerObserverHolder.getInstance();
         bo.afterInterestRegistration();
       }
       /////////////////////////////////////////

@@ -27,8 +27,8 @@ import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
@@ -98,23 +98,23 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
 
-      setBridgeObserver();
+      setClientServerObserver();
 
       server1.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
 
       waitForPrimaryIdentification();
       //primary
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsAlive");
-      unSetBridgeObserver();
+      unSetClientServerObserver();
       //secondary
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
 
-      setBridgeObserver();
+      setClientServerObserver();
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
       //primary
       waitForPrimaryIdentification();
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsAlive");
-      unSetBridgeObserver();
+      unSetClientServerObserver();
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
       // All servers are dead at this point , no primary in the system.
       verifyDeadAndLiveServers(3,0);
@@ -146,7 +146,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       //secondary
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
 
-      setBridgeObserver();
+      setClientServerObserver();
 
       //stop new primary
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
@@ -156,7 +156,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       //newly selectd primary
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsAlive");
 
-      unSetBridgeObserver();
+      unSetClientServerObserver();
     }
 
     /**
@@ -174,7 +174,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       // secondaries
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
-      setBridgeObserver();
+      setClientServerObserver();
 
       server1.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
       //stop ProbablePrimary
@@ -185,7 +185,7 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       waitForPrimaryIdentification();
       //new primary
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsAlive");
-      unSetBridgeObserver();
+      unSetClientServerObserver();
 
     }
 
@@ -212,10 +212,10 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
       server1.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsAlive");
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
       server3.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsNotAlive");
-      setBridgeObserver();
+      setClientServerObserver();
       server1.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
       waitForPrimaryIdentification();
-      unSetBridgeObserver();
+      unSetClientServerObserver();
       verifyDeadAndLiveServers(1,2);
       server2.invoke(HAStartupAndFailoverDUnitTest.class, "verifyDispatcherIsAlive");
      }
@@ -299,12 +299,12 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
 //       // create a client with large retry interval for server monitors and no client updater thread
 //       // so that only cache operation can detect a server failure and should initiate failover
 //       createClientCacheWithLargeRetryIntervalAndWithoutCallbackConnection(this.getName());
-//       setBridgeObserver();
+//       setClientServerObserver();
 //       server1.invoke(HAStartupAndFailoverDUnitTest.class, "stopServer");
 //       releaseConnection();//Added by Jason
 //       put();
 //       waitForPrimaryIdentification();
-//       unSetBridgeObserver();
+//       unSetClientServerObserver();
 //       verifyDeadAndLiveServers(1,2);
 //     }
 //     public static void releaseConnection() {
@@ -357,9 +357,9 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
 //     start = System.currentTimeMillis();
   }
  
-    public static void setBridgeObserver() {
+    public static void setClientServerObserver() {
         PoolImpl.AFTER_PRIMARY_IDENTIFICATION_FROM_BACKUP_CALLBACK_FLAG = true;
-        BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+        ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
             public void afterPrimaryIdentificationFromBackup(ServerLocation primaryEndpoint) {
                 synchronized (HAStartupAndFailoverDUnitTest.class) {
                   HAStartupAndFailoverDUnitTest.identifiedPrimary = true;
@@ -369,12 +369,12 @@ public class HAStartupAndFailoverDUnitTest extends DistributedTestCase
         });
     }
 
-    public static void unSetBridgeObserver()
+    public static void unSetClientServerObserver()
   {
       synchronized (HAStartupAndFailoverDUnitTest.class) {
           PoolImpl.AFTER_PRIMARY_IDENTIFICATION_FROM_BACKUP_CALLBACK_FLAG = false;
           HAStartupAndFailoverDUnitTest.identifiedPrimary = false;
-          BridgeObserverHolder.setInstance(new BridgeObserverAdapter());
+          ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter());
       }
 
   }

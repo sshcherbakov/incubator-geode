@@ -25,8 +25,8 @@ import com.gemstone.gemfire.cache.util.CacheListenerAdapter;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.tier.sockets.CacheServerTestUtil;
 import dunit.DistributedTestCase;
 import dunit.Host;
@@ -260,7 +260,7 @@ public class HASlowReceiverDUnitTest extends DistributedTestCase {
   public static void setBridgeObeserverForAfterQueueDestroyMessage()
       throws Exception {
     PoolImpl.AFTER_QUEUE_DESTROY_MESSAGE_FLAG = true;
-    BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+    ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
       @Override
       public void afterQueueDestroyMessage() {       
         clientVM.invoke(HASlowReceiverDUnitTest.class, "checkRedundancyLevel",

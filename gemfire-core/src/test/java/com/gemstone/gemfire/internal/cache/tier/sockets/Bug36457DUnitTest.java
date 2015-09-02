@@ -26,8 +26,8 @@ import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 
 import dunit.DistributedTestCase;
 import dunit.Host;
@@ -159,7 +159,7 @@ public class Bug36457DUnitTest extends DistributedTestCase
         getServerHostName(server1.getHost()), port1, port2 });
     //set a cllabck so that we come to know that whether a failover is called or not
     // if failover is called means this bug is present.
-    client2.invoke(Bug36457DUnitTest.class, "setBridgeObserver");
+    client2.invoke(Bug36457DUnitTest.class, "setClientServerObserver");
     client1.invoke(Bug36457DUnitTest.class, "destroyRegion");
     isFaileoverHappened = ((Boolean)client2.invoke(Bug36457DUnitTest.class,
         "isFaileoverHappened")).booleanValue();
@@ -173,11 +173,11 @@ public class Bug36457DUnitTest extends DistributedTestCase
     return new Boolean(isFaileoverHappened);
   }
 
-  public static void setBridgeObserver()
+  public static void setClientServerObserver()
   {
     PoolImpl.AFTER_PRIMARY_IDENTIFICATION_FROM_BACKUP_CALLBACK_FLAG = true;
-    BridgeObserverHolder
-        .setInstance(new BridgeObserverAdapter() {
+    ClientServerObserverHolder
+        .setInstance(new ClientServerObserverAdapter() {
           public void afterPrimaryIdentificationFromBackup(ServerLocation primaryEndpoint)
           {
             getLogWriter().fine("TEST FAILED HERE YOGI ");
@@ -186,7 +186,7 @@ public class Bug36457DUnitTest extends DistributedTestCase
         });
   }
 
-  public static void unSetBridgeObserver()
+  public static void unSetClientServerObserver()
   {
     PoolImpl.AFTER_PRIMARY_IDENTIFICATION_FROM_BACKUP_CALLBACK_FLAG = false;
   }

@@ -13,8 +13,8 @@ import com.gemstone.gemfire.cache.*;
 import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.cache.client.*;
 import com.gemstone.gemfire.cache.client.internal.PoolImpl;
@@ -147,7 +147,7 @@ public class DurableResponseMatrixDUnitTest extends DistributedTestCase
   public void testRegisterInterest_Destroy_Concurrent() throws Exception
   {  
 	PoolImpl.BEFORE_REGISTER_CALLBACK_FLAG = true;
-	BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+	ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
 		public void beforeInterestRegistration()
 	    {	          
 	      	Region r = cache.getRegion(Region.SEPARATOR + REGION_NAME);	  

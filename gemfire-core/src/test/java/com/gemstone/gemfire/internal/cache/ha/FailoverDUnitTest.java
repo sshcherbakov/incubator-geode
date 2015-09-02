@@ -26,8 +26,8 @@ import com.gemstone.gemfire.cache30.ClientServerTestCase;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.tier.sockets.CacheServerTestUtil;
 import com.gemstone.gemfire.internal.cache.tier.sockets.ConflationDUnitTest;
 import com.gemstone.gemfire.cache.client.PoolManager;
@@ -98,7 +98,7 @@ public class FailoverDUnitTest extends DistributedTestCase
     registerInterestList();
     primary.invoke(FailoverDUnitTest.class, "put");
     verifyEntries();
-    setBridgeObserver();
+    setClientServerObserver();
     primary.invoke(FailoverDUnitTest.class, "stopServer");
     verifyEntriesAfterFailover();
   }
@@ -270,9 +270,9 @@ public class FailoverDUnitTest extends DistributedTestCase
     assertEquals("value-3", r.getEntry("key-3").getValue());
   }
 
-  public static void setBridgeObserver() {
+  public static void setClientServerObserver() {
     PoolImpl.BEFORE_PRIMARY_IDENTIFICATION_FROM_BACKUP_CALLBACK_FLAG = true;
-    BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+    ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
         public void beforePrimaryIdentificationFromBackup() {
           primary.invoke(FailoverDUnitTest.class, "putDuringFailover");
           PoolImpl.BEFORE_PRIMARY_IDENTIFICATION_FROM_BACKUP_CALLBACK_FLAG = false;

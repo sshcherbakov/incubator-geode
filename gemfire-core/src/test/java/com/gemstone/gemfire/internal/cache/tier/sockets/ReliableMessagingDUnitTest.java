@@ -25,9 +25,9 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserver;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserver;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.ha.HAHelper;
 import com.gemstone.gemfire.internal.cache.ha.HARegionQueue;
 import com.gemstone.gemfire.internal.cache.ha.ThreadIdentifier;
@@ -101,7 +101,7 @@ public class ReliableMessagingDUnitTest extends DistributedTestCase
   public void testPeriodicAckSendByClientPrimaryFailover() throws Exception {    
     addExpectedException("java.net.ConnectException");
     createEntries();
-    setBridgeObserverForBeforeSendingClientAck();    
+    setClientServerObserverForBeforeSendingClientAck();    
     server1.invoke(ReliableMessagingDUnitTest.class, "putOnServer");
     getLogWriter().info("Entering waitForServerUpdate");
     waitForServerUpdate();    
@@ -279,10 +279,10 @@ public class ReliableMessagingDUnitTest extends DistributedTestCase
     }
   }
   
-  public static void setBridgeObserverForBeforeSendingClientAck() throws Exception
+  public static void setClientServerObserverForBeforeSendingClientAck() throws Exception
   {
     PoolImpl.BEFORE_SENDING_CLIENT_ACK_CALLBACK_FLAG = true;
-    origObserver = BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+    origObserver = ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
       public void beforeSendingClientAck()
       {
         getLogWriter().info("beforeSendingClientAck invoked");
@@ -418,10 +418,10 @@ public class ReliableMessagingDUnitTest extends DistributedTestCase
     }
   }
   
-  private static BridgeObserver origObserver;
+  private static ClientServerObserver origObserver;
   
   public static void resetCallBack()  {    
-    BridgeObserverHolder.setInstance(origObserver);
+    ClientServerObserverHolder.setInstance(origObserver);
   }
 
 }

@@ -34,8 +34,8 @@ import com.gemstone.gemfire.distributed.internal.DistributionConfig;
 import com.gemstone.gemfire.internal.AvailablePort;
 import com.gemstone.gemfire.internal.InternalDataSerializer;
 import com.gemstone.gemfire.internal.InternalDataSerializer.SerializerAttributesHolder;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.EventID;
 
@@ -726,9 +726,9 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     client2.invoke(DataSerializerPropogationDUnitTest.class,
         "createClientCache", new Object[] {
             getServerHostName(server2.getHost()), new Integer(PORT2) });
-    setBridgeObserver1();
+    setClientServerObserver1();
     client2
-        .invoke(DataSerializerPropogationDUnitTest.class, "setBridgeObserver2");
+        .invoke(DataSerializerPropogationDUnitTest.class, "setClientServerObserver2");
 
     registerDSObject13();
 
@@ -905,9 +905,9 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     return new Integer(port);
   }
 
-  public static void setBridgeObserver1() {
+  public static void setClientServerObserver1() {
     PoolImpl.IS_INSTANTIATOR_CALLBACK = true;
-    BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+    ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
       @Override
       public void beforeSendingToServer(EventID eventID) {
         eventId = eventID;
@@ -928,9 +928,9 @@ public class DataSerializerPropogationDUnitTest extends DistributedTestCase {
     eventId = eventID;
   }
 
-  public static void setBridgeObserver2() {
+  public static void setClientServerObserver2() {
     PoolImpl.IS_INSTANTIATOR_CALLBACK = true;
-    BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+    ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
       @Override
       public void afterReceivingFromServer(EventID eventID) {
         testEventIDResult = eventID.equals(eventId);

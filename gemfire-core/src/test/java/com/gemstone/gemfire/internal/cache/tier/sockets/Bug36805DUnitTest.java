@@ -154,7 +154,7 @@ public class Bug36805DUnitTest extends DistributedTestCase
     // set a cllabck so that we come to know that whether a failover is called
     // or not
     // if failover is called means this bug is present.
-    // client2.invoke(Bug36805DUnitTest.class, "setBridgeObserver");
+    // client2.invoke(Bug36805DUnitTest.class, "setClientServerObserver");
     client1.invoke(Bug36805DUnitTest.class, "registerInterest"); // register
                                                                   // interest
                                                                   // shoud not

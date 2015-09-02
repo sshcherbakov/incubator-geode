@@ -4092,7 +4092,7 @@ public class LocalRegion extends AbstractRegion
       this.clearKeysOfInterest(key, interestType, pol);
       // Checking for the Dunit test(testRegisterInterst_Destroy_Concurrent) flag
       if (PoolImpl.BEFORE_REGISTER_CALLBACK_FLAG) {
-        BridgeObserver bo = BridgeObserverHolder.getInstance();
+        ClientServerObserver bo = ClientServerObserverHolder.getInstance();
         bo.beforeInterestRegistration();
       }// Test Code Ends
       final byte regionDataPolicy = getAttributes().getDataPolicy().ordinal;

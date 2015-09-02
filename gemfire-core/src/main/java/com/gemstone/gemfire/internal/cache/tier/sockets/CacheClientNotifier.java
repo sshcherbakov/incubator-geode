@@ -76,8 +76,8 @@ import com.gemstone.gemfire.internal.InternalInstantiator;
 import com.gemstone.gemfire.internal.SocketUtils;
 import com.gemstone.gemfire.internal.SystemTimer;
 import com.gemstone.gemfire.internal.Version;
-import com.gemstone.gemfire.internal.cache.BridgeObserver;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserver;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.ClientRegionEventImpl;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 import com.gemstone.gemfire.internal.cache.CacheClientStatus;
@@ -1102,7 +1102,7 @@ public class CacheClientNotifier {
           removeClientProxy(proxy);
 
           if (PoolImpl.AFTER_QUEUE_DESTROY_MESSAGE_FLAG) {
-            BridgeObserver bo = BridgeObserverHolder.getInstance();
+            ClientServerObserver bo = ClientServerObserverHolder.getInstance();
             bo.afterQueueDestroyMessage();
           }
 

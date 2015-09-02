@@ -28,9 +28,9 @@ import com.gemstone.gemfire.cache.server.CacheServer;
 import com.gemstone.gemfire.distributed.DistributedSystem;
 import com.gemstone.gemfire.distributed.internal.ServerLocation;
 import com.gemstone.gemfire.internal.AvailablePort;
-import com.gemstone.gemfire.internal.cache.BridgeObserver;
-import com.gemstone.gemfire.internal.cache.BridgeObserverAdapter;
-import com.gemstone.gemfire.internal.cache.BridgeObserverHolder;
+import com.gemstone.gemfire.internal.cache.ClientServerObserver;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverAdapter;
+import com.gemstone.gemfire.internal.cache.ClientServerObserverHolder;
 import com.gemstone.gemfire.internal.cache.CacheServerImpl;
 
 import dunit.DistributedTestCase;
@@ -76,7 +76,7 @@ public class RedundancyLevelTestBase extends DistributedTestCase
 
   static PoolImpl pool = null;  
 
-  static BridgeObserver oldBo = null;
+  static ClientServerObserver oldBo = null;
   
   static boolean FailOverDetectionByCCU = false;
   
@@ -525,7 +525,7 @@ public class RedundancyLevelTestBase extends DistributedTestCase
     
     if(!FailOverDetectionByCCU)
     {
-        oldBo = BridgeObserverHolder.setInstance(new BridgeObserverAdapter() {
+        oldBo = ClientServerObserverHolder.setInstance(new ClientServerObserverAdapter() {
         public void beforeFailoverByCacheClientUpdater(ServerLocation epFailed)
         {
           try {
@@ -617,7 +617,7 @@ public class RedundancyLevelTestBase extends DistributedTestCase
       super.tearDown2();
     
       if(!FailOverDetectionByCCU)
-        BridgeObserverHolder.setInstance(oldBo);   
+        ClientServerObserverHolder.setInstance(oldBo);   
     
       FailOverDetectionByCCU = false;
     
