@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -24,6 +25,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.gemfire.support.GemfireCache;
 
 import junit.framework.TestCase;
 
@@ -92,6 +94,7 @@ import dunit.standalone.DUnitLauncher;
 public abstract class DistributedTestCase extends TestCase implements java.io.Serializable {
   private static final Logger logger = LogService.getLogger();
   private static final LogWriterLogger oldLogger = LogWriterLogger.create(logger);
+  private static final LinkedHashSet<String> testHistory = new LinkedHashSet<String>();
 
   private static void setUpCreationStackGenerator() {
     // the following is moved from InternalDistributedSystem to fix #51058
@@ -672,6 +675,7 @@ public abstract class DistributedTestCase extends TestCase implements java.io.Se
    */
   @Override
   public void setUp() throws Exception {
+    logTestHistory();
     setUpCreationStackGenerator();
     testName = getName();
     System.setProperty(HoplogConfig.ALLOW_LOCAL_HDFS_PROP, "true");
@@ -689,6 +693,16 @@ public abstract class DistributedTestCase extends TestCase implements java.io.Se
       }
     }
     System.out.println("\n\n[setup] START TEST " + getClass().getSimpleName()+"."+testName+"\n\n");
+  }
+
+  /**
+   * Write a message to the log about what tests have ran previously. This
+   * makes it easier to figure out if a previous test may have caused problems
+   */
+  private void logTestHistory() {
+    String classname = getClass().getSimpleName();
+    testHistory.add(classname);
+    System.out.println("Previously run tests: " + testHistory);
   }
 
   public static void perVMSetUp(String name, String defaultDiskStoreName) {
@@ -767,6 +781,8 @@ public abstract class DistributedTestCase extends TestCase implements java.io.Se
 
 
   private static void cleanupThisVM() {
+    closeCache();
+    
     IpAddress.resolve_dns = true;
     SocketCreator.resolve_dns = true;
     InitialImageOperation.slowImageProcessing = 0;
@@ -792,6 +808,13 @@ public abstract class DistributedTestCase extends TestCase implements java.io.Se
     ExpectedException ex;
     while((ex = expectedExceptions.poll()) != null) {
       ex.remove();
+    }
+  }
+
+  private static void closeCache() {
+    GemFireCacheImpl cache = GemFireCacheImpl.getInstance();
+    if(cache != null && !cache.isClosed()) {
+      cache.close();
     }
   }
   
