@@ -29,10 +29,13 @@ import org.springframework.data.gemfire.support.GemfireCache;
 
 import junit.framework.TestCase;
 
+import com.gemstone.gemfire.InternalGemFireError;
 import com.gemstone.gemfire.LogWriter;
+import com.gemstone.gemfire.SystemFailure;
 import com.gemstone.gemfire.admin.internal.AdminDistributedSystemImpl;
 import com.gemstone.gemfire.cache.Cache;
 import com.gemstone.gemfire.cache.DiskStoreFactory;
+import com.gemstone.gemfire.cache.Region;
 import com.gemstone.gemfire.cache.hdfs.internal.HDFSStoreImpl;
 import com.gemstone.gemfire.cache.hdfs.internal.hoplog.HoplogConfig;
 import com.gemstone.gemfire.cache.query.QueryTestUtils;
@@ -56,8 +59,10 @@ import com.gemstone.gemfire.internal.SocketCreator;
 import com.gemstone.gemfire.internal.admin.ClientStatsManager;
 import com.gemstone.gemfire.internal.cache.DiskStoreObserver;
 import com.gemstone.gemfire.internal.cache.GemFireCacheImpl;
+import com.gemstone.gemfire.internal.cache.HARegion;
 import com.gemstone.gemfire.internal.cache.InitialImageOperation;
 import com.gemstone.gemfire.internal.cache.LocalRegion;
+import com.gemstone.gemfire.internal.cache.PartitionedRegion;
 import com.gemstone.gemfire.internal.cache.tier.InternalBridgeMembership;
 import com.gemstone.gemfire.internal.cache.tier.sockets.CacheServerTestUtil;
 import com.gemstone.gemfire.internal.cache.tier.sockets.ClientProxyMembershipID;
@@ -814,9 +819,37 @@ public abstract class DistributedTestCase extends TestCase implements java.io.Se
   private static void closeCache() {
     GemFireCacheImpl cache = GemFireCacheImpl.getInstance();
     if(cache != null && !cache.isClosed()) {
+      destroyRegions(cache);
       cache.close();
     }
   }
+  
+  protected static final void destroyRegions(Cache cache)
+      throws InternalGemFireError, Error, VirtualMachineError {
+    if (cache != null && !cache.isClosed()) {
+      //try to destroy the root regions first so that
+      //we clean up any persistent files.
+      for (Iterator itr = cache.rootRegions().iterator(); itr.hasNext();) {
+        Region root = (Region)itr.next();
+        //for colocated regions you can't locally destroy a partitioned
+        //region.
+        if(root.isDestroyed() || root instanceof HARegion || root instanceof PartitionedRegion) {
+          continue;
+        }
+        try {
+          root.localDestroyRegion("teardown");
+        }
+        catch (VirtualMachineError e) {
+          SystemFailure.initiateFailure(e);
+          throw e;
+        }
+        catch (Throwable t) {
+          getLogWriter().error(t);
+        }
+      }
+    }
+  }
+  
   
   public static void unregisterAllDataSerializersFromAllVms()
   {
